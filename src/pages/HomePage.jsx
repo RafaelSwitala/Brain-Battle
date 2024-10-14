@@ -1,17 +1,15 @@
-import React, { useState } from 'react'; // Importiere useState
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import Test from './Test'; // Importiere die Test-Komponente
+import QuizErstellen from './QuizErstellen';
 
 import './allPages.css';
 
-
-
 const HomePage = () => {
-  const [modalShow, setModalShow] = useState(false); // Zustand für das Modal
+  const [modalShow, setModalShow] = useState(false);
 
   return (
     <Container>
@@ -22,29 +20,29 @@ const HomePage = () => {
         </Col>
       </Row>
       <Row>
-        <Col className="left-column">
+        <Col xs={12} md={4} className="left-column">
           <h2>Erstelle ein neues Spiel</h2>
           <div className="link-container">
-            <Link to="/QuizErstellen" className="button-2">Quiz Erstellen</Link>
             <Link to="/QuizBearbeiten" className="button-2">Quiz Bearbeiten</Link>
             <Link to="/Spielerverwaltung" className="button-2">Spieler Verwaltung</Link>
 
             <Button variant="primary" onClick={() => setModalShow(true)}>
-              Launch vertically centered modal
+              Neues Quiz Erstellen
             </Button>
-            
-            <Test
-              show={modalShow} // Zeige das Modal basierend auf modalShow
-              onHide={() => setModalShow(false)} // Schließe das Modal
+      
+            <QuizErstellen
+              show={modalShow}
+              onHide={() => setModalShow(false)}
             />
           </div>
         </Col>
 
-        <Col className="right-column">
+        <Col xs={12} md={8} className="right-column"> 
           <h2>Quiz Spielen</h2>
           <Link to="/QuizSpielen" className="button-2">Quiz Spielen</Link>
         </Col>
       </Row>
+
     </Container>
   );
 };

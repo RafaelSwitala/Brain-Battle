@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
 import './allPages.css';
 
-const QuizErstellen = () => {
-  const [showAdditionalContent, setShowAdditionalContent] = useState(false);
+const QuizErstellen = ({ show, onHide }) => {
   const [questions, setQuestions] = useState([]);
   const [categoryCount, setCategoryCount] = useState(1);
   const [rowCount, setRowCount] = useState(1);
@@ -22,7 +24,7 @@ const QuizErstellen = () => {
         for (let j = 0; j < rowCount; j++) {
           generatedQuestions.push({
             id: i * rowCount + j,
-            questionNumber: i * rowCount + j + 1
+            questionNumber: i * rowCount + j + 1,
           });
         }
       }
@@ -31,7 +33,7 @@ const QuizErstellen = () => {
   };
 
   const addOptionHandler = (questionId) => {
-    const updatedQuestions = questions.map(q => {
+    const updatedQuestions = questions.map((q) => {
       if (q.id === questionId) {
         return { ...q, options: [...(q.options || []), ''] };
       }
@@ -41,7 +43,7 @@ const QuizErstellen = () => {
   };
 
   const removeOptionHandler = (questionId, index) => {
-    const updatedQuestions = questions.map(q => {
+    const updatedQuestions = questions.map((q) => {
       if (q.id === questionId) {
         return { ...q, options: q.options.filter((_, i) => i !== index) };
       }
@@ -51,73 +53,81 @@ const QuizErstellen = () => {
   };
 
   return (
-    <div className="container">
-
-      <button className="button-1">
-        Play A Quiz
-      </button>
-      <button className="button-1" onClick={() => setShowAdditionalContent(!showAdditionalContent)}>
-        Create New Quiz
-      </button>
-
-      {showAdditionalContent && (
-        <div className="additional-content">
-          <div className="quiz-settings numberCategories">
-            <p className="settings-label-h1">Anzahl der Kategorien: {categoryCount}</p>
-            <input
-              className="settings-slider"
-              type="range"
-              min="2"
-              max="8"
-              value={categoryCount}
-              onChange={handleCategoryCountChange}
-            />
-          </div>
-
-          <div className="quiz-settings difficultyCategories">
-            <p className="settings-label-h1">Schwierigkeitslevel pro Kategorie: {rowCount}</p>
-            <input
-              className="settings-slider"
-              type="range"
-              min="3"
-              max="10"
-              value={rowCount}
-              onChange={handleRowCountChange}
-            />
-          </div>
-
-          <button className="button-1" onClick={generateQuestions}>
-            Generate Questions
-          </button>
+    <Modal
+      show={show}
+      onHide={onHide}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Quiz Erstellen
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h4>Einstellungen</h4>
+        <div className="quiz-settings numberCategories">
+          <p className="settings-label-h1">Anzahl der Kategorien: {categoryCount}</p>
+          <input
+            className="settings-slider"
+            type="range"
+            min="2"
+            max="8"
+            value={categoryCount}
+            onChange={handleCategoryCountChange}
+          />
         </div>
-      )}
 
-      <div className="question-container">
-        {questions.map(question => (
-          <div key={question.id} className="question-item">
-            <h4 className="question-number">Question {question.questionNumber}</h4>
-            <input className="question-input" type="text" placeholder="Question" />
-            <div className="options-container">
-              <button className="button-secondary" onClick={() => addOptionHandler(question.id)}>
-                Add Option
-              </button>
-              {(question.options || []).map((_, index) => (
-                <div key={index} className="option-item">
-                  <input className="option-input" type="text" placeholder={`Option ${String.fromCharCode(65 + index)}`} />
-                  <button
-                    className="button-remove"
-                    onClick={() => removeOptionHandler(question.id, index)}
-                  >
-                    X
-                  </button>
-                </div>
-              ))}
+        <div className="quiz-settings difficultyCategories">
+          <p className="settings-label-h1">Schwierigkeitslevel pro Kategorie: {rowCount}</p>
+          <input
+            className="settings-slider"
+            type="range"
+            min="3"
+            max="10"
+            value={rowCount}
+            onChange={handleRowCountChange}
+          />
+        </div>
+
+        <Button className="button-1" onClick={generateQuestions}>
+          Generate Questions
+        </Button>
+
+        <div className="question-container">
+          {questions.map((question) => (
+            <div key={question.id} className="question-item">
+              <h4 className="question-number">Question {question.questionNumber}</h4>
+              <input className="question-input" type="text" placeholder="Question" />
+              <div className="options-container">
+                <Button
+                  className="button-secondary"
+                  onClick={() => addOptionHandler(question.id)}
+                >
+                  Add Option
+                </Button>
+                {(question.options || []).map((_, index) => (
+                  <div key={index} className="option-item">
+                    <input className="option-input" type="text" placeholder={`Option ${String.fromCharCode(65 + index)}`} />
+                    <Button
+                      className="button-remove"
+                      onClick={() => removeOptionHandler(question.id, index)}
+                    >
+                      X
+                    </Button>
+                  </div>
+                ))}
+              </div>
+              <input className="points-input" type="text" placeholder="Points" />
             </div>
-            <input className="points-input" type="text" placeholder="Points" />
-          </div>
-        ))}
-      </div>
-    </div>
+          ))}
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 
