@@ -1,7 +1,7 @@
 {
-  "name": "smartmind",
+  "name": "TabItRight-BoneItOut",
   "version": "1.0.0",
-  "description": "SmartMind is an engaging online platform where users can create, share, and play a variety of quizzes, offering a dynamic and interactive way to test and expand their knowledge.",
+  "description": "TabItRight-BoneItOut is an engaging online platform where users can create, share, and play a variety of quizzes, offering a dynamic and interactive way to test and expand their knowledge.",
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --mode development",
@@ -15,7 +15,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.25.1",
-    "smartmind": "file:"
+    "smartTabItRight-BoneItOutmind": "file:"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
