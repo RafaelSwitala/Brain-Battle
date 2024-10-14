@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './allPages.css';
 
-const ChallengeYourCategories = () => {
+const QuizErstellen = () => {
   const [showAdditionalContent, setShowAdditionalContent] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [categoryCount, setCategoryCount] = useState(1);
@@ -121,4 +121,4 @@ const ChallengeYourCategories = () => {
   );
 };
 
-export default ChallengeYourCategories;
+export default QuizErstellen;

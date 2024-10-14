@@ -4,7 +4,12 @@ import NavBar from './components/NavBar';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
+import QuizErstellen from './pages/QuizErstellen';
+import QuizBearbeiten from './pages/QuizBearbeiten';
+import QuizSpielen from './pages/QuizSpielen';
+import SpielerVerwaltung from './pages/SpielerVerwaltung';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 const App = () => {
@@ -12,7 +17,7 @@ const App = () => {
     <div className="app-container">
       <div className='navBar-container'>
         <NavBar />
-        </div>
+      </div>
       <div className='header-container'>
         <Header />
       </div>
@@ -20,6 +25,10 @@ const App = () => {
         <div className='mainPage-container'>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/QuizErstellen" element={<QuizErstellen />} />
+            <Route path="/QuizBearbeiten" element={<QuizBearbeiten />} />
+            <Route path="/QuizSpielen" element={<QuizSpielen />} />
+            <Route path="/Spielerverwaltung" element={<SpielerVerwaltung />} />
           </Routes>
         </div>
       </div>
