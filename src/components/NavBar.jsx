@@ -20,7 +20,7 @@ const NavBar = () => {
           <button className="navbar-buttons">Button3</button>
         </Link>
         <Link to="/">
-          <button className="navbar-buttons">Button4</button>
+          <button className="navbar-buttons">Einstellungen</button>
         </Link>
       </div>
     </nav>
