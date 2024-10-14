@@ -4,8 +4,6 @@ import NavBar from './components/NavBar';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
-import ChallengeYourCategories from './pages/ChallengeYourCategories';
-
 
 import './App.css';
 
@@ -22,7 +20,6 @@ const App = () => {
         <div className='mainPage-container'>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/ChallengeYourCategories" element={<ChallengeYourCategories />} />
           </Routes>
         </div>
       </div>

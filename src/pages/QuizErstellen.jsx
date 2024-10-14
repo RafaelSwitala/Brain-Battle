@@ -52,16 +52,7 @@ const ChallengeYourCategories = () => {
 
   return (
     <div className="container">
-      <div>
-        <h2>Wilkommen bei Challenge Your Categories</h2>
-        <p>Willkommen zu Challenge Your Categories, dem ultimiven Quizspiel, das deine Wissen und Strategie auf die Probe stellt! Hier ist, wie es funktioniert:</p>
-        <p>Erstelle Dein Quiz: Wähle die Anzahl der Kategorien und Schwierigkeitslevel, die du in deinem Quiz haben möchtest. Jede Kategorie hat Fragen unterschiedlicher Schwierigkeit, die du selbst bestimmen kannst.</p>
-        <p>Wähle Deine Fragen: Beantworte Fragen aus verschiedenen Kategorien und Schwierigkeitsgraden. Jede Frage ist mit einer Punktzahl versehen, die von der Schwierigkeit abhängt – die leichten Fragen bringen weniger Punkte als die schweren!</p>
-        <p>Strategisch Spielen: Entscheide weise, welche Fragen du beantworten möchtest. Der richtige Umgang mit deiner Auswahl und das Wissen um die Schwierigkeiten der Fragen können den Unterschied zwischen Sieg und Niederlage ausmachen.</p>
-        <p>Punkte Sammeln: Verdiene Punkte für jede richtig beantwortete Frage. Je schwieriger die Frage, desto mehr Punkte kannst du erhalten. Aber sei vorsichtig – die Fragen, die einmal beantwortet wurden, erscheinen nicht mehr!</p>
-        <p>Herausfordern und Gewinnen: Spiele gegen Freunde oder selbst und versuche, die höchste Punktzahl zu erreichen. Die beste Strategie und das meiste Wissen werden hier belohnt!</p>
-        <p>Challenge Your Categories bringt Spannung und Spaß in deine Quiz-Abende. Stelle dich der Herausforderung und zeige, wie gut du wirklich bist!</p>
-      </div>
+
       <button className="button-1">
         Play A Quiz
       </button>
