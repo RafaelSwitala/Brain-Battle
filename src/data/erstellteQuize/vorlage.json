@@ -2,12 +2,58 @@
   "name": "vorlage",
   "questions": [
     {
-      "question": "Was ist die Hauptstadt von Spanien?",
-      "answer": "Madrid"
+      "question": "Deutschland",
+      "answer": "Berlin",
+      "options": [
+        "Köln",
+        "Bonn",
+        "Mainz"
+      ]
     },
     {
-      "question": "Was ist die Hauptstadt von Österreich?",
-      "answer": "Wien"
+      "question": "Polen",
+      "answer": "Warschau",
+      "options": [
+        "Krakau",
+        "Breslau",
+        "Danzig"
+      ]
+    },
+    {
+      "question": "Spanien",
+      "answer": "Madrid",
+      "options": [
+        "Barcelona",
+        "Malaga",
+        "Sevilla"
+      ]
+    },
+    {
+      "question": "Frankreich",
+      "answer": "Paris",
+      "options": [
+        "Tours",
+        "Rennes",
+        "Monaco"
+      ]
+    },
+    {
+      "question": "England",
+      "answer": "London",
+      "options": [
+        "Manchester",
+        "Liverpool",
+        "Wales"
+      ]
+    },
+    {
+      "question": "USA",
+      "answer": "Washington",
+      "options": [
+        "New York",
+        "Miami",
+        "Los Angeles"
+      ]
     }
   ]
 }

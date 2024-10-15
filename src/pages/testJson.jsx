@@ -5,16 +5,13 @@ import Form from 'react-bootstrap/Form';
 import './allPages.css';
 
 const TestJson = ({ show, onHide }) => {
-  // State für den Namen des Quizzes und die Fragen/Antworten
   const [quizName, setQuizName] = useState('');
   const [question1, setQuestion1] = useState('');
   const [answer1, setAnswer1] = useState('');
   const [question2, setQuestion2] = useState('');
   const [answer2, setAnswer2] = useState('');
 
-  // Funktion zum Erstellen und Speichern der JSON-Datei auf dem Server
   const handleCreateJson = () => {
-    // JSON-Daten aus den Eingaben erstellen
     const jsonData = {
       name: quizName,
       questions: [
@@ -29,10 +26,8 @@ const TestJson = ({ show, onHide }) => {
       ]
     };
 
-    // Der Name der JSON-Datei wird auf Basis des eingegebenen Quiz-Namens erstellt
     const fileName = `${quizName}.json`;
 
-    // JSON-Daten an das Backend senden
     fetch(`http://localhost:5000/api/save-json`, {
       method: 'POST',
       headers: {
@@ -42,7 +37,7 @@ const TestJson = ({ show, onHide }) => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data.message); // Erfolgsnachricht
+        console.log(data.message);
       })
       .catch(error => {
         console.error('Fehler beim Speichern der Datei:', error);
@@ -65,7 +60,6 @@ const TestJson = ({ show, onHide }) => {
       </Modal.Header>
       <Modal.Body className='modalBody'>
         <Form>
-          {/* Eingabefeld für den Namen des Quizzes */}
           <Form.Group controlId="formQuizName">
             <Form.Label>Name des Quizzes</Form.Label>
             <Form.Control 
@@ -76,7 +70,6 @@ const TestJson = ({ show, onHide }) => {
             />
           </Form.Group>
 
-          {/* Eingabefelder für Frage 1 und Antwort 1 */}
           <Form.Group controlId="formQuestion1">
             <Form.Label>Frage 1</Form.Label>
             <Form.Control 
@@ -96,7 +89,6 @@ const TestJson = ({ show, onHide }) => {
             />
           </Form.Group>
 
-          {/* Eingabefelder für Frage 2 und Antwort 2 */}
           <Form.Group controlId="formQuestion2">
             <Form.Label>Frage 2</Form.Label>
             <Form.Control 

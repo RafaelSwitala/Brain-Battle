@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-
+import Form from 'react-bootstrap/Form';
 import './allPages.css';
 
 const QuizErstellen = ({ show, onHide }) => {
+  const [quizName, setQuizName] = useState('');
   const [questions, setQuestions] = useState([]);
   const [categoryCount, setCategoryCount] = useState(1);
   const [rowCount, setRowCount] = useState(1);
@@ -24,12 +25,52 @@ const QuizErstellen = ({ show, onHide }) => {
         for (let j = 0; j < rowCount; j++) {
           generatedQuestions.push({
             id: i * rowCount + j,
-            questionNumber: i * rowCount + j + 1,
+            question: '',
+            answer: '',
+            options: [],
           });
         }
       }
       setQuestions(generatedQuestions);
     }
+  };
+
+  const handleQuestionChange = (questionId, field, value) => {
+    const updatedQuestions = questions.map((q) => {
+      if (q.id === questionId) {
+        return { ...q, [field]: value };
+      }
+      return q;
+    });
+    setQuestions(updatedQuestions);
+  };
+
+  const handleCreateJson = () => {
+    const jsonData = {
+      name: quizName,
+      questions: questions.map(q => ({
+        question: q.question,
+        answer: q.answer,
+        options: q.options
+      }))
+    };
+
+    const fileName = `${quizName}.json`;
+
+    fetch(`http://localhost:5000/api/save-json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ fileName, jsonData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.message);
+      })
+      .catch(error => {
+        console.error('Fehler beim Speichern der Datei:', error);
+      });
   };
 
   const addOptionHandler = (questionId) => {
@@ -52,6 +93,18 @@ const QuizErstellen = ({ show, onHide }) => {
     setQuestions(updatedQuestions);
   };
 
+  const handleOptionChange = (questionId, index, value) => {
+    const updatedQuestions = questions.map((q) => {
+      if (q.id === questionId) {
+        const updatedOptions = [...q.options];
+        updatedOptions[index] = value;
+        return { ...q, options: updatedOptions };
+      }
+      return q;
+    });
+    setQuestions(updatedQuestions);
+  };
+
   return (
     <Modal
       className='quizModal'
@@ -67,6 +120,18 @@ const QuizErstellen = ({ show, onHide }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className='modalBody'>
+        <Form>
+          <Form.Group controlId="formQuizName">
+            <Form.Label>Name des Quizzes</Form.Label>
+            <Form.Control 
+              type="text" 
+              placeholder="Gib den Namen des Quizzes ein"
+              value={quizName}
+              onChange={(e) => setQuizName(e.target.value)} 
+            />
+          </Form.Group>
+        </Form>
+
         <h4>Einstellungen</h4>
         <div className="quiz-settings numberCategories">
           <p className="settings-label-h1">Anzahl der Kategorien: {categoryCount}</p>
@@ -97,33 +162,55 @@ const QuizErstellen = ({ show, onHide }) => {
         </Button>
 
         <div className="question-container">
-          {questions.map((question) => (
+          {questions.map((question, index) => (
             <div key={question.id} className="question-item">
-              <h4 className="question-number">Question {question.questionNumber}</h4>
-              <input className="question-input" type="text" placeholder="Question" />
+              <h4 className="question-number">Frage {index + 1}</h4>
+              <input
+                className="question-input"
+                type="text"
+                placeholder="Frage eingeben"
+                value={question.question}
+                onChange={(e) => handleQuestionChange(question.id, 'question', e.target.value)}
+              />
+              <input
+                className="answer-input"
+                type="text"
+                placeholder="Antwort eingeben"
+                value={question.answer}
+                onChange={(e) => handleQuestionChange(question.id, 'answer', e.target.value)}
+              />
               <div className="options-container">
                 <Button
                   className="button-secondary"
                   onClick={() => addOptionHandler(question.id)}
                 >
-                  Add Option
+                  Option hinzufügen
                 </Button>
-                {(question.options || []).map((_, index) => (
-                  <div key={index} className="option-item">
-                    <input className="option-input" type="text" placeholder={`Option ${String.fromCharCode(65 + index)}`} />
+                {(question.options || []).map((option, idx) => (
+                  <div key={idx} className="option-item">
+                    <input
+                      className="option-input"
+                      type="text"
+                      placeholder={`Option ${String.fromCharCode(65 + idx)}`}
+                      value={option}
+                      onChange={(e) => handleOptionChange(question.id, idx, e.target.value)}
+                    />
                     <Button
                       className="button-remove"
-                      onClick={() => removeOptionHandler(question.id, index)}
+                      onClick={() => removeOptionHandler(question.id, idx)}
                     >
                       X
                     </Button>
                   </div>
                 ))}
               </div>
-              <input className="points-input" type="text" placeholder="Points" />
             </div>
           ))}
         </div>
+
+        <Button onClick={handleCreateJson} className="mt-3">
+          JSON Datei erstellen
+        </Button>
       </Modal.Body>
       <Modal.Footer className='modalFooter'>
         <Button onClick={onHide}>Close</Button>
