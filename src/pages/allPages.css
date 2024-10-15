@@ -30,9 +30,9 @@
 }
 
 .quiz-list {
-  border: 2px solid white;
   height: 95%;
   padding: 10px;
+  overflow-y: auto; 
 }
 
 .quiz-list > p {
@@ -100,6 +100,7 @@
   background-color: var(--cream) !important;
   border-right: 15px solid var(--darkgrey);
   border-left: 15px solid var(--darkgrey);
+  overflow-y: auto; 
 }
 
 .modalHeader,
