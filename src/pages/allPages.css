@@ -190,3 +190,25 @@
   color: white !important;
   font-size: 20px !important;
 }
+
+/* Quiz Spielen */
+.mainPage-container {
+  padding: 20px;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+.grid-container {
+  display: grid;
+  gap: 10px;
+}
+
+.grid-cell {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+}
