@@ -54,18 +54,19 @@ const QuizErstellen = ({ show, onHide }) => {
 
   return (
     <Modal
+      className='quizModal'
       show={show}
       onHide={onHide}
-      size="lg"
+      size="xl"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header className='modalHeader' closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Quiz Erstellen
+          Neues Quiz Erstellen
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className='modalBody'>
         <h4>Einstellungen</h4>
         <div className="quiz-settings numberCategories">
           <p className="settings-label-h1">Anzahl der Kategorien: {categoryCount}</p>
@@ -124,7 +125,7 @@ const QuizErstellen = ({ show, onHide }) => {
           ))}
         </div>
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer className='modalFooter'>
         <Button onClick={onHide}>Close</Button>
       </Modal.Footer>
     </Modal>

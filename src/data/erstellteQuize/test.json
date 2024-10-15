@@ -1,0 +1,9 @@
+{
+  "name": "Test Quiz",
+  "questions": [
+    {
+      "question": "Was ist 2 + 2?",
+      "answer": "4"
+    }
+  ]
+}
