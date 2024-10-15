@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import QuizErstellen from './QuizErstellen';
 
-// import TestJson from './testJson';
-
 import './allPages.css';
 
 const HomePage = () => {
@@ -32,19 +30,11 @@ const HomePage = () => {
               Neues Quiz Erstellen
             </Button>
 
-            {/* <Button variant="primary" onClick={() => setModalShow(true)}>
-              Test Modal
-            </Button> */}
-      
             <QuizErstellen
               show={modalShow}
               onHide={() => setModalShow(false)}
             />
 
-            {/* <TestJson
-              show={modalShow}
-              onHide={() => setModalShow(false)}
-            /> */}
           </div>
         </Col>
 
