@@ -1,0 +1,13 @@
+{
+  "name": "vorlage",
+  "questions": [
+    {
+      "question": "Was ist die Hauptstadt von Spanien?",
+      "answer": "Madrid"
+    },
+    {
+      "question": "Was ist die Hauptstadt von Österreich?",
+      "answer": "Wien"
+    }
+  ]
+}
