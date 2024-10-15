@@ -1,0 +1,14 @@
+{
+  "name": "vorlage6",
+  "questions": [
+    {
+      "question": "Norwegen",
+      "answer": "Oslo",
+      "options": [
+        "Helsinki",
+        "Stockholm",
+        "Moskau"
+      ]
+    }
+  ]
+}

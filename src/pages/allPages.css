@@ -1,0 +1,140 @@
+:root {
+    --black: #000000;
+    --darkgrey: #2b2b2b;
+    --white: #ffffff;
+    --cream: #e6e6dd;
+    --gold: #959350;
+    --milenaFarbe: #852479;
+}
+/* Home Page */
+.left-column, .right-column {
+  background-color: var(--darkgrey);
+  color: var(--cream);
+  border: 10px solid var(--cream);
+  border-radius: 35px;
+  height: 850px;
+  padding: 22px;
+}
+
+.link-container {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1400px) {
+  .container {
+      max-width: 2350px !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Button-Stile */
+.button-1 {
+    display: block;
+    background: linear-gradient(90deg, var(--gold), var(--cream));
+    color: #000000;
+    padding: 14px 28px;
+    border: 1px solid black;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-top: 20px; 
+}
+
+.button-1:hover {
+    transform: scale(1.1);
+}
+
+.button-2 {
+  margin: 10px 0;
+  padding: 10px;
+  color: white;
+  background-color: #007BFF;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.button-2:hover {
+  background-color: #0056b3;
+}
+
+.modal-content {
+  border: 5px solid white !important;
+  border-radius: 7px !important;
+  height: 1000px !important;
+}
+
+.modalBody {
+  background-color: var(--cream) !important;
+  border-right: 15px solid var(--darkgrey);
+  border-left: 15px solid var(--darkgrey);
+}
+
+.modalHeader,
+.modalFooter {
+  background-color: var(--darkgrey) !important;
+  color: var(--cream);
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.additional-content {
+  border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+  
+.quiz-settings {
+  display: inline-block;
+  margin-right: 20px;
+  border: 2px solid black;
+  background-color: rgb(175, 16, 16);
+  border-radius: 20px;
+  padding: 10px;
+  width: 20%;
+}
+  
+.settings-label-h1 {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.settings-slider {
+  width: 100%;
+  cursor: pointer;
+}
+  
+.question-container {
+  margin-top: 20px;
+}
+
+.question-item {
+  margin-bottom: 20px;
+}
+
+.question-number, .question-input, .options-container, .points-input {
+  margin-bottom: 10px;
+}
+
+.button-secondary, .button-remove {
+  margin-top: 10px;
+}
