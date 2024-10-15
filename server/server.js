@@ -15,7 +15,7 @@ app.post('/api/save-json', (req, res) => {
 
   const safeFileName = fileName.endsWith('.json') ? fileName : `${fileName}.json`;
 
-  const filePath = path.join(__dirname, '../src/data/erstellteQuize/', safeFileName);
+  const filePath = path.join(__dirname, '../public/erstellteQuize', safeFileName);
 
   fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), (err) => {
     if (err) {
