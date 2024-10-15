@@ -126,8 +126,9 @@ const QuizErstellen = ({ show, onHide }) => {
           <>
             <Form>
               <Form.Group controlId="formQuizName">
-                <Form.Label>Name des Quizzes</Form.Label>
+                <Form.Label className='modalText'>Name des Quizzes</Form.Label>
                 <Form.Control 
+                  className='modalInput'
                   type="text" 
                   placeholder="Gib den Namen des Quizzes ein"
                   value={quizName}
@@ -136,7 +137,7 @@ const QuizErstellen = ({ show, onHide }) => {
               </Form.Group>
             </Form>
 
-            <h4>Einstellungen</h4>
+            <h4 className='modalText'>Einstellungen</h4>
             <div className="quiz-settings numberCategories">
               <p className="settings-label-h1">Anzahl der Kategorien: {categoryCount}</p>
               <input
@@ -162,7 +163,7 @@ const QuizErstellen = ({ show, onHide }) => {
             </div>
 
             <Button className="button-1" onClick={generateQuestions}>
-              Fragen generieren
+              Fragenfelder generieren
             </Button>
           </>
         )}
@@ -173,7 +174,7 @@ const QuizErstellen = ({ show, onHide }) => {
               {questions.map((question, index) => (
                 <div key={question.id} className="question-item">
                   <h4 className="question-number">Frage {index + 1}</h4>
-                  <input
+                  <textarea
                     className="question-input"
                     type="text"
                     placeholder="Frage eingeben"
