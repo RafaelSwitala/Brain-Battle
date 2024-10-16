@@ -5,9 +5,9 @@ import './allPages.css';
 const SpielerVerwaltung = () => {
   const [spielerName, setSpielerName] = useState('');
   const [spielerList, setSpielerList] = useState([]);
-  const [modus, setModus] = useState(1); // 1: Normal, 2: Bearbeiten, 3: Löschen
+  const [modus, setModus] = useState(1); 
   const [bearbeiteterSpieler, setBearbeiteterSpieler] = useState('');
-  const [bearbeitenIndex, setBearbeitenIndex] = useState(null); // Um den Index für die Bearbeitung zu speichern
+  const [bearbeitenIndex, setBearbeitenIndex] = useState(null);
 
   const fetchSpieler = async () => {
     try {
