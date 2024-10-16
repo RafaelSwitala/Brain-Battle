@@ -54,7 +54,6 @@ const HomePage = () => {
           <div className="link-container">
             <Link to="/QuizBearbeiten" className="button-2">Quiz Bearbeiten</Link>
             <Link to="/Spielerverwaltung" className="button-2">Spieler Verwaltung</Link>
-            <Link to="/QuizSpielen" className="button-2">Quiz Spielen</Link>
 
             <Button variant="primary" onClick={() => setModalShow(true)}>
               Neues Quiz Erstellen
