@@ -9,6 +9,7 @@ const QuizErstellen = ({ show, onHide }) => {
   const [questions, setQuestions] = useState([]);
   const [categoryCount, setCategoryCount] = useState(1);
   const [rowCount, setRowCount] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleCategoryCountChange = (event) => {
     setCategoryCount(event.target.value);
@@ -32,6 +33,7 @@ const QuizErstellen = ({ show, onHide }) => {
         }
       }
       setQuestions(generatedQuestions);
+      setCurrentPage(2);
     }
   };
 
@@ -120,100 +122,114 @@ const QuizErstellen = ({ show, onHide }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className='modalBody'>
-        <Form>
-          <Form.Group controlId="formQuizName">
-            <Form.Label>Name des Quizzes</Form.Label>
-            <Form.Control 
-              type="text" 
-              placeholder="Gib den Namen des Quizzes ein"
-              value={quizName}
-              onChange={(e) => setQuizName(e.target.value)} 
-            />
-          </Form.Group>
-        </Form>
+        {currentPage === 1 && (
+          <>
+            <Form>
+              <Form.Group controlId="formQuizName">
+                <Form.Label className='modalText'>Name des Quizzes</Form.Label>
+                <Form.Control 
+                  className='modalInput'
+                  type="text" 
+                  placeholder="Gib den Namen des Quizzes ein"
+                  value={quizName}
+                  onChange={(e) => setQuizName(e.target.value)} 
+                />
+              </Form.Group>
+            </Form>
 
-        <h4>Einstellungen</h4>
-        <div className="quiz-settings numberCategories">
-          <p className="settings-label-h1">Anzahl der Kategorien: {categoryCount}</p>
-          <input
-            className="settings-slider"
-            type="range"
-            min="2"
-            max="8"
-            value={categoryCount}
-            onChange={handleCategoryCountChange}
-          />
-        </div>
-
-        <div className="quiz-settings difficultyCategories">
-          <p className="settings-label-h1">Schwierigkeitslevel pro Kategorie: {rowCount}</p>
-          <input
-            className="settings-slider"
-            type="range"
-            min="3"
-            max="10"
-            value={rowCount}
-            onChange={handleRowCountChange}
-          />
-        </div>
-
-        <Button className="button-1" onClick={generateQuestions}>
-          Generate Questions
-        </Button>
-
-        <div className="question-container">
-          {questions.map((question, index) => (
-            <div key={question.id} className="question-item">
-              <h4 className="question-number">Frage {index + 1}</h4>
+            <h4 className='modalText'>Einstellungen</h4>
+            <div className="quiz-settings numberCategories">
+              <p className="settings-label-h1">Anzahl der Kategorien: {categoryCount}</p>
               <input
-                className="question-input"
-                type="text"
-                placeholder="Frage eingeben"
-                value={question.question}
-                onChange={(e) => handleQuestionChange(question.id, 'question', e.target.value)}
+                className="settings-slider"
+                type="range"
+                min="2"
+                max="8"
+                value={categoryCount}
+                onChange={handleCategoryCountChange}
               />
-              <input
-                className="answer-input"
-                type="text"
-                placeholder="Antwort eingeben"
-                value={question.answer}
-                onChange={(e) => handleQuestionChange(question.id, 'answer', e.target.value)}
-              />
-              <div className="options-container">
-                <Button
-                  className="button-secondary"
-                  onClick={() => addOptionHandler(question.id)}
-                >
-                  Option hinzufügen
-                </Button>
-                {(question.options || []).map((option, idx) => (
-                  <div key={idx} className="option-item">
-                    <input
-                      className="option-input"
-                      type="text"
-                      placeholder={`Option ${String.fromCharCode(65 + idx)}`}
-                      value={option}
-                      onChange={(e) => handleOptionChange(question.id, idx, e.target.value)}
-                    />
-                    <Button
-                      className="button-remove"
-                      onClick={() => removeOptionHandler(question.id, idx)}
-                    >
-                      X
-                    </Button>
-                  </div>
-                ))}
-              </div>
             </div>
-          ))}
-        </div>
 
-        <Button onClick={handleCreateJson} className="mt-3">
-          JSON Datei erstellen
-        </Button>
+            <div className="quiz-settings difficultyCategories">
+              <p className="settings-label-h1">Schwierigkeitslevel pro Kategorie: {rowCount}</p>
+              <input
+                className="settings-slider"
+                type="range"
+                min="3"
+                max="10"
+                value={rowCount}
+                onChange={handleRowCountChange}
+              />
+            </div>
+
+            <Button className="button-1" onClick={generateQuestions}>
+              Fragenfelder generieren
+            </Button>
+          </>
+        )}
+
+        {currentPage === 2 && (
+          <>
+            <div className="question-container">
+              {questions.map((question, index) => (
+                <div key={question.id} className="question-item">
+                  <h4 className="question-number">Frage {index + 1}</h4>
+                  <textarea
+                    className="question-input"
+                    type="text"
+                    placeholder="Frage eingeben"
+                    value={question.question}
+                    onChange={(e) => handleQuestionChange(question.id, 'question', e.target.value)}
+                  />
+                  <input
+                    className="answer-input"
+                    type="text"
+                    placeholder="Antwort eingeben"
+                    value={question.answer}
+                    onChange={(e) => handleQuestionChange(question.id, 'answer', e.target.value)}
+                  />
+                  <div className="options-container">
+                    <Button
+                      className="button-secondary"
+                      onClick={() => addOptionHandler(question.id)}
+                    >
+                      Option hinzufügen
+                    </Button>
+                    {(question.options || []).map((option, idx) => (
+                      <div key={idx} className="option-item">
+                        <input
+                          className="option-input"
+                          type="text"
+                          placeholder={`Option ${String.fromCharCode(65 + idx)}`}
+                          value={option}
+                          onChange={(e) => handleOptionChange(question.id, idx, e.target.value)}
+                        />
+                        <Button
+                          className="button-remove"
+                          onClick={() => removeOptionHandler(question.id, idx)}
+                        >
+                          X
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <Button onClick={handleCreateJson} className="mt-3">
+              JSON Datei erstellen
+            </Button>
+          </>
+        )}
       </Modal.Body>
       <Modal.Footer className='modalFooter'>
-        <Button onClick={onHide}>Close</Button>
+        <Button onClick={onHide}>Schließen</Button>
+        {currentPage === 2 && (
+          <Button onClick={() => setCurrentPage(1)}>
+            Zurück
+          </Button>
+        )}
       </Modal.Footer>
     </Modal>
   );
