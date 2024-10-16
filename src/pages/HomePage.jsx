@@ -5,7 +5,6 @@ import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import QuizErstellen from './QuizErstellen';
-
 import './allPages.css';
 
 const HomePage = () => {
@@ -16,7 +15,6 @@ const HomePage = () => {
     const loadQuizFiles = async () => {
       try {
         const response = await fetch('/erstellteQuize');
-        
         if (response.ok) {
           const directoryText = await response.text();
           const parser = new DOMParser();
@@ -56,7 +54,6 @@ const HomePage = () => {
           <div className="link-container">
             <Link to="/QuizBearbeiten" className="button-2">Quiz Bearbeiten</Link>
             <Link to="/Spielerverwaltung" className="button-2">Spieler Verwaltung</Link>
-            <Link to="/QuizSpielen" className="button-2">Quiz Spielen</Link>
 
             <Button variant="primary" onClick={() => setModalShow(true)}>
               Neues Quiz Erstellen
@@ -74,7 +71,9 @@ const HomePage = () => {
           <div className="quiz-list">
             {quizFiles.length > 0 ? (
               quizFiles.map((quizName, index) => (
-                <p key={index}>{quizName}</p>
+                <Link to={`/QuizSpielen/${quizName}`} key={index}>
+                  <p className="quiz-name">{quizName}</p>
+                </Link>
               ))
             ) : (
               <p>Keine Quize gefunden</p>

@@ -1,60 +1,101 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import './allPages.css';
 
 const QuizSpielen = () => {
-  const [columns, setColumns] = useState(2);
-  const [rows, setRows] = useState(4);
+  const { quizName } = useParams();
+  const [quizData, setQuizData] = useState(null);
+  const [selectedQuestion, setSelectedQuestion] = useState(null);
 
-  const generateCells = () => {
-    const cells = [];
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < columns; j++) {
-        const cellId = String(i * columns + j + 1).padStart(2, '0'); // ID mit führender Null
-        cells.push(<div key={cellId} className="grid-cell">{cellId}</div>);
+  useEffect(() => {
+    const loadQuiz = async () => {
+      try {
+        const response = await fetch(`/erstellteQuize/${quizName}.json`);
+        const data = await response.json();
+        setQuizData(data);
+      } catch (error) {
+        console.error("Fehler beim Laden des Quiz:", error);
       }
-    }
-    return cells;
+    };
+
+    loadQuiz();
+  }, [quizName]);
+
+  const handleCellClick = (question) => {
+    setSelectedQuestion(question);
   };
-  const generateCategoryHeaders = () => {
-    const headers = [];
-    for (let i = 0; i < columns; i++) {
-      headers.push(<div key={`header-${i}`} className="grid-cell">Kategorie {i + 1}</div>);
-    }
-    return headers;
+
+  const shuffleOptions = (options) => {
+    return options.sort(() => Math.random() - 0.5);
   };
+
+  if (!quizData) return <div>Lade Quiz...</div>;
+
+  const categorizedQuestions = {};
+  quizData.questions.forEach(question => {
+    const category = question.category;
+    if (!categorizedQuestions[category]) {
+      categorizedQuestions[category] = {};
+    }
+    const points = question.points;
+    if (!categorizedQuestions[category][points]) {
+      categorizedQuestions[category][points] = [];
+    }
+    categorizedQuestions[category][points].push(question);
+  });
+
+  const categories = Object.keys(categorizedQuestions);
+  const pointsSet = new Set();
+  Object.values(categorizedQuestions).forEach(pointsMap => {
+    Object.keys(pointsMap).forEach(point => pointsSet.add(point));
+  });
+  const sortedPoints = Array.from(pointsSet).sort((a, b) => a - b);
 
   return (
     <div>
-      <h3>Quiz Spielen</h3>
+      <h3>{quizData.name}</h3>
       <div className='mainPage-container'>
-        <div className="controls">
-          <label>
-            Spaltenanzahl:
-            <input
-              type="number"
-              min="2"
-              max="8"
-              value={columns}
-              onChange={(e) => setColumns(Number(e.target.value))}
-            />
-          </label>
-          <label>
-            Zeilenanzahl:
-            <input
-              type="number"
-              min="4"
-              max="11"
-              value={rows}
-              onChange={(e) => setRows(Number(e.target.value))}
-            />
-          </label>
-        </div>
-        
-        <div className="grid-container" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
-          {generateCategoryHeaders()}
-          {generateCells()}
+        <div className="grid-container" style={{ gridTemplateColumns: `repeat(${categories.length}, 1fr)` }}>
+          {categories.map((category, index) => (
+            <div key={index} className="grid-cell category-header">{category}</div>
+          ))}
+          {sortedPoints.map((points) => (
+            <React.Fragment key={points}>
+              {categories.map((category) => {
+                const questions = categorizedQuestions[category][points] || [];
+                return questions.map((question, questionIndex) => (
+                  <div
+                    key={`${category}-${questionIndex}`}
+                    className="grid-cell"
+                    onClick={() => handleCellClick(question)}>
+                    {points}
+                  </div>
+                ));
+              })}
+            </React.Fragment>
+          ))}
         </div>
       </div>
+
+      {selectedQuestion && (
+        <Modal className='modal-content' show={true} onHide={() => setSelectedQuestion(null)}>
+          <Modal.Header className='modalHeader' closeButton>
+            <Modal.Title className='modalQuestion'>{selectedQuestion.question}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className='modalBody'>
+            {shuffleOptions([selectedQuestion.answer, ...selectedQuestion.options]).map((option, index) => (
+              <Button key={index} variant="outline-primary" className="d-block mb-2">{option}</Button>
+            ))}
+          </Modal.Body>
+          <Modal.Footer className='modalFooter'>
+            <Button variant="secondary" onClick={() => setSelectedQuestion(null)}>
+              Schließen
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
     </div>
   );
 };
