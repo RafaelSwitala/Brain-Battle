@@ -35,7 +35,7 @@
   overflow-y: auto; 
 }
 
-.quiz-list > p {
+.quiz-list > p, .quiz-name {
   border: 2px solid white;
   height: 50px;
   background-color: var(--red);
@@ -45,9 +45,28 @@
   padding-top: 4px;
   width: 98.5%;
   border-radius: 6px;
+  text-decoration: none !important;
+  color: white;
 }
 
-.quiz-list > p:hover {
+.quiz-list > a {
+  text-decoration: none;
+}
+
+.quiz-list > a > p.quiz-name {
+  border: 2px solid white;
+  height: 50px;
+  background-color: var(--red);
+  font-weight: 600;
+  font-size: 24px;
+  padding-left: 18px;
+  padding-top: 4px;
+  width: 98.5%;
+  border-radius: 6px;
+  color: white;
+}
+
+.quiz-list > a:hover > p.quiz-name {
   background-color: #ffffffbb;
   color: var(--darkgrey);
   border: 2px solid var(--red);
