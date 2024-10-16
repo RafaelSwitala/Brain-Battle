@@ -80,16 +80,16 @@ const QuizSpielen = () => {
       </div>
 
       {selectedQuestion && (
-        <Modal show={true} onHide={() => setSelectedQuestion(null)}>
-          <Modal.Header closeButton>
-            <Modal.Title>{selectedQuestion.question}</Modal.Title>
+        <Modal className='modal-content' show={true} onHide={() => setSelectedQuestion(null)}>
+          <Modal.Header className='modalHeader' closeButton>
+            <Modal.Title className='modalQuestion'>{selectedQuestion.question}</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className='modalBody'>
             {shuffleOptions([selectedQuestion.answer, ...selectedQuestion.options]).map((option, index) => (
               <Button key={index} variant="outline-primary" className="d-block mb-2">{option}</Button>
             ))}
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className='modalFooter'>
             <Button variant="secondary" onClick={() => setSelectedQuestion(null)}>
               Schließen
             </Button>
