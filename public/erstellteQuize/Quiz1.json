@@ -1,0 +1,287 @@
+{
+  "name": "Quiz1",
+  "categories": [
+    "Mathematik",
+    "Hauptstädte",
+    "Fußball",
+    "Geschichte",
+    "Zusatz"
+  ],
+  "questions": [
+    {
+      "category": "Mathematik",
+      "points": 100,
+      "question": "Was ergibt 5+3?",
+      "answer": "8",
+      "options": [
+        "2",
+        "7",
+        "6"
+      ]
+    },
+    {
+      "category": "Mathematik",
+      "points": 200,
+      "question": "Was ergibt 15+3?",
+      "answer": "18",
+      "options": [
+        "22",
+        "34",
+        "9"
+      ]
+    },
+    {
+      "category": "Mathematik",
+      "points": 300,
+      "question": "Was ergibt 22+22?",
+      "answer": "44",
+      "options": [
+        "22",
+        "99",
+        "77"
+      ]
+    },
+    {
+      "category": "Mathematik",
+      "points": 400,
+      "question": "Was ergibt 1+2+3+4+5?",
+      "answer": "15",
+      "options": [
+        "22",
+        "55",
+        "66"
+      ]
+    },
+    {
+      "category": "Mathematik",
+      "points": 500,
+      "question": "Was ergibt 5 mal 3?",
+      "answer": "15",
+      "options": [
+        "444",
+        "666",
+        "918"
+      ]
+    },
+    {
+      "category": "Hauptstädte",
+      "points": 100,
+      "question": "Wie lautet die Hauptstadt von Deutschland?",
+      "answer": "Berlin",
+      "options": [
+        "Köln",
+        "Mannheim",
+        "Mainz"
+      ]
+    },
+    {
+      "category": "Hauptstädte",
+      "points": 200,
+      "question": "Wie lautet die Hauptstadt von Polen?",
+      "answer": "Warschau",
+      "options": [
+        "Danzig",
+        "Breslau",
+        "Krakau"
+      ]
+    },
+    {
+      "category": "Hauptstädte",
+      "points": 300,
+      "question": "Wie lautet die Hauptstadt von Norwegen?",
+      "answer": "Oslo",
+      "options": [
+        "Helsinki",
+        "Stockholm",
+        "Kopenhagen"
+      ]
+    },
+    {
+      "category": "Hauptstädte",
+      "points": 400,
+      "question": "Wie lautet die Hauptstadt von Russland?",
+      "answer": "Moskau",
+      "options": [
+        "Minsk",
+        "Kiew",
+        "St. Petersburg"
+      ]
+    },
+    {
+      "category": "Hauptstädte",
+      "points": 500,
+      "question": "Wie lautet die Hauptstadt von Spanien?",
+      "answer": "Madrid",
+      "options": [
+        "Sevilla",
+        "Malaga",
+        "Barcelona"
+      ]
+    },
+    {
+      "category": "Fußball",
+      "points": 100,
+      "question": "Aus wie vielen Metern Entfernung wird ein Elfmeter geschossen?",
+      "answer": "11",
+      "options": [
+        "7",
+        "5",
+        "13"
+      ]
+    },
+    {
+      "category": "Fußball",
+      "points": 200,
+      "question": "Wer ist der Rekordmeister der 1. deutschen Bundesliga?",
+      "answer": "FC Bayern München",
+      "options": [
+        "Dortmund",
+        "Schalke",
+        "Hamburger SV"
+      ]
+    },
+    {
+      "category": "Fußball",
+      "points": 300,
+      "question": "Wer ist der aktuelle Trainer der deutschen Nationalmannschaft?",
+      "answer": "Julian Nagelsmann",
+      "options": [
+        "Joachim Löw",
+        "Hansi Flick",
+        "Jürgen Klopp"
+      ]
+    },
+    {
+      "category": "Fußball",
+      "points": 400,
+      "question": "Auf welcher Position spielt Manuel Neuer?",
+      "answer": "Torwart",
+      "options": [
+        "Stürmer",
+        "Mittelfeld",
+        "Abwehr"
+      ]
+    },
+    {
+      "category": "Fußball",
+      "points": 500,
+      "question": "Wie viele Spieltage gibt es in der Bundesliga?",
+      "answer": "34",
+      "options": [
+        "38",
+        "20",
+        "40"
+      ]
+    },
+    {
+      "category": "Geschichte",
+      "points": 100,
+      "question": "Wann hat der erste Weltkrieg begonnen?",
+      "answer": "1914",
+      "options": [
+        "1901",
+        "1922",
+        "1954"
+      ]
+    },
+    {
+      "category": "Geschichte",
+      "points": 200,
+      "question": "Wann hat der zweite Weltkrieg begonnen?",
+      "answer": "1939",
+      "options": [
+        "1928",
+        "1945",
+        "1956"
+      ]
+    },
+    {
+      "category": "Geschichte",
+      "points": 300,
+      "question": "Wer hat Amerika im 16. Jahrhundert entdeckt?",
+      "answer": "Christoph Kolumbus",
+      "options": [
+        "Magelan",
+        "Amerigo Vespucci",
+        "La Cruz"
+      ]
+    },
+    {
+      "category": "Geschichte",
+      "points": 400,
+      "question": "Von Wem hat die USA Alaska gekauft?",
+      "answer": "Russland",
+      "options": [
+        "Kanada",
+        "Grönland",
+        "Dänemark"
+      ]
+    },
+    {
+      "category": "Geschichte",
+      "points": 500,
+      "question": "Wie lange dauerte der 30-jährige Krieg?",
+      "answer": "30 Jahre",
+      "options": [
+        "34 Jahre",
+        "29 Jahre",
+        "31 Jahre"
+      ]
+    },
+    {
+      "category": "Zusatz",
+      "points": 100,
+      "question": "Welche Farbe hat das e bei Google?",
+      "answer": "rot",
+      "options": [
+        "blau",
+        "grün",
+        "gelb"
+      ]
+    },
+    {
+      "category": "Zusatz",
+      "points": 200,
+      "question": "Wie oft war Deutschland Weltmeister in Fußball?",
+      "answer": "4",
+      "options": [
+        "2",
+        "3",
+        "5"
+      ]
+    },
+    {
+      "category": "Zusatz",
+      "points": 300,
+      "question": "Wie lautet der botanische Name der Felsenkirsche?",
+      "answer": "Prunus mahaleb",
+      "options": [
+        "Prunus javanica",
+        "Prunus mimosifolia",
+        "Prunus styraciflua"
+      ]
+    },
+    {
+      "category": "Zusatz",
+      "points": 400,
+      "question": "Wie heißt Captain America mit bürgerlichem Namen?",
+      "answer": "Steve Rogers",
+      "options": [
+        "Tony Stark",
+        "Bruce Banner",
+        "Alexander Mahomes"
+      ]
+    },
+    {
+      "category": "Zusatz",
+      "points": 500,
+      "question": "Aus welchen drei Farben besteht die französische Flagge?",
+      "answer": "rot, weiß, blau",
+      "options": [
+        "rot, weiß, grün",
+        "rot, weiß, gelb",
+        "grün, weiß, blau"
+      ]
+    }
+  ]
+}
