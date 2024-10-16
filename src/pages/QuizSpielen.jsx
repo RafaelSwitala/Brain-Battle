@@ -8,6 +8,26 @@ const QuizSpielen = () => {
   const { quizName } = useParams();
   const [quizData, setQuizData] = useState(null);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
+  const [spieler, setSpieler] = useState([]);
+  const [selectedSpieler, setSelectedSpieler] = useState([]);
+
+  useEffect(() => {
+    const loadSpieler = async () => {
+      try {
+        const response = await fetch('/api/spieler');
+        if (!response.ok) {
+          throw new Error('Netzwerkantwort war nicht ok');
+        }
+        const data = await response.json();
+        console.log("Geladene Spieler:", data);
+        setSpieler(data);
+      } catch (error) {
+        console.error("Fehler beim Laden der Spieler:", error);
+      }
+    };
+
+    loadSpieler();
+  }, []);
 
   useEffect(() => {
     const loadQuiz = async () => {
@@ -29,6 +49,16 @@ const QuizSpielen = () => {
 
   const shuffleOptions = (options) => {
     return options.sort(() => Math.random() - 0.5);
+  };
+
+  const handleCheckboxChange = (spielerName) => {
+    setSelectedSpieler(prevSelected => {
+      if (prevSelected.includes(spielerName)) {
+        return prevSelected.filter(name => name !== spielerName);
+      } else {
+        return [...prevSelected, spielerName];
+      }
+    });
   };
 
   if (!quizData) return <div>Lade Quiz...</div>;
@@ -56,6 +86,36 @@ const QuizSpielen = () => {
   return (
     <div>
       <h3>{quizData.name}</h3>
+
+      {/* Auswahl der Spieler */}
+      <div className="spieler-auswahl">
+        <h4>Spieler auswählen:</h4>
+        {spieler.length > 0 ? (
+          spieler.map((spielerItem, index) => (
+            <div key={index}>
+              <input
+                type="checkbox"
+                id={`spieler-${index}`}
+                checked={selectedSpieler.includes(spielerItem)}
+                onChange={() => handleCheckboxChange(spielerItem)}
+              />
+              <label htmlFor={`spieler-${index}`}>{spielerItem}</label>
+            </div>
+          ))
+        ) : (
+          <div>Keine Spieler verfügbar</div>
+        )}
+      </div>
+
+      <div className="ausgewählte-spieler">
+        <h4>Ausgewählte Spieler:</h4>
+        <ul>
+          {selectedSpieler.map((spielerName, index) => (
+            <li key={index}>{spielerName}</li>
+          ))}
+        </ul>
+      </div>
+
       <div className='mainPage-container'>
         <div className="grid-container" style={{ gridTemplateColumns: `repeat(${categories.length}, 1fr)` }}>
           {categories.map((category, index) => (
@@ -74,6 +134,7 @@ const QuizSpielen = () => {
                   </div>
                 ));
               })}
+
             </React.Fragment>
           ))}
         </div>

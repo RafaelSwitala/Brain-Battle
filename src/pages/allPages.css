@@ -269,3 +269,11 @@ li button {
   background-color: white;
   color: black;
 }
+
+.spieler-auswahl, .ausgewählte-spieler {
+  margin-bottom: 20px;
+}
+
+.spieler-auswahl h4, .ausgewählte-spieler h4 {
+  margin-bottom: 10px;
+}

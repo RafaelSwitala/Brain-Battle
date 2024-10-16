@@ -18,7 +18,15 @@ app.get('/api/spieler', (req, res) => {
       console.error('Fehler beim Laden der Spieler:', err);
       return res.status(500).json({ error: 'Fehler beim Laden der Spieler.' });
     }
-    res.json(JSON.parse(data || '[]'));
+
+    try {
+      const spieler = JSON.parse(data);
+      console.log('Geladene Spieler:', spieler);
+      res.json(spieler);
+    } catch (parseError) {
+      console.error('Fehler beim Parsen der Spieler:', parseError);
+      return res.status(500).json({ error: 'Fehler beim Parsen der Spieler.' });
+    }
   });
 });
 
