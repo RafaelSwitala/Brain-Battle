@@ -9,35 +9,45 @@ const QuizErstellen = ({ show, onHide }) => {
   const [questions, setQuestions] = useState([]);
   const [categoryCount, setCategoryCount] = useState(1);
   const [rowCount, setRowCount] = useState(1);
+  const [pointStep, setPointStep] = useState(100); // Standardmäßig 100er Schritte
+  const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pointStep, setPointStep] = useState(1); // Neu hinzugefügter State für Punkteschritte
 
   const handleCategoryCountChange = (event) => {
-    setCategoryCount(event.target.value);
+    setCategoryCount(parseInt(event.target.value));
   };
 
   const handleRowCountChange = (event) => {
-    setRowCount(event.target.value);
+    setRowCount(parseInt(event.target.value));
   };
 
   const handlePointStepChange = (event) => {
-    setPointStep(event.target.value); // Aktualisiert die gewählten Punkteschritte
+    setPointStep(Number(event.target.value));
+  };
+
+  const handleCategoryChange = (index, value) => {
+    const updatedCategories = [...categories];
+    updatedCategories[index] = value;
+    setCategories(updatedCategories);
   };
 
   const generateQuestions = () => {
-    if (categoryCount && rowCount) {
+    if (categoryCount && rowCount && pointStep) {
       const generatedQuestions = [];
       for (let i = 0; i < categoryCount; i++) {
         for (let j = 0; j < rowCount; j++) {
           generatedQuestions.push({
-            id: i * rowCount + j,
+            categoryIndex: i,  // Zu welcher Kategorie die Frage gehört
+            id: `${i}-${j}`,   // Eindeutige ID für die Frage
+            points: (j + 1) * pointStep,  // Punkte basierend auf Schrittgröße
             question: '',
             answer: '',
-            options: [],
+            options: []
           });
         }
       }
       setQuestions(generatedQuestions);
+      setCategories(new Array(categoryCount).fill('')); // Erstelle leere Felder für die Kategorien
       setCurrentPage(2);
     }
   };
@@ -50,34 +60,6 @@ const QuizErstellen = ({ show, onHide }) => {
       return q;
     });
     setQuestions(updatedQuestions);
-  };
-
-  const handleCreateJson = () => {
-    const jsonData = {
-      name: quizName,
-      questions: questions.map(q => ({
-        question: q.question,
-        answer: q.answer,
-        options: q.options
-      }))
-    };
-
-    const fileName = `${quizName}.json`;
-
-    fetch(`http://localhost:5000/api/save-json`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ fileName, jsonData })
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data.message);
-      })
-      .catch(error => {
-        console.error('Fehler beim Speichern der Datei:', error);
-      });
   };
 
   const addOptionHandler = (questionId) => {
@@ -110,6 +92,37 @@ const QuizErstellen = ({ show, onHide }) => {
       return q;
     });
     setQuestions(updatedQuestions);
+  };
+
+  const handleCreateJson = () => {
+    const jsonData = {
+      name: quizName,
+      categories: categories,
+      questions: questions.map(q => ({
+        category: categories[q.categoryIndex],
+        points: q.points,
+        question: q.question,
+        answer: q.answer,
+        options: q.options
+      }))
+    };
+
+    const fileName = `${quizName}.json`;
+
+    fetch(`http://localhost:5000/api/save-json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ fileName, jsonData })
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.message);
+      })
+      .catch(error => {
+        console.error('Fehler beim Speichern der Datei:', error);
+      });
   };
 
   return (
@@ -167,7 +180,6 @@ const QuizErstellen = ({ show, onHide }) => {
               />
             </div>
 
-            {/* Neu: Punkteschritte Dropdown-Menü */}
             <div className="quiz-settings pointSteps">
               <h4 className='modalText'>Punkteschritte</h4>
               <Form.Select
@@ -194,49 +206,73 @@ const QuizErstellen = ({ show, onHide }) => {
 
         {currentPage === 2 && (
           <>
+            {/* Eingabe für Kategorien */}
+            <div className="category-inputs">
+              <h4>Kategorien eingeben:</h4>
+              {categories.map((category, index) => (
+                <Form.Group key={index} controlId={`category-${index}`}>
+                  <Form.Label>Kategorie {index + 1}</Form.Label>
+                  <Form.Control 
+                    type="text"
+                    placeholder={`Kategorie ${index + 1} eingeben`}
+                    value={category}
+                    onChange={(e) => handleCategoryChange(index, e.target.value)}
+                  />
+                </Form.Group>
+              ))}
+            </div>
+
+            {/* Fragen-Input pro Kategorie und Schwierigkeitslevel */}
             <div className="question-container">
-              {questions.map((question, index) => (
-                <div key={question.id} className="question-item">
-                  <h4 className="question-number">Frage {index + 1}</h4>
-                  <textarea
-                    className="question-input"
-                    type="text"
-                    placeholder="Frage eingeben"
-                    value={question.question}
-                    onChange={(e) => handleQuestionChange(question.id, 'question', e.target.value)}
-                  />
-                  <input
-                    className="answer-input"
-                    type="text"
-                    placeholder="Antwort eingeben"
-                    value={question.answer}
-                    onChange={(e) => handleQuestionChange(question.id, 'answer', e.target.value)}
-                  />
-                  <div className="options-container">
-                    <Button
-                      className="button-secondary"
-                      onClick={() => addOptionHandler(question.id)}
-                    >
-                      Option hinzufügen
-                    </Button>
-                    {(question.options || []).map((option, idx) => (
-                      <div key={idx} className="option-item">
-                        <input
-                          className="option-input"
+              {categories.map((category, catIndex) => (
+                <div key={catIndex}>
+                  <h4 className="category-title">Kategorie: {category || `Kategorie ${catIndex + 1}`}</h4>
+                  {questions
+                    .filter((q) => q.categoryIndex === catIndex)
+                    .map((question) => (
+                      <div key={question.id} className="question-item">
+                        <h5>Frage für {question.points} Punkte</h5>
+                        <textarea
+                          className="question-input"
                           type="text"
-                          placeholder={`Option ${String.fromCharCode(65 + idx)}`}
-                          value={option}
-                          onChange={(e) => handleOptionChange(question.id, idx, e.target.value)}
+                          placeholder="Frage eingeben"
+                          value={question.question}
+                          onChange={(e) => handleQuestionChange(question.id, 'question', e.target.value)}
                         />
-                        <Button
-                          className="button-remove"
-                          onClick={() => removeOptionHandler(question.id, idx)}
-                        >
-                          X
-                        </Button>
+                        <input
+                          className="answer-input"
+                          type="text"
+                          placeholder="Antwort eingeben"
+                          value={question.answer}
+                          onChange={(e) => handleQuestionChange(question.id, 'answer', e.target.value)}
+                        />
+                        <div className="options-container">
+                          <Button
+                            className="button-secondary"
+                            onClick={() => addOptionHandler(question.id)}
+                          >
+                            Option hinzufügen
+                          </Button>
+                          {(question.options || []).map((option, idx) => (
+                            <div key={idx} className="option-item">
+                              <input
+                                className="option-input"
+                                type="text"
+                                placeholder={`Option ${String.fromCharCode(65 + idx)}`}
+                                value={option}
+                                onChange={(e) => handleOptionChange(question.id, idx, e.target.value)}
+                              />
+                              <Button
+                                className="button-remove"
+                                onClick={() => removeOptionHandler(question.id, idx)}
+                              >
+                                X
+                              </Button>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     ))}
-                  </div>
                 </div>
               ))}
             </div>
