@@ -10,6 +10,7 @@ const QuizErstellen = ({ show, onHide }) => {
   const [categoryCount, setCategoryCount] = useState(1);
   const [rowCount, setRowCount] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [pointStep, setPointStep] = useState(1); // Neu hinzugefügter State für Punkteschritte
 
   const handleCategoryCountChange = (event) => {
     setCategoryCount(event.target.value);
@@ -17,6 +18,10 @@ const QuizErstellen = ({ show, onHide }) => {
 
   const handleRowCountChange = (event) => {
     setRowCount(event.target.value);
+  };
+
+  const handlePointStepChange = (event) => {
+    setPointStep(event.target.value); // Aktualisiert die gewählten Punkteschritte
   };
 
   const generateQuestions = () => {
@@ -160,6 +165,25 @@ const QuizErstellen = ({ show, onHide }) => {
                 value={rowCount}
                 onChange={handleRowCountChange}
               />
+            </div>
+
+            {/* Neu: Punkteschritte Dropdown-Menü */}
+            <div className="quiz-settings pointSteps">
+              <h4 className='modalText'>Punkteschritte</h4>
+              <Form.Select
+                className='modalInput'
+                value={pointStep}
+                onChange={handlePointStepChange}
+              >
+                <option value={1}>1er Schritte</option>
+                <option value={10}>10er Schritte</option>
+                <option value={20}>20er Schritte</option>
+                <option value={50}>50er Schritte</option>
+                <option value={100}>100er Schritte</option>
+                <option value={200}>200er Schritte</option>
+                <option value={500}>500er Schritte</option>
+                <option value={1000}>1000er Schritte</option>
+              </Form.Select>
             </div>
 
             <Button className="button-1" onClick={generateQuestions}>
