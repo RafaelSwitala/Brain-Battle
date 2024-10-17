@@ -18,7 +18,8 @@
     "react-bootstrap": "^2.10.5",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.25.1",
-    "smartTabItRight-BoneItOutmind": "file:"
+    "smartTabItRight-BoneItOutmind": "file:",
+    "tabitright-boneitout": "file:"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
