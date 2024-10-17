@@ -202,6 +202,25 @@
 }
 
 /* Quiz Spielen */
+.quizSpielenContainer{
+  display: flex;
+}
+
+.quizSpielenSpieler,
+.quizSpielenQuiz {
+  display: inline-block;
+  height: 900px;
+}
+
+.quizSpielenSpieler {
+  width: 15%;
+  margin-top: 62px;
+}
+
+.quizSpielenQuiz {
+  width: 80%;
+}
+
 .mainPage-container {
   padding: 20px;
 }
@@ -240,6 +259,48 @@
 .category-header:hover {
   background-color: var(--red);
 }
+
+.wer-spielt-mit {
+  display: flex;
+  width: 100%;
+  height: 500px;
+}
+
+.spieler-auswahl,
+.ausgewählte-spieler {
+  display: inline-block;
+  border: 2px solid black;
+  height: 500px;
+  padding-top: 10px;
+}
+
+.spieler-auswahl {
+  border-radius: 20px 0 0 20px;
+}
+
+.ausgewählte-spieler {
+  border-radius: 0 20px 20px 0;
+}
+
+.spielerNameLabel,
+.spielerNameGewaehlt {
+  font-size: 24px;
+  margin-left: 8px;
+  width: 130px;
+  margin-bottom: 10px;
+  background-color: var(--gold);
+  color: white;
+  padding-left: 6px;
+}
+
+.spielerNameGewaehlt {
+  margin-left: -30px;
+  width: 180px;
+  background-color: white;
+  color: var(--darkgrey);
+  border: 1px solid var(--darkgrey);
+}
+
 
 /* Spielerverwaltung */
 input[type="text"] {

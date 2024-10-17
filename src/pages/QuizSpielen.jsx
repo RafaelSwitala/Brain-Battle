@@ -84,79 +84,89 @@ const QuizSpielen = () => {
   const sortedPoints = Array.from(pointsSet).sort((a, b) => a - b);
 
   return (
-    <div>
+    <div className='quizSpielenContainer'>
+      <div className='quizSpielenSpieler'>
       <h3>{quizData.name}</h3>
+        <div className='wer-spielt-mit'>
+          <div className="spieler-auswahl">
+            <h4>Spieler auswählen:</h4>
+            {spieler.length > 0 ? (
+              spieler.map((spielerItem, index) => (
+                <div key={index}>
+                  <input
+                    className='spielerAuswahlCheckbox'
+                    type="checkbox"
+                    id={`spieler-${index}`}
+                    checked={selectedSpieler.includes(spielerItem)}
+                    onChange={() => handleCheckboxChange(spielerItem)}
+                  />
+                  <label className='spielerNameLabel' htmlFor={`spieler-${index}`}>{spielerItem}</label>
+                </div>
+              ))
+            ) : (
+              <div>Keine Spieler verfügbar</div>
+            )}
 
-      {/* Auswahl der Spieler */}
-      <div className="spieler-auswahl">
-        <h4>Spieler auswählen:</h4>
-        {spieler.length > 0 ? (
-          spieler.map((spielerItem, index) => (
-            <div key={index}>
-              <input
-                type="checkbox"
-                id={`spieler-${index}`}
-                checked={selectedSpieler.includes(spielerItem)}
-                onChange={() => handleCheckboxChange(spielerItem)}
-              />
-              <label htmlFor={`spieler-${index}`}>{spielerItem}</label>
-            </div>
-          ))
-        ) : (
-          <div>Keine Spieler verfügbar</div>
-        )}
-      </div>
+          </div>
 
-      <div className="ausgewählte-spieler">
-        <h4>Ausgewählte Spieler:</h4>
-        <ul>
-          {selectedSpieler.map((spielerName, index) => (
-            <li key={index}>{spielerName}</li>
-          ))}
-        </ul>
-      </div>
+          <div className="ausgewählte-spieler">
+            <h4>Ausgewählte Spieler:</h4>
+            <ul>
+              {selectedSpieler.map((spielerName, index) => (
+                <li className='spielerNameGewaehlt' key={index}>{spielerName}</li>
+              ))}
+            </ul>
+          </div>
 
-      <div className='mainPage-container'>
-        <div className="grid-container" style={{ gridTemplateColumns: `repeat(${categories.length}, 1fr)` }}>
-          {categories.map((category, index) => (
-            <div key={index} className="grid-cell category-header">{category}</div>
-          ))}
-          {sortedPoints.map((points) => (
-            <React.Fragment key={points}>
-              {categories.map((category) => {
-                const questions = categorizedQuestions[category][points] || [];
-                return questions.map((question, questionIndex) => (
-                  <div
-                    key={`${category}-${questionIndex}`}
-                    className="grid-cell"
-                    onClick={() => handleCellClick(question)}>
-                    {points}
-                  </div>
-                ));
-              })}
-
-            </React.Fragment>
-          ))}
         </div>
       </div>
 
-      {selectedQuestion && (
-        <Modal className='modal-content' show={true} onHide={() => setSelectedQuestion(null)}>
-          <Modal.Header className='modalHeader' closeButton>
-            <Modal.Title className='modalQuestion'>{selectedQuestion.question}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body className='modalBody'>
-            {shuffleOptions([selectedQuestion.answer, ...selectedQuestion.options]).map((option, index) => (
-              <Button key={index} variant="outline-primary" className="d-block mb-2">{option}</Button>
+      <div className='quizSpielenQuiz'>
+        <div className='mainPage-container'>
+          <div className="grid-container" style={{ gridTemplateColumns: `repeat(${categories.length}, 1fr)` }}>
+            {categories.map((category, index) => (
+              <div key={index} className="grid-cell category-header">{category}</div>
             ))}
-          </Modal.Body>
-          <Modal.Footer className='modalFooter'>
-            <Button variant="secondary" onClick={() => setSelectedQuestion(null)}>
-              Schließen
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      )}
+            {sortedPoints.map((points) => (
+              <React.Fragment key={points}>
+                {categories.map((category) => {
+                  const questions = categorizedQuestions[category][points] || [];
+                  return questions.map((question, questionIndex) => (
+                    <div
+                      key={`${category}-${questionIndex}`}
+                      className="grid-cell"
+                      onClick={() => handleCellClick(question)}>
+                      {points}
+                    </div>
+                  ));
+                })}
+
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+
+        {selectedQuestion && (
+          <Modal className='modal-content' show={true} onHide={() => setSelectedQuestion(null)}>
+            <Modal.Header className='modalHeader' closeButton>
+              <Modal.Title className='modalQuestion'>{selectedQuestion.question}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body className='modalBody'>
+              {shuffleOptions([selectedQuestion.answer, ...selectedQuestion.options]).map((option, index) => (
+                <Button key={index} variant="outline-primary" className="d-block mb-2">{option}</Button>
+              ))}
+            </Modal.Body>
+            <Modal.Footer className='modalFooter'>
+              <Button variant="secondary" onClick={() => setSelectedQuestion(null)}>
+                Schließen
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        )}
+      </div>
+
+
+
     </div>
   );
 };
