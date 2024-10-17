@@ -11,7 +11,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/api/spieler', (req, res) => {
-  const filePath = path.join(__dirname, '../public/spieler.json');
+  // const filePath = path.join(__dirname, '../public/spieler.json');
+  const filePath = path.resolve(__dirname, '../public/spieler.json');
+
 
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {

@@ -14,7 +14,7 @@ const QuizSpielen = () => {
   useEffect(() => {
     const loadSpieler = async () => {
       try {
-        const response = await fetch('/api/spieler');
+        const response = await fetch('http://localhost:5000/api/spieler');
         if (!response.ok) {
           throw new Error('Netzwerkantwort war nicht ok');
         }
