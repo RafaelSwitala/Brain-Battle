@@ -5,12 +5,17 @@ import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import QuizErstellen from './QuizErstellen';
+import Modal from 'react-bootstrap/Modal';
 import './allPages.css';
 
 const HomePage = () => {
   const [modalShow, setModalShow] = useState(false);
+  const [deleteModalShow, setDeleteModalShow] = useState(false);
   const [quizFiles, setQuizFiles] = useState([]);
+  const [quizToEdit, setQuizToEdit] = useState(null);
+  const [quizToDelete, setQuizToDelete] = useState(null);
 
+  // Laden der Quiz-Dateien
   useEffect(() => {
     const loadQuizFiles = async () => {
       try {
@@ -39,6 +44,30 @@ const HomePage = () => {
 
     loadQuizFiles();
   }, []);
+
+  const handleDeleteQuiz = async (quizName) => {
+    try {
+      console.log("Löschen von Quiz:", quizName);
+  
+      const response = await fetch(`http://localhost:5000/api/delete-quiz/${quizName}`, {
+        method: 'DELETE'
+      });
+  
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+      }
+  
+      const message = await response.text();
+      console.log(message);
+  
+      setQuizFiles(quizFiles.filter(quiz => quiz !== quizName));
+      setDeleteModalShow(false);
+
+    } catch (error) {
+      console.error('Fehler beim Löschen:', error.message);
+    }
+  };
 
   return (
     <Container>
@@ -71,9 +100,31 @@ const HomePage = () => {
           <div className="quiz-list">
             {quizFiles.length > 0 ? (
               quizFiles.map((quizName, index) => (
-                <Link to={`/QuizSpielen/${quizName}`} key={index}>
-                  <p className="quiz-name">{quizName}</p>
-                </Link>
+                <div key={index} className="quiz-item">
+                  <Link to={`/QuizSpielen/${quizName}`}>
+                    <p className="quiz-name">{quizName}</p>
+                  </Link>
+                  <Button
+                    variant="secondary"
+                    className="edit-btn"
+                    onClick={() => {
+                      setQuizToEdit(quizName);
+                      setModalShow(true);
+                    }}
+                  >
+                    B
+                  </Button>
+                  <Button
+                    variant="danger"
+                    className="delete-btn"
+                    onClick={() => {
+                      setQuizToDelete(quizName);
+                      setDeleteModalShow(true);
+                    }}
+                  >
+                    L
+                  </Button>
+                </div>
               ))
             ) : (
               <p>Keine Quize gefunden</p>
@@ -81,6 +132,25 @@ const HomePage = () => {
           </div>
         </Col>
       </Row>
+
+      <Modal show={deleteModalShow} onHide={() => setDeleteModalShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Quiz löschen</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Bist du sicher, dass du das Quiz "{quizToDelete}" löschen möchtest?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setDeleteModalShow(false)}>
+            Abbrechen
+          </Button>
+          <Button variant="danger" onClick={() => {
+            if (quizToDelete) handleDeleteQuiz(quizToDelete);
+          }}>
+            Löschen
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

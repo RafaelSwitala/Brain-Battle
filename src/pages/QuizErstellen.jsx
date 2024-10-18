@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import './allPages.css';
 
-const QuizErstellen = ({ show, onHide }) => {
+const QuizErstellen = ({ show, onHide, editQuizName }) => {
   const [quizName, setQuizName] = useState('');
   const [questions, setQuestions] = useState([]);
   const [categoryCount, setCategoryCount] = useState(1);
@@ -12,6 +12,36 @@ const QuizErstellen = ({ show, onHide }) => {
   const [pointStep, setPointStep] = useState(100);
   const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    if (editQuizName) {
+      // Quizdaten laden, wenn ein Quizname zum Bearbeiten übergeben wird
+      fetch(`/erstellteQuize/${editQuizName}.json`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Fehler beim Laden des Quizzes');
+          }
+          return response.json();
+        })
+        .then(data => {
+          setQuizName(data.name);
+          setCategories(data.categories || []);
+          setQuestions(data.questions || []);
+          setCategoryCount(data.categories.length);
+          setRowCount(data.questions.length / data.categories.length); // Schätzung
+          setCurrentPage(2);
+        })
+        .catch(err => console.error('Fehler beim Laden des Quizzes:', err));
+    } else {
+      // Reset der Felder, wenn kein Quiz bearbeitet wird
+      setQuizName('');
+      setCategories([]);
+      setQuestions([]);
+      setCategoryCount(1);
+      setRowCount(1);
+      setCurrentPage(1);
+    }
+  }, [editQuizName]);
 
   const isQuiznameValid = (name) => {
     const regexQuizname = /^[a-zA-Z0-9_-]+$/;
@@ -119,6 +149,19 @@ const QuizErstellen = ({ show, onHide }) => {
 
     const fileName = `${quizName}.json`;
 
+    // Lösche die alte Datei, wenn der Name geändert wurde
+    if (editQuizName && editQuizName !== quizName) {
+      fetch(`/api/delete-quiz/${editQuizName}`, { method: 'DELETE' })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Fehler beim Löschen der alten Datei');
+          }
+          console.log(`${editQuizName} gelöscht`);
+        })
+        .catch(err => console.error('Fehler beim Löschen:', err));
+    }
+
+    // Speichere die neue Datei
     fetch(`http://localhost:5000/api/save-json`, {
       method: 'POST',
       headers: {
@@ -126,9 +169,15 @@ const QuizErstellen = ({ show, onHide }) => {
       },
       body: JSON.stringify({ fileName, jsonData })
     })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Fehler beim Speichern der Datei');
+        }
+        return response.json();
+      })
       .then(data => {
         console.log(data.message);
+        onHide(); // Schließt das Modal nach dem Speichern
       })
       .catch(error => {
         console.error('Fehler beim Speichern der Datei:', error);
@@ -146,7 +195,7 @@ const QuizErstellen = ({ show, onHide }) => {
     >
       <Modal.Header className='modalHeader' closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Neues Quiz Erstellen
+          {editQuizName ? 'Quiz Bearbeiten' : 'Neues Quiz Erstellen'}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className='modalBody'>
