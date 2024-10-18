@@ -12,6 +12,8 @@ const QuizSpielen = () => {
   const [selectedSpieler, setSelectedSpieler] = useState([]);
   const [confirmedSpieler, setConfirmedSpieler] = useState(false);
   const [spielerPunkte, setSpielerPunkte] = useState({});
+  const [currentSpielerIndex, setCurrentSpielerIndex] = useState(0); // Aktueller Spieler
+  const [answeredQuestions, setAnsweredQuestions] = useState(new Set()); // Beantwortete Fragen
 
   useEffect(() => {
     const loadSpieler = async () => {
@@ -21,7 +23,6 @@ const QuizSpielen = () => {
           throw new Error('Netzwerkantwort war nicht ok');
         }
         const data = await response.json();
-        console.log("Geladene Spieler:", data);
         setSpieler(data);
       } catch (error) {
         console.error("Fehler beim Laden der Spieler:", error);
@@ -46,7 +47,9 @@ const QuizSpielen = () => {
   }, [quizName]);
 
   const handleCellClick = (question) => {
-    setSelectedQuestion(question);
+    if (!answeredQuestions.has(question)) {
+      setSelectedQuestion(question); // Frage wird nur ausgewählt, wenn sie noch nicht beantwortet wurde
+    }
   };
 
   const shuffleOptions = (options) => {
@@ -70,10 +73,29 @@ const QuizSpielen = () => {
         return acc;
       }, {});
       setSpielerPunkte(initialPunkte);
-      setConfirmedSpieler(true);  // Spieler bestätigt, Quiz kann gestartet werden
+      setConfirmedSpieler(true);
     } else {
       alert("Bitte mindestens einen Spieler auswählen!");
     }
+  };
+
+  const handleAnswerClick = (isCorrect) => {
+    const currentSpieler = selectedSpieler[currentSpielerIndex];
+    const points = selectedQuestion.points;
+
+    setSpielerPunkte(prevPunkte => ({
+      ...prevPunkte,
+      [currentSpieler]: prevPunkte[currentSpieler] + (isCorrect ? points : -points)
+    }));
+
+    // Frage wird als beantwortet markiert
+    setAnsweredQuestions(prevAnswered => new Set([...prevAnswered, selectedQuestion]));
+
+    // Nächster Spieler ist dran
+    setCurrentSpielerIndex((prevIndex) => (prevIndex + 1) % selectedSpieler.length);
+
+    // Modal schließen
+    setSelectedQuestion(null);
   };
 
   if (!quizData) return <div>Lade Quiz...</div>;
@@ -97,6 +119,8 @@ const QuizSpielen = () => {
     Object.keys(pointsMap).forEach(point => pointsSet.add(point));
   });
   const sortedPoints = Array.from(pointsSet).sort((a, b) => a - b);
+
+  const currentSpieler = selectedSpieler[currentSpielerIndex];
 
   return (
     <div className='quizSpielenContainer'>
@@ -157,6 +181,7 @@ const QuizSpielen = () => {
                 ))}
               </tbody>
             </table>
+            <h4>Aktueller Spieler: {currentSpieler}</h4>
           </div>
 
           <div className='quizSpielenQuiz'>
@@ -172,7 +197,7 @@ const QuizSpielen = () => {
                       return questions.map((question, questionIndex) => (
                         <div
                           key={`${category}-${questionIndex}`}
-                          className="grid-cell"
+                          className={`grid-cell ${answeredQuestions.has(question) ? 'answered' : ''}`}
                           onClick={() => handleCellClick(question)}>
                           {points}
                         </div>
@@ -190,7 +215,9 @@ const QuizSpielen = () => {
                 </Modal.Header>
                 <Modal.Body className='modalBody'>
                   {shuffleOptions([selectedQuestion.answer, ...selectedQuestion.options]).map((option, index) => (
-                    <Button key={index} variant="outline-primary" className="d-block mb-2">{option}</Button>
+                    <Button key={index} variant="outline-primary" className="d-block mb-2" onClick={() => handleAnswerClick(option === selectedQuestion.answer)}>
+                      {option}
+                    </Button>
                   ))}
                 </Modal.Body>
                 <Modal.Footer className='modalFooter'>

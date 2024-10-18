@@ -249,6 +249,12 @@
   background-color: #155b554a;
 }
 
+.grid-cell.answered {
+  background-color: #d3d3d3;
+  color: #a9a9a9;
+  pointer-events: none;
+}
+
 .category-header {
   background-color: var(--red);
   color: black;
