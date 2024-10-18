@@ -10,19 +10,39 @@ const PORT = 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/api/save-json', (req, res) => {
-  const { fileName, jsonData } = req.body;
+app.get('/api/spieler', (req, res) => {
+  // const filePath = path.join(__dirname, '../public/spieler.json');
+  const filePath = path.resolve(__dirname, '../public/spieler.json');
 
-  const safeFileName = fileName.endsWith('.json') ? fileName : `${fileName}.json`;
 
-  const filePath = path.join(__dirname, '../public/erstellteQuize', safeFileName);
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Fehler beim Laden der Spieler:', err);
+      return res.status(500).json({ error: 'Fehler beim Laden der Spieler.' });
+    }
 
-  fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), (err) => {
+    try {
+      const spieler = JSON.parse(data);
+      console.log('Geladene Spieler:', spieler);
+      res.json(spieler);
+    } catch (parseError) {
+      console.error('Fehler beim Parsen der Spieler:', parseError);
+      return res.status(500).json({ error: 'Fehler beim Parsen der Spieler.' });
+    }
+  });
+});
+
+app.post('/api/spieler', (req, res) => {
+  const spielerList = req.body;
+
+  const filePath = path.join(__dirname, '../public/spieler.json');
+
+  fs.writeFile(filePath, JSON.stringify(spielerList, null, 2), (err) => {
     if (err) {
       console.error('Fehler beim Speichern der Datei:', err);
       return res.status(500).json({ error: 'Fehler beim Speichern der Datei.' });
     }
-    res.status(200).json({ message: `Datei ${safeFileName} erfolgreich gespeichert.` });
+    res.status(200).json({ message: 'Spieler erfolgreich gespeichert.' });
   });
 });
 
