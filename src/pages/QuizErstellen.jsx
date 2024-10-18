@@ -9,9 +9,14 @@ const QuizErstellen = ({ show, onHide }) => {
   const [questions, setQuestions] = useState([]);
   const [categoryCount, setCategoryCount] = useState(1);
   const [rowCount, setRowCount] = useState(1);
-  const [pointStep, setPointStep] = useState(100); // Standardmäßig 100er Schritte
+  const [pointStep, setPointStep] = useState(100);
   const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const isQuiznameValid = (name) => {
+    const regexQuizname = /^[a-zA-Z0-9_-]+$/;
+    return regexQuizname.test(name) && name.length >= 3;
+  };
 
   const handleCategoryCountChange = (event) => {
     setCategoryCount(parseInt(event.target.value));
@@ -37,9 +42,9 @@ const QuizErstellen = ({ show, onHide }) => {
       for (let i = 0; i < categoryCount; i++) {
         for (let j = 0; j < rowCount; j++) {
           generatedQuestions.push({
-            categoryIndex: i,  // Zu welcher Kategorie die Frage gehört
-            id: `${i}-${j}`,   // Eindeutige ID für die Frage
-            points: (j + 1) * pointStep,  // Punkte basierend auf Schrittgröße
+            categoryIndex: i, 
+            id: `${i}-${j}`,
+            points: (j + 1) * pointStep, 
             question: '',
             answer: '',
             options: []
@@ -47,7 +52,7 @@ const QuizErstellen = ({ show, onHide }) => {
         }
       }
       setQuestions(generatedQuestions);
-      setCategories(new Array(categoryCount).fill('')); // Erstelle leere Felder für die Kategorien
+      setCategories(new Array(categoryCount).fill(''));
       setCurrentPage(2);
     }
   };
@@ -95,6 +100,11 @@ const QuizErstellen = ({ show, onHide }) => {
   };
 
   const handleCreateJson = () => {
+    if (!isQuiznameValid(quizName)) {
+      alert("Der Quizname ist ungültig! Er darf keine Leerzeichen, Sonderzeichen oder Punkte enthalten und muss mindestens 3 Zeichen lang sein.");
+      return;
+    }
+
     const jsonData = {
       name: quizName,
       categories: categories,
@@ -146,12 +156,13 @@ const QuizErstellen = ({ show, onHide }) => {
               <Form.Group controlId="formQuizName">
                 <Form.Label className='modalText'>Name des Quizzes</Form.Label>
                 <Form.Control 
-                  className='modalInput'
+                  className={`modalInput ${isQuiznameValid(quizName) ? '' : 'is-invalid'}`}
                   type="text" 
                   placeholder="Gib den Namen des Quizzes ein"
                   value={quizName}
                   onChange={(e) => setQuizName(e.target.value)} 
                 />
+                { !isQuiznameValid(quizName) && <p className="error-text">Ungültiger Quizname!</p> }
               </Form.Group>
             </Form>
 
@@ -206,7 +217,6 @@ const QuizErstellen = ({ show, onHide }) => {
 
         {currentPage === 2 && (
           <>
-            {/* Eingabe für Kategorien */}
             <div className="category-inputs">
               <h4>Kategorien eingeben:</h4>
               {categories.map((category, index) => (
@@ -222,7 +232,6 @@ const QuizErstellen = ({ show, onHide }) => {
               ))}
             </div>
 
-            {/* Fragen-Input pro Kategorie und Schwierigkeitslevel */}
             <div className="question-container">
               {categories.map((category, catIndex) => (
                 <div key={catIndex}>
@@ -251,22 +260,22 @@ const QuizErstellen = ({ show, onHide }) => {
                             className="button-secondary"
                             onClick={() => addOptionHandler(question.id)}
                           >
-                            Option hinzufügen
+                            Antwortoption hinzufügen
                           </Button>
-                          {(question.options || []).map((option, idx) => (
-                            <div key={idx} className="option-item">
+                          {question.options.map((option, index) => (
+                            <div key={index} className="option-item">
                               <input
                                 className="option-input"
                                 type="text"
-                                placeholder={`Option ${String.fromCharCode(65 + idx)}`}
+                                placeholder={`Option ${index + 1}`}
                                 value={option}
-                                onChange={(e) => handleOptionChange(question.id, idx, e.target.value)}
+                                onChange={(e) => handleOptionChange(question.id, index, e.target.value)}
                               />
                               <Button
-                                className="button-remove"
-                                onClick={() => removeOptionHandler(question.id, idx)}
+                                className="button-danger"
+                                onClick={() => removeOptionHandler(question.id, index)}
                               >
-                                X
+                                Entfernen
                               </Button>
                             </div>
                           ))}
@@ -277,20 +286,12 @@ const QuizErstellen = ({ show, onHide }) => {
               ))}
             </div>
 
-            <Button onClick={handleCreateJson} className="mt-3">
-              JSON Datei erstellen
+            <Button className="button-1" onClick={handleCreateJson}>
+              JSON-Datei erstellen
             </Button>
           </>
         )}
       </Modal.Body>
-      <Modal.Footer className='modalFooter'>
-        <Button onClick={onHide}>Schließen</Button>
-        {currentPage === 2 && (
-          <Button onClick={() => setCurrentPage(1)}>
-            Zurück
-          </Button>
-        )}
-      </Modal.Footer>
     </Modal>
   );
 };
