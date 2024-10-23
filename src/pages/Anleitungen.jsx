@@ -4,23 +4,22 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 const Anleitungen = () => {
-
-
   return (
     <div>
+        hallo
       <Tabs
       defaultActiveKey="profile"
       id="uncontrolled-tab-example"
       className="mb-3"
     >
-      <Tab eventKey="home" title="Home">
-        Tab content for Home
+      <Tab eventKey="spielerVerwaltung" title="Spielerverwaltung">
+        Spielerverwaltung Inhalt
       </Tab>
-      <Tab eventKey="profile" title="Profile">
-        Tab content for Profile
+      <Tab eventKey="quizErstellen" title="Quiz Erstellen">
+        Anleitung zum Erstellen, Bearbeiten und Löschen eines Quizzes
       </Tab>
-      <Tab eventKey="contact" title="Contact" disabled>
-        Tab content for Contact
+      <Tab eventKey="mobileConnection" title="Verbindung mit Mobilgeräten">
+        Auf diese Art und Weise lässt sich ein Handy mit der App verbinden
       </Tab>
     </Tabs>
     </div>
