@@ -344,3 +344,13 @@ li button {
 .spieler-auswahl h4, .ausgewählte-spieler h4 {
   margin-bottom: 10px;
 }
+
+/* Anleitungen */
+.anleitungTabGruppe {
+  background-color: green;
+}
+
+.anleitungTab {
+  background-color: rgb(212, 195, 69) !important;
+  color: white !important;
+} 

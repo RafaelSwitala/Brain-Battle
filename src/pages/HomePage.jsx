@@ -52,13 +52,18 @@ const HomePage = () => {
         <Col xs={12} md={4} className="left-column">
           <h2>Erstelle ein neues Spiel</h2>
           <div className="link-container">
+            {/* Verlinkung zu den verschiedenen Seiten */}
             <Link to="/QuizBearbeiten" className="button-2">Quiz Bearbeiten</Link>
             <Link to="/Spielerverwaltung" className="button-2">Spieler Verwaltung</Link>
+            {/* Verlinkung zur Anleitungen-Seite */}
+            <Link to="/Anleitungen" className="button-2">Anleitungen</Link>
 
+            {/* Button für Quiz erstellen */}
             <Button variant="primary" onClick={() => setModalShow(true)}>
               Neues Quiz Erstellen
             </Button>
 
+            {/* Modales Fenster für das Erstellen eines neuen Quiz */}
             <QuizErstellen
               show={modalShow}
               onHide={() => setModalShow(false)}
