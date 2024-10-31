@@ -12,8 +12,8 @@ const QuizSpielen = () => {
   const [selectedSpieler, setSelectedSpieler] = useState([]);
   const [confirmedSpieler, setConfirmedSpieler] = useState(false);
   const [spielerPunkte, setSpielerPunkte] = useState({});
-  const [currentSpielerIndex, setCurrentSpielerIndex] = useState(0); // Aktueller Spieler
-  const [answeredQuestions, setAnsweredQuestions] = useState(new Set()); // Beantwortete Fragen
+  const [currentSpielerIndex, setCurrentSpielerIndex] = useState(0);
+  const [answeredQuestions, setAnsweredQuestions] = useState(new Set());
 
   useEffect(() => {
     const loadSpieler = async () => {
@@ -48,7 +48,7 @@ const QuizSpielen = () => {
 
   const handleCellClick = (question) => {
     if (!answeredQuestions.has(question)) {
-      setSelectedQuestion(question); // Frage wird nur ausgewählt, wenn sie noch nicht beantwortet wurde
+      setSelectedQuestion(question);
     }
   };
 
@@ -88,13 +88,10 @@ const QuizSpielen = () => {
       [currentSpieler]: prevPunkte[currentSpieler] + (isCorrect ? points : -points)
     }));
 
-    // Frage wird als beantwortet markiert
     setAnsweredQuestions(prevAnswered => new Set([...prevAnswered, selectedQuestion]));
 
-    // Nächster Spieler ist dran
     setCurrentSpielerIndex((prevIndex) => (prevIndex + 1) % selectedSpieler.length);
 
-    // Modal schließen
     setSelectedQuestion(null);
   };
 
