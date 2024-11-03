@@ -3,33 +3,21 @@ import { useParams } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import './allPages.css';
+import spielerData from '../../public/spieler.json'; 
 
 const QuizSpielen = () => {
   const { quizName } = useParams();
   const [quizData, setQuizData] = useState(null);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
-  const [spieler, setSpieler] = useState([]);
+  const [spieler, setSpieler] = useState([]); 
   const [selectedSpieler, setSelectedSpieler] = useState([]);
   const [confirmedSpieler, setConfirmedSpieler] = useState(false);
   const [spielerPunkte, setSpielerPunkte] = useState({});
   const [currentSpielerIndex, setCurrentSpielerIndex] = useState(0);
-  const [answeredQuestions, setAnsweredQuestions] = useState(new Set());
+  const [answeredQuestions, setAnsweredQuestions] = useState(new Set()); 
 
   useEffect(() => {
-    const loadSpieler = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/spieler');
-        if (!response.ok) {
-          throw new Error('Netzwerkantwort war nicht ok');
-        }
-        const data = await response.json();
-        setSpieler(data);
-      } catch (error) {
-        console.error("Fehler beim Laden der Spieler:", error);
-      }
-    };
-
-    loadSpieler();
+    setSpieler(spielerData);
   }, []);
 
   useEffect(() => {
@@ -48,7 +36,7 @@ const QuizSpielen = () => {
 
   const handleCellClick = (question) => {
     if (!answeredQuestions.has(question)) {
-      setSelectedQuestion(question);
+      setSelectedQuestion(question); 
     }
   };
 
