@@ -196,7 +196,7 @@ const QuizSpielen = () => {
             </div>
 
             {selectedQuestion && (
-              <Modal className='modal-content' show={true} onHide={() => setSelectedQuestion(null)}>
+              <Modal className='quizModal' show={true} onHide={() => setSelectedQuestion(null)}>
                 <Modal.Header className='modalHeader' closeButton>
                   <Modal.Title className='modalQuestion'>{selectedQuestion.question}</Modal.Title>
                 </Modal.Header>
