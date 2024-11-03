@@ -166,7 +166,9 @@ const QuizSpielen = () => {
                 ))}
               </tbody>
             </table>
-            <h4>Aktueller Spieler: {currentSpieler}</h4>
+            <h4>Aktueller Spieler:
+              <br />
+               {currentSpieler}</h4>
           </div>
 
           <div className='quizSpielenQuiz'>

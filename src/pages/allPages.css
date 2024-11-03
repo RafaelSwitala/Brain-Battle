@@ -209,7 +209,14 @@
 .quizSpielenSpieler,
 .quizSpielenQuiz {
   display: inline-block;
-  height: 900px;
+  padding: 20px;
+  height: 700px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  background-color: var(--pattyGreen);
+  border: 4px solid black;
+  width: 2000px !important;
+  border-radius: 20px;
 }
 
 .quizSpielenSpieler {
@@ -275,17 +282,19 @@
 .spieler-auswahl,
 .ausgewählte-spieler {
   display: inline-block;
-  border: 2px solid black;
   height: 500px;
   padding-top: 10px;
+  margin-left: 20px;
 }
 
 .spieler-auswahl {
   border-radius: 20px 0 0 20px;
+  width: 300px;
 }
 
 .ausgewählte-spieler {
   border-radius: 0 20px 20px 0;
+  width: 1300px;
 }
 
 .spielerNameLabel,
@@ -305,6 +314,36 @@
   background-color: white;
   color: var(--darkgrey);
   border: 1px solid var(--darkgrey);
+}
+
+.tabelle-container {
+  background-color: var(--darkgrey);
+  border: 2px solid var(--darkgrey);
+  border-radius: 20px;
+  color: white;
+  padding: 15px;
+}
+
+.tabelle-container > h3{
+  font-size: 40px;
+  margin-bottom: 65px;
+  padding-bottom: 18px;
+  padding-left: 32px;
+  border-bottom: 3px solid white;
+}
+
+.spieler-tabelle {
+  width: 260px;
+  font-size: 24px;
+  margin-bottom: 90px;
+}
+
+.spieler-tabelle > thead {
+  border-bottom: 3px solid white;
+}
+
+.spieler-tabelle > tbody {
+  border-bottom: 3px solid white;
 }
 
 
