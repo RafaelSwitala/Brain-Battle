@@ -2,286 +2,346 @@
   "name": "Quiz1",
   "categories": [
     "Mathematik",
-    "Hauptstädte",
-    "Fußball",
-    "Geschichte",
-    "Zusatz"
+    "Natur",
+    "Sport",
+    "Pub",
+    "Alltag",
+    "Hauptstädte"
   ],
   "questions": [
     {
       "category": "Mathematik",
       "points": 100,
-      "question": "Was ergibt 5+3?",
-      "answer": "8",
+      "question": "Was ergibt 12 mal 12?",
+      "answer": "144",
       "options": [
+        "120",
+        "124",
+        "140"
+      ]
+    },
+    {
+      "category": "Mathematik",
+      "points": 200,
+      "question": "Wie lautet die Quadratzahl von 20?",
+      "answer": "400",
+      "options": [
+        "2000",
+        "600",
+        "1200"
+      ]
+    },
+    {
+      "category": "Mathematik",
+      "points": 300,
+      "question": "Wie viele Binomische Formeln gibt es?",
+      "answer": "3",
+      "options": [
+        "1",
         "2",
-        "7",
-        "6"
-      ]
-    },
-    {
-      "category": "Mathematik",
-      "points": 200,
-      "question": "Was ergibt 15+3?",
-      "answer": "18",
-      "options": [
-        "22",
-        "34",
-        "9"
-      ]
-    },
-    {
-      "category": "Mathematik",
-      "points": 300,
-      "question": "Was ergibt 22+22?",
-      "answer": "44",
-      "options": [
-        "22",
-        "99",
-        "77"
+        "4"
       ]
     },
     {
       "category": "Mathematik",
       "points": 400,
-      "question": "Was ergibt 1+2+3+4+5?",
-      "answer": "15",
+      "question": "Was ist richtig? 12 cm ergeben auch...",
+      "answer": "1,2 dm",
       "options": [
-        "22",
-        "55",
-        "66"
+        "1,2 mm",
+        "1,2 m",
+        "1,2 km"
       ]
     },
     {
       "category": "Mathematik",
       "points": 500,
-      "question": "Was ergibt 5 mal 3?",
-      "answer": "15",
+      "question": "Was muss man tun um 2 Brüche miteinander multiplizieren zu können?",
+      "answer": "Zähler mit Zähler und Nenner mit Nenner multiplizieren",
       "options": [
-        "444",
-        "666",
-        "918"
+        "Auf den selben Nenner bringen",
+        "Auf den selben Zähler bringen",
+        "Durch den Kehrwert dividieren"
       ]
     },
     {
-      "category": "Hauptstädte",
+      "category": "Natur",
       "points": 100,
-      "question": "Wie lautet die Hauptstadt von Deutschland?",
-      "answer": "Berlin",
+      "question": "Von welchem Tier stammt der Hund ursprünglich?",
+      "answer": "Vom Wolf",
       "options": [
-        "Köln",
-        "Mannheim",
-        "Mainz"
+        "Vom Fuchs",
+        "Vom Löwen",
+        "Vom Urhund"
       ]
     },
     {
-      "category": "Hauptstädte",
+      "category": "Natur",
       "points": 200,
-      "question": "Wie lautet die Hauptstadt von Polen?",
-      "answer": "Warschau",
+      "question": "Aus welchem Material besteht ein Diamant?",
+      "answer": "Kohlenstoff",
       "options": [
-        "Danzig",
-        "Breslau",
-        "Krakau"
+        "Holzkohle",
+        "Sand",
+        "Eisen"
       ]
     },
     {
-      "category": "Hauptstädte",
+      "category": "Natur",
       "points": 300,
-      "question": "Wie lautet die Hauptstadt von Norwegen?",
-      "answer": "Oslo",
+      "question": "In welchem Zusammenhang wird das Molekül ATP in der Biologie am öftesten erwähnt?",
+      "answer": "Neurologie",
       "options": [
-        "Helsinki",
-        "Stockholm",
-        "Kopenhagen"
+        "Ökologie",
+        "Genetik",
+        "Evolution"
       ]
     },
     {
-      "category": "Hauptstädte",
+      "category": "Natur",
       "points": 400,
-      "question": "Wie lautet die Hauptstadt von Russland?",
-      "answer": "Moskau",
+      "question": "Was für ein Himmelskörper ist unsere Sonne?",
+      "answer": "Stern",
       "options": [
-        "Minsk",
-        "Kiew",
-        "St. Petersburg"
+        "Planet",
+        "Mond",
+        "Galaxie"
       ]
     },
     {
-      "category": "Hauptstädte",
+      "category": "Natur",
       "points": 500,
-      "question": "Wie lautet die Hauptstadt von Spanien?",
-      "answer": "Madrid",
+      "question": "Was versteht man unter Sacchariden?",
+      "answer": "Zucker",
       "options": [
-        "Sevilla",
-        "Malaga",
-        "Barcelona"
+        "Salze",
+        "Edelsteine",
+        "Kalksteine in einer Tropfsteinhöhle"
       ]
     },
     {
-      "category": "Fußball",
+      "category": "Sport",
       "points": 100,
-      "question": "Aus wie vielen Metern Entfernung wird ein Elfmeter geschossen?",
-      "answer": "11",
+      "question": "Welchem Land wird der Ursprung vom Fußball zugeschrieben?",
+      "answer": "England",
       "options": [
-        "7",
-        "5",
-        "13"
+        "Deutschland",
+        "Brasilien",
+        "Frankreich"
       ]
     },
     {
-      "category": "Fußball",
+      "category": "Sport",
       "points": 200,
-      "question": "Wer ist der Rekordmeister der 1. deutschen Bundesliga?",
-      "answer": "FC Bayern München",
-      "options": [
-        "Dortmund",
-        "Schalke",
-        "Hamburger SV"
-      ]
-    },
-    {
-      "category": "Fußball",
-      "points": 300,
-      "question": "Wer ist der aktuelle Trainer der deutschen Nationalmannschaft?",
-      "answer": "Julian Nagelsmann",
-      "options": [
-        "Joachim Löw",
-        "Hansi Flick",
-        "Jürgen Klopp"
-      ]
-    },
-    {
-      "category": "Fußball",
-      "points": 400,
-      "question": "Auf welcher Position spielt Manuel Neuer?",
-      "answer": "Torwart",
-      "options": [
-        "Stürmer",
-        "Mittelfeld",
-        "Abwehr"
-      ]
-    },
-    {
-      "category": "Fußball",
-      "points": 500,
-      "question": "Wie viele Spieltage gibt es in der Bundesliga?",
-      "answer": "34",
-      "options": [
-        "38",
-        "20",
-        "40"
-      ]
-    },
-    {
-      "category": "Geschichte",
-      "points": 100,
-      "question": "Wann hat der erste Weltkrieg begonnen?",
-      "answer": "1914",
-      "options": [
-        "1901",
-        "1922",
-        "1954"
-      ]
-    },
-    {
-      "category": "Geschichte",
-      "points": 200,
-      "question": "Wann hat der zweite Weltkrieg begonnen?",
-      "answer": "1939",
-      "options": [
-        "1928",
-        "1945",
-        "1956"
-      ]
-    },
-    {
-      "category": "Geschichte",
-      "points": 300,
-      "question": "Wer hat Amerika im 16. Jahrhundert entdeckt?",
-      "answer": "Christoph Kolumbus",
-      "options": [
-        "Magelan",
-        "Amerigo Vespucci",
-        "La Cruz"
-      ]
-    },
-    {
-      "category": "Geschichte",
-      "points": 400,
-      "question": "Von Wem hat die USA Alaska gekauft?",
+      "question": "Wo fanden die olympischen Winterspiele 2014 statt?",
       "answer": "Russland",
       "options": [
-        "Kanada",
-        "Grönland",
-        "Dänemark"
+        "Schweden",
+        "Finnland",
+        "Norwegen"
       ]
     },
     {
-      "category": "Geschichte",
-      "points": 500,
-      "question": "Wie lange dauerte der 30-jährige Krieg?",
-      "answer": "30 Jahre",
+      "category": "Sport",
+      "points": 300,
+      "question": "In wie viele Teile wird ein Basketballspiel unterteilt?",
+      "answer": "In 4 Viertel",
       "options": [
-        "34 Jahre",
-        "29 Jahre",
-        "31 Jahre"
+        "In 2 Hälften",
+        "In 3 Dritteln",
+        "Es wird nicht aufgeteilt"
       ]
     },
     {
-      "category": "Zusatz",
+      "category": "Sport",
+      "points": 400,
+      "question": "Wie hoch ist die obere Netzkante bei professionellem Badminton?",
+      "answer": "1,55m",
+      "options": [
+        "1,85m",
+        "2,05m",
+        "3,25m"
+      ]
+    },
+    {
+      "category": "Sport",
+      "points": 500,
+      "question": "Welche Mannschaft hat den DFB-Pokal 2018 gewonnen?",
+      "answer": "Eintracht Frankfurt",
+      "options": [
+        "Borussia Dortmund",
+        "Bayer Leverkusen",
+        "RB Leipzig"
+      ]
+    },
+    {
+      "category": "Pub",
       "points": 100,
-      "question": "Welche Farbe hat das e bei Google?",
+      "question": "Welche Farben hat die Polsterung der Hocker, die im Pub stehen?",
+      "answer": "Grün und Rot",
+      "options": [
+        "Blau und Gelb",
+        "Grün und Gelb",
+        "Gelb und Braun"
+      ]
+    },
+    {
+      "category": "Pub",
+      "points": 200,
+      "question": "Wie lautet die Adresse vom Molly Malone´s Irish Pub, in Bad Dürkheim?",
+      "answer": "Wasserhohl 1",
+      "options": [
+        "Mannheimer Straße 1",
+        "Mannheimer Straße 14b",
+        "Am Bahnhof 2b"
+      ]
+    },
+    {
+      "category": "Pub",
+      "points": 300,
+      "question": "Welches Baguette wurde vor einigen Monaten noch im Pub verkauft?",
+      "answer": "Tomaten Mozzarella Baguette",
+      "options": [
+        "Laugen Salami Käse Baguette",
+        "Laugen Käse Baguette",
+        "Salami Schinken Baguette"
+      ]
+    },
+    {
+      "category": "Pub",
+      "points": 400,
+      "question": "Wie heißt der Shot, der aus Baileys, Kahlua und Old Pascas gemacht wird?",
+      "answer": "B-52",
+      "options": [
+        "Baby Guiness",
+        "Black Russian",
+        "White Russian"
+      ]
+    },
+    {
+      "category": "Pub",
+      "points": 500,
+      "question": "Wo ist Tischnummer 6 im Pub?",
+      "answer": "Fass, direkt wenn man ins Pub reinkommt, geradeaus",
+      "options": [
+        "Es gibt eine Tischnummer 6 (wegen geänderter Tischordnung)",
+        "Der Spieltisch, ehemalig die Spielautomaten",
+        "Direkt beim Dartautomaten"
+      ]
+    },
+    {
+      "category": "Alltag",
+      "points": 100,
+      "question": "Wie viel °C haben Eiswürfel?",
+      "answer": "0 °C",
+      "options": [
+        "-2 °C",
+        "2 °C",
+        "-8 °C"
+      ]
+    },
+    {
+      "category": "Alltag",
+      "points": 200,
+      "question": "Was wird in Watt gemessen?",
+      "answer": "elektrische Leistung",
+      "options": [
+        "Helligkeit",
+        "Lautstärke",
+        "Druck"
+      ]
+    },
+    {
+      "category": "Alltag",
+      "points": 300,
+      "question": "Ab wie vielenJahren ist es in Deutschland möglich, Zeitung auszutragen?",
+      "answer": "13 Jahre",
+      "options": [
+        "12 Jahre",
+        "14 Jahre",
+        "16 Jahre"
+      ]
+    },
+    {
+      "category": "Alltag",
+      "points": 400,
+      "question": "Woraus werden handelsübliche Taschentücher hergestellt? ",
+      "answer": "Zellstoff",
+      "options": [
+        "Recyceltes Papier",
+        "Baumwolle",
+        "Blätter von Laubbäumen"
+      ]
+    },
+    {
+      "category": "Alltag",
+      "points": 500,
+      "question": "Welche Farbe hat das e in Google?",
       "answer": "rot",
       "options": [
         "blau",
-        "grün",
-        "gelb"
+        "gelb",
+        "grün"
       ]
     },
     {
-      "category": "Zusatz",
+      "category": "Hauptstädte",
+      "points": 100,
+      "question": "Wie lautet die Hauptstadt von Österreich?",
+      "answer": "Wien",
+      "options": [
+        "Salzburg",
+        "Graz",
+        "Bern"
+      ]
+    },
+    {
+      "category": "Hauptstädte",
       "points": 200,
-      "question": "Wie oft war Deutschland Weltmeister in Fußball?",
-      "answer": "4",
+      "question": "Wie lautet die Hauptstadt von Ägypten?",
+      "answer": "Kairo",
       "options": [
-        "2",
-        "3",
-        "5"
+        "Alexandria",
+        "Abu Dhabi",
+        "Maputo"
       ]
     },
     {
-      "category": "Zusatz",
+      "category": "Hauptstädte",
       "points": 300,
-      "question": "Wie lautet der botanische Name der Felsenkirsche?",
-      "answer": "Prunus mahaleb",
+      "question": "Wie lautet die Hauptstadt von Portugal?",
+      "answer": "Lissabon",
       "options": [
-        "Prunus javanica",
-        "Prunus mimosifolia",
-        "Prunus styraciflua"
+        "Porto",
+        "Valencia",
+        "Madeira"
       ]
     },
     {
-      "category": "Zusatz",
+      "category": "Hauptstädte",
       "points": 400,
-      "question": "Wie heißt Captain America mit bürgerlichem Namen?",
-      "answer": "Steve Rogers",
+      "question": "Wie lautet die Hauptstadt von Vietnam?",
+      "answer": "Hanoi",
       "options": [
-        "Tony Stark",
-        "Bruce Banner",
-        "Alexander Mahomes"
+        "Laos",
+        "Taipeh",
+        "Pjöngjang"
       ]
     },
     {
-      "category": "Zusatz",
+      "category": "Hauptstädte",
       "points": 500,
-      "question": "Aus welchen drei Farben besteht die französische Flagge?",
-      "answer": "rot, weiß, blau",
+      "question": "Wie lautet die Hauptstadt von Grönland?",
+      "answer": "Nuuk",
       "options": [
-        "rot, weiß, grün",
-        "rot, weiß, gelb",
-        "grün, weiß, blau"
+        "Greensmouth",
+        "Kopenhagen",
+        "Eswatini"
       ]
     }
-  ]
+  ],
+  "settings": {
+    "timer": 30,
+    "incorrectAnswerBehavior": "skip"
+  }
 }
