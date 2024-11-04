@@ -20,11 +20,20 @@ const SpielerVerwaltung = () => {
 
   const addSpieler = async () => {
     if (spielerName) {
-      const neueSpielerList = [...spielerList, spielerName];
-      await saveSpieler(neueSpielerList);
-      setSpielerName('');
+      try {
+        const response = await axios.post('http://localhost:5000/api/spieler', { spielerName });
+        if (response.status === 200) {
+          fetchSpieler();
+          setSpielerName('');
+        }
+      } catch (error) {
+        console.error('Fehler beim Hinzufügen des Spielers:', error);
+      }
+    } else {
+      alert('Bitte geben Sie einen Spielernamen ein.');
     }
   };
+  
 
   const saveSpieler = async (spieler) => {
     try {

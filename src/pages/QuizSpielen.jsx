@@ -3,33 +3,21 @@ import { useParams } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import './allPages.css';
+import spielerData from '../../public/spieler.json'; 
 
 const QuizSpielen = () => {
   const { quizName } = useParams();
   const [quizData, setQuizData] = useState(null);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
-  const [spieler, setSpieler] = useState([]);
+  const [spieler, setSpieler] = useState([]); 
   const [selectedSpieler, setSelectedSpieler] = useState([]);
   const [confirmedSpieler, setConfirmedSpieler] = useState(false);
   const [spielerPunkte, setSpielerPunkte] = useState({});
-  const [currentSpielerIndex, setCurrentSpielerIndex] = useState(0); // Aktueller Spieler
-  const [answeredQuestions, setAnsweredQuestions] = useState(new Set()); // Beantwortete Fragen
+  const [currentSpielerIndex, setCurrentSpielerIndex] = useState(0);
+  const [answeredQuestions, setAnsweredQuestions] = useState(new Set()); 
 
   useEffect(() => {
-    const loadSpieler = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/spieler');
-        if (!response.ok) {
-          throw new Error('Netzwerkantwort war nicht ok');
-        }
-        const data = await response.json();
-        setSpieler(data);
-      } catch (error) {
-        console.error("Fehler beim Laden der Spieler:", error);
-      }
-    };
-
-    loadSpieler();
+    setSpieler(spielerData);
   }, []);
 
   useEffect(() => {
@@ -48,7 +36,7 @@ const QuizSpielen = () => {
 
   const handleCellClick = (question) => {
     if (!answeredQuestions.has(question)) {
-      setSelectedQuestion(question); // Frage wird nur ausgewählt, wenn sie noch nicht beantwortet wurde
+      setSelectedQuestion(question); 
     }
   };
 
@@ -88,13 +76,10 @@ const QuizSpielen = () => {
       [currentSpieler]: prevPunkte[currentSpieler] + (isCorrect ? points : -points)
     }));
 
-    // Frage wird als beantwortet markiert
     setAnsweredQuestions(prevAnswered => new Set([...prevAnswered, selectedQuestion]));
 
-    // Nächster Spieler ist dran
     setCurrentSpielerIndex((prevIndex) => (prevIndex + 1) % selectedSpieler.length);
 
-    // Modal schließen
     setSelectedQuestion(null);
   };
 
@@ -181,7 +166,9 @@ const QuizSpielen = () => {
                 ))}
               </tbody>
             </table>
-            <h4>Aktueller Spieler: {currentSpieler}</h4>
+            <h4>Aktueller Spieler:
+              <br />
+               {currentSpieler}</h4>
           </div>
 
           <div className='quizSpielenQuiz'>
@@ -209,7 +196,7 @@ const QuizSpielen = () => {
             </div>
 
             {selectedQuestion && (
-              <Modal className='modal-content' show={true} onHide={() => setSelectedQuestion(null)}>
+              <Modal className='quizModal' show={true} onHide={() => setSelectedQuestion(null)}>
                 <Modal.Header className='modalHeader' closeButton>
                   <Modal.Title className='modalQuestion'>{selectedQuestion.question}</Modal.Title>
                 </Modal.Header>
