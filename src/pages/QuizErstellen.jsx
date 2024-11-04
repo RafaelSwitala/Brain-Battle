@@ -328,7 +328,7 @@ const QuizErstellen = ({ show, onHide }) => {
               <Form.Select value={incorrectAnswerBehavior} onChange={(e) => setIncorrectAnswerBehavior(e.target.value)}>
                 <option value="none">Keine Aktion</option>
                 <option value="retry">Erneut versuchen</option>
-                <option value="skip">Zur nächsten Frage</option>
+                <option value="minus">Punktezahl abziehen</option>
               </Form.Select>
             </Form.Group>
             
