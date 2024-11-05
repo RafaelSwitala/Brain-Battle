@@ -12,24 +12,19 @@ const QuizErstellen = ({ show, onHide }) => {
   const [pointStep, setPointStep] = useState(100);
   const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [timer, setTimer] = useState(15);
+  const [incorrectAnswerBehavior, setIncorrectAnswerBehavior] = useState('none');
+  const [creationStatus, setCreationStatus] = useState('');
+  const [overwriteQuiz, setOverwriteQuiz] = useState(false);
 
   const isQuiznameValid = (name) => {
     const regexQuizname = /^[a-zA-Z0-9_-]+$/;
     return regexQuizname.test(name) && name.length >= 3;
   };
 
-  const handleCategoryCountChange = (event) => {
-    setCategoryCount(parseInt(event.target.value));
-  };
-
-  const handleRowCountChange = (event) => {
-    setRowCount(parseInt(event.target.value));
-  };
-
-  const handlePointStepChange = (event) => {
-    setPointStep(Number(event.target.value));
-  };
-
+  const handleCategoryCountChange = (event) => setCategoryCount(parseInt(event.target.value));
+  const handleRowCountChange = (event) => setRowCount(parseInt(event.target.value));
+  const handlePointStepChange = (event) => setPointStep(Number(event.target.value));
   const handleCategoryChange = (index, value) => {
     const updatedCategories = [...categories];
     updatedCategories[index] = value;
@@ -99,6 +94,17 @@ const QuizErstellen = ({ show, onHide }) => {
     setQuestions(updatedQuestions);
   };
 
+  const checkQuizNameExists = async (name) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/check-quiz-name/${name}`);
+      const data = await response.json();
+      return data.exists;
+    } catch (error) {
+      console.error('Fehler beim Überprüfen des Quiznamens:', error);
+      return false;
+    }
+  };
+
   const handleCreateJson = () => {
     if (!isQuiznameValid(quizName)) {
       alert("Der Quizname ist ungültig! Er darf keine Leerzeichen, Sonderzeichen oder Punkte enthalten und muss mindestens 3 Zeichen lang sein.");
@@ -114,7 +120,11 @@ const QuizErstellen = ({ show, onHide }) => {
         question: q.question,
         answer: q.answer,
         options: q.options
-      }))
+      })),
+      settings: {
+        timer,
+        incorrectAnswerBehavior
+      }
     };
 
     const fileName = `${quizName}.json`;
@@ -132,6 +142,8 @@ const QuizErstellen = ({ show, onHide }) => {
       })
       .catch(error => {
         console.error('Fehler beim Speichern der Datei:', error);
+        setCreationStatus('Fehler beim Speichern der Datei');
+        setCurrentPage(4);
       });
   };
 
@@ -286,9 +298,40 @@ const QuizErstellen = ({ show, onHide }) => {
               ))}
             </div>
 
-            <Button className="button-1" onClick={handleCreateJson}>
-              JSON-Datei erstellen
-            </Button>
+            <Button onClick={() => setCurrentPage(3)}>Weiter zu Seite 3</Button>
+          </>
+        )}
+        {currentPage === 3 && (
+          <>
+            {/* Seite 3: Weitere Einstellungen */}
+            <Form.Group controlId="timer">
+              <Form.Label>Timer-Dauer:</Form.Label>
+              <Form.Select value={timer} onChange={(e) => setTimer(Number(e.target.value))}>
+                <option value={15}>15 Sekunden</option>
+                <option value={30}>30 Sekunden</option>
+                <option value={45}>45 Sekunden</option>
+                <option value={60}>1 Minute</option>
+              </Form.Select>
+            </Form.Group>
+
+            <Form.Group controlId="incorrectAnswerBehavior">
+              <Form.Label>Verhalten bei falscher Antwort:</Form.Label>
+              <Form.Select value={incorrectAnswerBehavior} onChange={(e) => setIncorrectAnswerBehavior(e.target.value)}>
+                <option value="skip">Keine Aktion</option>
+                <option value="retry">Erneut versuchen</option>
+                <option value="minus">Punktezahl abziehen</option>
+              </Form.Select>
+            </Form.Group>
+            
+            <Button onClick={handleCreateJson}>Quiz erstellen</Button>
+          </>
+        )}
+
+        {currentPage === 4 && (
+          <>
+            {/* Seite 4: Status der Erstellung */}
+            <h4>{creationStatus}</h4>
+            <Button onClick={onHide}>Schließen</Button>
           </>
         )}
       </Modal.Body>

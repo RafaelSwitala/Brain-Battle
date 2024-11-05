@@ -10,10 +10,11 @@ const PORT = 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-console.log('Server-Setup beginnt...');  // <-- Neuer Log
+console.log('Server-Setup beginnt...');
 
+// Route zum Abrufen der Spieler-Daten
 app.get('/api/spieler', (req, res) => {
-  console.log('GET /api/spieler aufgerufen');  // <-- Neuer Log
+  console.log('GET /api/spieler aufgerufen');
   const filePath = path.resolve(__dirname, '../public/spieler.json');
 
   fs.readFile(filePath, 'utf8', (err, data) => {
@@ -33,8 +34,25 @@ app.get('/api/spieler', (req, res) => {
   });
 });
 
+// Route zum Aktualisieren der Spieler
 app.post('/api/spieler', (req, res) => {
-  console.log('POST /api/spieler aufgerufen');  // <-- Neuer Log
+  console.log('POST /api/spieler aufgerufen');
+  const spielerList = req.body; // gesamte Spieler-Liste übernehmen
+  const filePath = path.join(__dirname, '../public/spieler.json');
+
+  fs.writeFile(filePath, JSON.stringify(spielerList, null, 2), (writeErr) => {
+    if (writeErr) {
+      console.error('Fehler beim Speichern der Datei:', writeErr);
+      return res.status(500).json({ error: 'Fehler beim Speichern der Datei.' });
+    }
+    console.log('Spieler-Liste erfolgreich aktualisiert');
+    res.status(200).json({ message: 'Spieler-Liste erfolgreich aktualisiert.' });
+  });
+});
+
+// Route zum Hinzufügen eines neuen Spielers
+app.post('/api/spieler', (req, res) => {
+  console.log('POST /api/spieler aufgerufen');
   const neuerSpieler = req.body.spielerName;
   const filePath = path.join(__dirname, '../public/spieler.json');
 
@@ -69,6 +87,54 @@ app.post('/api/spieler', (req, res) => {
   });
 });
 
+// Route zum Überprüfen, ob ein Quizname bereits existiert
+app.get('/api/check-quiz-name/:name', (req, res) => {
+  const quizName = req.params.name;
+  const filePath = path.resolve(__dirname, '../public', `${quizName}.json`);
+
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      // Datei existiert nicht
+      res.json({ exists: false });
+    } else {
+      // Datei existiert
+      res.json({ exists: true });
+    }
+  });
+});
+
+// Route zum Speichern eines neuen Quiz als JSON-Datei
+app.post('/api/save-json', (req, res) => {
+  const { fileName, jsonData } = req.body;
+  const filePath = path.join(__dirname, '../public/erstellteQuize', fileName);
+
+  fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), (err) => {
+    if (err) {
+      console.error('Fehler beim Speichern der Datei:', err);
+      return res.status(500).json({ error: 'Fehler beim Speichern der Datei.' });
+    }
+    console.log('Datei erfolgreich gespeichert:', fileName);
+    res.status(200).json({ message: 'Datei erfolgreich gespeichert.' });
+  });
+});
+
+// Route zum Speichern der Quiz-Ergebnisse
+app.post('/api/save-results', (req, res) => {
+  const { quizName, results } = req.body;
+  const filePath = path.join(__dirname, '../public/ergebnisse', `Ergebnis-${quizName}.json`);
+
+  fs.writeFile(filePath, JSON.stringify(results, null, 2), (err) => {
+    if (err) {
+      console.error('Fehler beim Speichern der Ergebnisse:', err);
+      return res.status(500).json({ error: 'Fehler beim Speichern der Ergebnisse.' });
+    }
+    console.log('Ergebnisse erfolgreich gespeichert:', `${quizName}-results.json`);
+    res.status(200).json({ message: 'Ergebnisse erfolgreich gespeichert.' });
+  });
+});
+
+
+// Server starten
 app.listen(PORT, () => {
   console.log(`Server läuft auf http://localhost:${PORT}`);
 });

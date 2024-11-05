@@ -4,6 +4,9 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import './allPages.css';
 import spielerData from '../../public/spieler.json'; 
+import Accordion from 'react-bootstrap/Accordion';
+import Form from 'react-bootstrap/Form';
+import axios from 'axios';
 
 const QuizSpielen = () => {
   const { quizName } = useParams();
@@ -14,7 +17,13 @@ const QuizSpielen = () => {
   const [confirmedSpieler, setConfirmedSpieler] = useState(false);
   const [spielerPunkte, setSpielerPunkte] = useState({});
   const [currentSpielerIndex, setCurrentSpielerIndex] = useState(0);
-  const [answeredQuestions, setAnsweredQuestions] = useState(new Set()); 
+  const [answeredQuestions, setAnsweredQuestions] = useState(new Set());
+  const [timer, setTimer] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const [punkteAnpassen, setPunkteAnpassen] = useState(0);
+  const [punkteOption, setPunkteOption] = useState('add');
+  const currentSpieler = selectedSpieler[currentSpielerIndex];
+  const [spielerReihenfolge, setSpielerReihenfolge] = useState([]);
 
   useEffect(() => {
     setSpieler(spielerData);
@@ -36,7 +45,9 @@ const QuizSpielen = () => {
 
   const handleCellClick = (question) => {
     if (!answeredQuestions.has(question)) {
-      setSelectedQuestion(question); 
+      setSelectedQuestion(question);
+      setTimer(question.timer || 0);
+      setIsTimerRunning(false);
     }
   };
 
@@ -56,7 +67,9 @@ const QuizSpielen = () => {
 
   const handleConfirmSpieler = () => {
     if (selectedSpieler.length > 0) {
-      const initialPunkte = selectedSpieler.reduce((acc, spielerName) => {
+      const shuffledSpieler = selectedSpieler.sort(() => Math.random() - 0.5);
+      setSpielerReihenfolge(shuffledSpieler);
+      const initialPunkte = shuffledSpieler.reduce((acc, spielerName) => {
         acc[spielerName] = 0;
         return acc;
       }, {});
@@ -66,22 +79,61 @@ const QuizSpielen = () => {
       alert("Bitte mindestens einen Spieler auswählen!");
     }
   };
+  
 
   const handleAnswerClick = (isCorrect) => {
-    const currentSpieler = selectedSpieler[currentSpielerIndex];
+    if (!selectedQuestion) {
+      console.error("Selected question is null");
+      return;
+    }
+  
     const points = selectedQuestion.points;
-
     setSpielerPunkte(prevPunkte => ({
       ...prevPunkte,
       [currentSpieler]: prevPunkte[currentSpieler] + (isCorrect ? points : -points)
     }));
-
+  
     setAnsweredQuestions(prevAnswered => new Set([...prevAnswered, selectedQuestion]));
-
     setCurrentSpielerIndex((prevIndex) => (prevIndex + 1) % selectedSpieler.length);
-
     setSelectedQuestion(null);
+    setTimer(0);
   };
+  
+  
+
+  const handleTimerStart = () => {
+    setIsTimerRunning(true);
+  };
+
+  useEffect(() => {
+    let interval;
+    if (isTimerRunning && timer > 0) {
+      interval = setInterval(() => {
+        setTimer(prevTimer => Math.max(prevTimer - 1, 0));
+      }, 1000);
+    } else if (timer === 0) {
+      handleAnswerClick(false);
+    }
+
+    return () => clearInterval(interval);
+  }, [isTimerRunning, timer]);
+
+  const saveResults = async () => {
+    const results = {
+      quizName: quizName,
+      date: new Date().toLocaleDateString(),
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      scores: spielerPunkte,
+    };
+  
+    try {
+      await axios.post('http://localhost:5000/api/save-results', { quizName, results });
+      alert("Ergebnisse wurden gespeichert!");
+    } catch (error) {
+      console.error("Fehler beim Speichern der Ergebnisse:", error);
+    }
+  };
+  
 
   if (!quizData) return <div>Lade Quiz...</div>;
 
@@ -105,7 +157,6 @@ const QuizSpielen = () => {
   });
   const sortedPoints = Array.from(pointsSet).sort((a, b) => a - b);
 
-  const currentSpieler = selectedSpieler[currentSpielerIndex];
 
   return (
     <div className='quizSpielenContainer'>
@@ -158,7 +209,7 @@ const QuizSpielen = () => {
                 </tr>
               </thead>
               <tbody>
-                {selectedSpieler.map((spielerName, index) => (
+                {spielerReihenfolge.map((spielerName, index) => (
                   <tr key={index}>
                     <td>{spielerName}</td>
                     <td>{spielerPunkte[spielerName]}</td>
@@ -169,6 +220,72 @@ const QuizSpielen = () => {
             <h4>Aktueller Spieler:
               <br />
                {currentSpieler}</h4>
+
+               <div className='individuellePunkte'>
+                <Form.Group controlId="individuellePunkteSpieler">
+                  <Form.Label>Spieler auswählen:</Form.Label>
+                  <Form.Select value={spielerReihenfolge[currentSpielerIndex]} onChange={(e) => {}}>
+                    {spielerReihenfolge.map((spielerName, index) => (
+                      <option key={index} value={spielerName}>
+                        {spielerName}
+                      </option>
+                    ))}
+                  </Form.Select>
+
+
+                </Form.Group>
+
+                <Form.Group controlId="punkteInput">
+                  <Form.Label>Punkte anpassen:</Form.Label>
+                  <Form.Control
+                    type="number"
+                    min="0"
+                    placeholder="Punktezahl"
+                    onChange={(e) => setPunkteAnpassen(parseInt(e.target.value))}
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="punkteOptionen">
+                  <Form.Check
+                    type="radio"
+                    id="pluspunkte"
+                    label="Punkte hinzufügen"
+                    name="punkteOptionen"
+                    onChange={() => setPunkteOption('add')}
+                    defaultChecked
+                  />
+                  <Form.Check
+                    type="radio"
+                    id="minuspunkte"
+                    label="Punkte abziehen"
+                    name="punkteOptionen"
+                    onChange={() => setPunkteOption('subtract')}
+                  />
+                </Form.Group>
+
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    if (currentSpieler && !isNaN(punkteAnpassen)) {
+                      setSpielerPunkte((prevPunkte) => ({
+                        ...prevPunkte,
+                        [currentSpieler]: Math.max(
+                          0,
+                          prevPunkte[currentSpieler] + (punkteOption === 'add' ? punkteAnpassen : -punkteAnpassen)
+                        )
+                      }));
+                    }
+                  }}
+                >
+                  Punkte aktualisieren
+                </Button>
+              </div>
+
+
+                <Button variant="danger" onClick={saveResults}>
+                 Quiz beenden
+                </Button>
+
           </div>
 
           <div className='quizSpielenQuiz'>
@@ -198,19 +315,49 @@ const QuizSpielen = () => {
             {selectedQuestion && (
               <Modal className='quizModal' show={true} onHide={() => setSelectedQuestion(null)}>
                 <Modal.Header className='modalHeader' closeButton>
-                  <Modal.Title className='modalQuestion'>{selectedQuestion.question}</Modal.Title>
+                  <Modal.Title className='modalQuestion'>
+                    <small>{selectedQuestion.category} - {selectedQuestion.points} Punkte</small>
+                  </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className='modalBody'>
-                  {shuffleOptions([selectedQuestion.answer, ...selectedQuestion.options]).map((option, index) => (
-                    <Button key={index} variant="outline-primary" className="d-block mb-2" onClick={() => handleAnswerClick(option === selectedQuestion.answer)}>
-                      {option}
+                  {selectedQuestion.question} <br />
+                  <h5>Zeit verbleibend: {timer} Sekunden</h5>
+                    {!isTimerRunning && <Button className='timerButton' onClick={handleTimerStart}>Start Timer</Button>}
+
+                    <Button
+                      className='beantwortenButton richtigButton'
+                      onClick={() => handleAnswerClick(true)}
+                    >
+                      Richtig
                     </Button>
-                  ))}
+
+                    <Button
+                      className='beantwortenButton falschButton'
+                      onClick={() => handleAnswerClick(false)}
+                    >
+                      Falsch
+                    </Button>
+
+                    <Accordion>
+                      <Accordion.Item eventKey="0">
+                        <Accordion.Header>Antwortmöglichkeiten</Accordion.Header>
+                        <Accordion.Body>
+                          {shuffleOptions([selectedQuestion.answer, ...selectedQuestion.options]).map((option, index) => (
+                          <Button 
+                            key={index} 
+                            variant="outline-primary" 
+                            className="d-block mb-2" 
+                            onClick={() => handleAnswerClick(option === selectedQuestion.answer)}
+                          >
+                            {option}
+                          </Button>
+                        ))}
+                        </Accordion.Body>
+                      </Accordion.Item>
+                    </Accordion>
                 </Modal.Body>
                 <Modal.Footer className='modalFooter'>
-                  <Button variant="secondary" onClick={() => setSelectedQuestion(null)}>
-                    Schließen
-                  </Button>
+                  
                 </Modal.Footer>
               </Modal>
             )}

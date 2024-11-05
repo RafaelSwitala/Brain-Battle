@@ -5,7 +5,6 @@ import './allPages.css';
 const SpielerVerwaltung = () => {
   const [spielerName, setSpielerName] = useState('');
   const [spielerList, setSpielerList] = useState([]);
-  const [modus, setModus] = useState(1); 
   const [bearbeiteterSpieler, setBearbeiteterSpieler] = useState('');
   const [bearbeitenIndex, setBearbeitenIndex] = useState(null);
 
@@ -20,27 +19,21 @@ const SpielerVerwaltung = () => {
 
   const addSpieler = async () => {
     if (spielerName) {
-      try {
-        const response = await axios.post('http://localhost:5000/api/spieler', { spielerName });
-        if (response.status === 200) {
-          fetchSpieler();
-          setSpielerName('');
+      // Wir überprüfen, ob der Spieler bereits existiert
+      if (!spielerList.includes(spielerName)) {
+        const neueSpielerList = [...spielerList, spielerName];
+        try {
+          await axios.post('http://localhost:5000/api/spieler', neueSpielerList);
+          setSpielerList(neueSpielerList); // Aktuellen Zustand aktualisieren
+          setSpielerName(''); // Eingabefeld zurücksetzen
+        } catch (error) {
+          console.error('Fehler beim Hinzufügen des Spielers:', error);
         }
-      } catch (error) {
-        console.error('Fehler beim Hinzufügen des Spielers:', error);
+      } else {
+        alert('Spieler ist bereits in der Liste.');
       }
     } else {
       alert('Bitte geben Sie einen Spielernamen ein.');
-    }
-  };
-  
-
-  const saveSpieler = async (spieler) => {
-    try {
-      await axios.post('http://localhost:5000/api/spieler', spieler);
-      setSpielerList(spieler);
-    } catch (error) {
-      console.error('Fehler beim Speichern der Spieler:', error);
     }
   };
 
@@ -48,17 +41,28 @@ const SpielerVerwaltung = () => {
     if (bearbeitenIndex !== null) {
       const neueSpielerList = [...spielerList];
       neueSpielerList[bearbeitenIndex] = bearbeiteterSpieler;
-      await saveSpieler(neueSpielerList);
-      setBearbeiteterSpieler('');
-      setBearbeitenIndex(null);
-      setModus(1);
+
+      try {
+        await axios.post('http://localhost:5000/api/spieler', neueSpielerList);
+        setSpielerList(neueSpielerList); // Liste aktualisieren
+        setBearbeiteterSpieler('');
+        setBearbeitenIndex(null);
+      } catch (error) {
+        console.error('Fehler beim Aktualisieren der Spieler:', error);
+      }
     }
   };
 
   const deleteSpieler = async (index) => {
     if (window.confirm('Möchten Sie diesen Spieler wirklich löschen?')) {
       const neueSpielerList = spielerList.filter((_, i) => i !== index);
-      await saveSpieler(neueSpielerList);
+
+      try {
+        await axios.post('http://localhost:5000/api/spieler', neueSpielerList);
+        setSpielerList(neueSpielerList);
+      } catch (error) {
+        console.error('Fehler beim Löschen des Spielers:', error);
+      }
     }
   };
 
@@ -70,28 +74,26 @@ const SpielerVerwaltung = () => {
     <div>
       <h3>Spielerverwaltung</h3>
       <div className='mainPage-container'>
-        {modus === 1 && (
-          <div>
-            <input
-              type="text"
-              value={spielerName}
-              onChange={(e) => setSpielerName(e.target.value)}
-              placeholder="Spielernamen eingeben"
-            />
-            <button onClick={addSpieler}>Spieler hinzufügen</button>
-            <h4>Spielerliste</h4>
-            <ul>
-              {spielerList.map((spieler, index) => (
-                <li key={index}>
-                  {spieler}
-                  <button onClick={() => { setBearbeitenIndex(index); setBearbeiteterSpieler(spieler); setModus(2); }}>Bearbeiten</button>
-                  <button onClick={() => deleteSpieler(index)}>Löschen</button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {modus === 2 && (
+        <input
+          type="text"
+          value={spielerName}
+          onChange={(e) => setSpielerName(e.target.value)}
+          placeholder="Spielernamen eingeben"
+        />
+        <button onClick={addSpieler}>Spieler hinzufügen</button>
+        <h4>Spielerliste</h4>
+        <ul>
+          {spielerList.map((spieler, index) => (
+            <li key={index}>
+              <span>{spieler}</span>
+              <div className="button-container">
+                <button onClick={() => { setBearbeitenIndex(index); setBearbeiteterSpieler(spieler); }}>Bearbeiten</button>
+                <button onClick={() => deleteSpieler(index)}>Löschen</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+        {bearbeitenIndex !== null && (
           <div>
             <h4>Spieler bearbeiten</h4>
             <input
@@ -101,28 +103,9 @@ const SpielerVerwaltung = () => {
               placeholder="Neuer Spielername"
             />
             <button onClick={updateSpieler}>Aktualisieren</button>
-            <button onClick={() => setModus(1)}>Zurück</button>
+            <button onClick={() => setBearbeitenIndex(null)}>Abbrechen</button>
           </div>
         )}
-        {modus === 3 && (
-          <div>
-            <h4>Löschen</h4>
-            <ul>
-              {spielerList.map((spieler, index) => (
-                <li key={index}>
-                  {spieler}
-                  <button onClick={() => deleteSpieler(index)}>X</button>
-                </li>
-              ))}
-            </ul>
-            <button onClick={() => setModus(1)}>Zurück</button>
-          </div>
-        )}
-      </div>
-      <div>
-        <button onClick={() => setModus(1)}>Modus 1</button>
-        <button onClick={() => setModus(2)}>Modus 2</button>
-        <button onClick={() => setModus(3)}>Modus 3</button>
       </div>
     </div>
   );
