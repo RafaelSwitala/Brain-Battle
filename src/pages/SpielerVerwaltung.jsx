@@ -5,7 +5,6 @@ import './allPages.css';
 const SpielerVerwaltung = () => {
   const [spielerName, setSpielerName] = useState('');
   const [spielerList, setSpielerList] = useState([]);
-  const [modus, setModus] = useState(1); 
   const [bearbeiteterSpieler, setBearbeiteterSpieler] = useState('');
   const [bearbeitenIndex, setBearbeitenIndex] = useState(null);
 
@@ -33,7 +32,6 @@ const SpielerVerwaltung = () => {
       alert('Bitte geben Sie einen Spielernamen ein.');
     }
   };
-  
 
   const saveSpieler = async (spieler) => {
     try {
@@ -51,7 +49,6 @@ const SpielerVerwaltung = () => {
       await saveSpieler(neueSpielerList);
       setBearbeiteterSpieler('');
       setBearbeitenIndex(null);
-      setModus(1);
     }
   };
 
@@ -70,59 +67,25 @@ const SpielerVerwaltung = () => {
     <div>
       <h3>Spielerverwaltung</h3>
       <div className='mainPage-container'>
-        {modus === 1 && (
-          <div>
-            <input
-              type="text"
-              value={spielerName}
-              onChange={(e) => setSpielerName(e.target.value)}
-              placeholder="Spielernamen eingeben"
-            />
-            <button onClick={addSpieler}>Spieler hinzufügen</button>
-            <h4>Spielerliste</h4>
-            <ul>
-              {spielerList.map((spieler, index) => (
-                <li key={index}>
-                  {spieler}
-                  <button onClick={() => { setBearbeitenIndex(index); setBearbeiteterSpieler(spieler); setModus(2); }}>Bearbeiten</button>
-                  <button onClick={() => deleteSpieler(index)}>Löschen</button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {modus === 2 && (
-          <div>
-            <h4>Spieler bearbeiten</h4>
-            <input
-              type="text"
-              value={bearbeiteterSpieler}
-              onChange={(e) => setBearbeiteterSpieler(e.target.value)}
-              placeholder="Neuer Spielername"
-            />
-            <button onClick={updateSpieler}>Aktualisieren</button>
-            <button onClick={() => setModus(1)}>Zurück</button>
-          </div>
-        )}
-        {modus === 3 && (
-          <div>
-            <h4>Löschen</h4>
-            <ul>
-              {spielerList.map((spieler, index) => (
-                <li key={index}>
-                  {spieler}
-                  <button onClick={() => deleteSpieler(index)}>X</button>
-                </li>
-              ))}
-            </ul>
-            <button onClick={() => setModus(1)}>Zurück</button>
-          </div>
-        )}
-      </div>
-      <div>
-        <button onClick={() => setModus(1)}>Modus 1</button>
-        <button onClick={() => setModus(2)}>Modus 2</button>
-        <button onClick={() => setModus(3)}>Modus 3</button>
+        <input
+          type="text"
+          value={spielerName}
+          onChange={(e) => setSpielerName(e.target.value)}
+          placeholder="Spielernamen eingeben"
+        />
+        <button onClick={addSpieler}>Spieler hinzufügen</button>
+        <h4>Spielerliste</h4>
+        <ul>
+          {spielerList.map((spieler, index) => (
+            <li key={index}>
+              <span>{spieler}</span>
+              <div className="button-container">
+                <button onClick={() => { setBearbeitenIndex(index); setBearbeiteterSpieler(spieler); updateSpieler(); }}>Bearbeiten</button>
+                <button onClick={() => deleteSpieler(index)}>Löschen</button>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

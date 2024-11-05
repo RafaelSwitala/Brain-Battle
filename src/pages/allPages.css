@@ -394,6 +394,7 @@ input[type="text"] {
 ul {
   list-style-type: none;
   padding: 0;
+  margin: 0; 
 }
 
 li {
@@ -401,15 +402,31 @@ li {
   color: white;
   padding: 10px;
   margin: 5px 0;
-  border-radius: 5px;
-  display: flex;
+  border-radius: 5px; 
+  display: flex; 
+  align-items: center;
   justify-content: space-between;
+  width: 100%;
+}
+
+li span {
+  flex: 1;
+}
+
+.button-container {
+  display: flex;
+  gap: 5px;
 }
 
 li button {
-  background-color: white;
+  background-color: rgb(190, 22, 22);
   color: black;
 }
+
+
+
+
+
 
 .spieler-auswahl, .ausgewählte-spieler {
   margin-bottom: 20px;
