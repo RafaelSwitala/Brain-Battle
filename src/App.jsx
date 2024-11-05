@@ -8,7 +8,8 @@ import QuizErstellen from './pages/QuizErstellen';
 import QuizBearbeiten from './pages/QuizBearbeiten';
 import QuizSpielen from './pages/QuizSpielen';
 import SpielerVerwaltung from './pages/SpielerVerwaltung';
-import Anleitungen from './pages/Anleitungen'; // Anleitungen-Komponente importieren
+import Anleitungen from './pages/Anleitungen';
+import Ergebnisse from './pages/Ergebnisse';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -30,7 +31,8 @@ const App = () => {
             <Route path="/QuizBearbeiten" element={<QuizBearbeiten />} />
             <Route path="/QuizSpielen/:quizName" element={<QuizSpielen />} />
             <Route path="/Spielerverwaltung" element={<SpielerVerwaltung />} />
-            <Route path="/Anleitungen" element={<Anleitungen />} /> {/* Route für Anleitungen hinzufügen */}
+            <Route path="/Anleitungen" element={<Anleitungen />} />
+            <Route path="/Ergebnisse" element={<Ergebnisse />} />
           </Routes>
         </div>
       </div>
