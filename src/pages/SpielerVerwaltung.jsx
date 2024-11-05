@@ -19,13 +19,12 @@ const SpielerVerwaltung = () => {
 
   const addSpieler = async () => {
     if (spielerName) {
-      // Wir überprüfen, ob der Spieler bereits existiert
       if (!spielerList.includes(spielerName)) {
         const neueSpielerList = [...spielerList, spielerName];
         try {
           await axios.post('http://localhost:5000/api/spieler', neueSpielerList);
-          setSpielerList(neueSpielerList); // Aktuellen Zustand aktualisieren
-          setSpielerName(''); // Eingabefeld zurücksetzen
+          setSpielerList(neueSpielerList);
+          setSpielerName('');
         } catch (error) {
           console.error('Fehler beim Hinzufügen des Spielers:', error);
         }
@@ -44,7 +43,7 @@ const SpielerVerwaltung = () => {
 
       try {
         await axios.post('http://localhost:5000/api/spieler', neueSpielerList);
-        setSpielerList(neueSpielerList); // Liste aktualisieren
+        setSpielerList(neueSpielerList); 
         setBearbeiteterSpieler('');
         setBearbeitenIndex(null);
       } catch (error) {

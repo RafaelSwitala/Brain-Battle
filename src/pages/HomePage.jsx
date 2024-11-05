@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Container, Row, Col, Button, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import QuizErstellen from './QuizErstellen';
-import './allPages.css';
 
 const HomePage = () => {
-  const [modalShow, setModalShow] = useState(false);
   const [quizFiles, setQuizFiles] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
     const loadQuizFiles = async () => {
@@ -25,15 +21,30 @@ const HomePage = () => {
             .map(link => link.getAttribute('href'))
             .filter(file => file.endsWith('.json'));
 
-          const quizNames = files.map(file => 
-            file.replace('/erstellteQuize/', '').replace('.json', '')
-          );
-          setQuizFiles(quizNames);
+          const quizDataPromises = files.map(async (file) => {
+            const quizResponse = await fetch(file);
+            if (quizResponse.ok) {
+              const quizData = await quizResponse.json();
+              return {
+                name: quizData.name || file.replace('/erstellteQuize/', '').replace('.json', ''),
+                timerLength: quizData.settings?.timer || 'N/A',
+                wrongAnswerBehavior: quizData.settings?.incorrectAnswerBehavior || 'N/A',
+                openAnswerBehavior: quizData.settings?.openOptionsBehavior || 'N/A',
+                categoryCount: quizData.categories?.length || 0,
+                difficultyLevels: new Set(quizData.questions.map(q => q.points)).size,
+                scoreSteps: [...new Set(quizData.questions.map(q => q.points))].sort((a, b) => a - b).join(', ')
+              };
+            }
+            return null;
+          });
+
+          const quizFilesData = (await Promise.all(quizDataPromises)).filter(data => data !== null);
+          setQuizFiles(quizFilesData);
         } else {
-          console.error('Fehler beim Abrufen der Dateien:', response.statusText);
+          console.error('Error fetching files:', response.statusText);
         }
       } catch (error) {
-        console.error("Fehler beim Laden der Quiz-Dateien:", error);
+        console.error("Error loading quiz files:", error);
       }
     };
 
@@ -45,20 +56,20 @@ const HomePage = () => {
       <Row>
         <Col>
           <h3>Home Page Content</h3>
-          <p>Was möchtest du tun? Ein neues Quiz erstellen oder ein Quiz spielen?</p>
+          <p>Text</p>
         </Col>
       </Row>
       <Row>
         <Col xs={12} md={4} className="left-column">
-          <h2>Erstelle ein neues Spiel</h2>
+          <h2>Dashboard</h2>
           <div className="link-container">
             <Link to="/QuizBearbeiten" className="button-2">Quiz Bearbeiten</Link>
-            <Link to="/Spielerverwaltung" className="button-2">Spieler Verwaltung</Link>
+            <Link to="/Spielerverwaltung" className="button-2">Spielerverwaltung</Link>
             <Link to="/Anleitungen" className="button-2">Anleitungen</Link>
-            <Link to="/Ergebnisse" className="button-2">Quiz-Ergebnisse</Link>
+            <Link to="/Ergebnisse" className="button-2">Quiz Ergebnisse</Link>
 
             <Button variant="primary" onClick={() => setModalShow(true)}>
-              Neues Quiz Erstellen
+              Neues Quiz erstellen
             </Button>
 
             <QuizErstellen
@@ -69,18 +80,46 @@ const HomePage = () => {
         </Col>
 
         <Col xs={12} md={8} className="right-column">
-          <h2>Quiz Spielen</h2>
-          <div className="quiz-list">
-            {quizFiles.length > 0 ? (
-              quizFiles.map((quizName, index) => (
-                <Link to={`/QuizSpielen/${quizName}`} key={index}>
-                  <p className="quiz-name">{quizName}</p>
-                </Link>
-              ))
-            ) : (
-              <p>Keine Quize gefunden</p>
-            )}
-          </div>
+          <h2>Quiz spielen</h2>
+          <Table striped bordered hover variant="dark" className="quiz-table">
+            <thead>
+              <tr>
+                <th className='spalte1'>Quizname</th>
+                <th className='spalte2'>Timer</th>
+                <th className='spalte3'>Falsche Antwort</th>
+                <th className='spalte4'>Antwortoptionen</th>
+                <th className='spalte5'>Kategorien</th>
+                <th className='spalte6'>Level</th>
+                <th className='spalte7'>B</th>
+                <th className='spalte8'>L</th>
+              </tr>
+            </thead>
+            <tbody>
+              {quizFiles.length > 0 ? (
+                quizFiles.map((quiz, index) => (
+                  <tr key={index} className="quiz-row">
+                    <td>
+                      <Link to={`/QuizSpielen/${quiz.name}`} className="quiz-link">
+                        {quiz.name}
+                      </Link>
+                    </td>
+                    <td>{quiz.timerLength} Sekunden</td>
+                    <td>{quiz.wrongAnswerBehavior}</td>
+                    <td>{quiz.openAnswerBehavior}</td>
+                    <td>{quiz.categoryCount}</td>
+                    <td>{quiz.scoreSteps}</td>
+                    <td>B</td>
+                    <td>L</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="7">Kein Quiz gefunden</td>
+                </tr>
+              )}
+            </tbody>
+
+          </Table>
         </Col>
       </Row>
     </Container>

@@ -133,6 +133,31 @@ app.post('/api/save-results', (req, res) => {
   });
 });
 
+// Route zum Abrufen der Quiz-Ergebnisse
+app.get('/api/ergebnisse', (req, res) => {
+  console.log('GET /api/ergebnisse aufgerufen');
+  const resultsDir = path.join(__dirname, '../public/ergebnisse');
+
+  fs.readdir(resultsDir, (err, files) => {
+    if (err) {
+      console.error('Fehler beim Lesen des Verzeichnisses:', err);
+      return res.status(500).json({ error: 'Fehler beim Laden der Ergebnisse.' });
+    }
+
+    const jsonFiles = files.filter(file => file.endsWith('.json'));
+
+    const results = jsonFiles.map(file => {
+      const filePath = path.join(resultsDir, file);
+      const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      return { fileName: file, data };
+    });
+
+    res.json(results);
+  });
+});
+
+
+
 
 // Server starten
 app.listen(PORT, () => {

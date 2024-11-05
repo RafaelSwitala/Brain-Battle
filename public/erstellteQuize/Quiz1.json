@@ -1,5 +1,10 @@
 {
   "name": "Quiz1",
+  "settings": {
+    "timer": 15,
+    "incorrectAnswerBehavior": "buzzer",
+    "openOptionsBehavior": "half"
+  },
   "categories": [
     "Mathematik",
     "Natur",
@@ -339,9 +344,5 @@
         "Eswatini"
       ]
     }
-  ],
-  "settings": {
-    "timer": 30,
-    "incorrectAnswerBehavior": "skip"
-  }
+  ]
 }

@@ -14,6 +14,7 @@ const QuizErstellen = ({ show, onHide }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [timer, setTimer] = useState(15);
   const [incorrectAnswerBehavior, setIncorrectAnswerBehavior] = useState('none');
+  const [openOptionsBehavior, setOpenOptionsBehavior] = useState('none');
   const [creationStatus, setCreationStatus] = useState('');
   const [overwriteQuiz, setOverwriteQuiz] = useState(false);
 
@@ -113,6 +114,11 @@ const QuizErstellen = ({ show, onHide }) => {
 
     const jsonData = {
       name: quizName,
+      settings: {
+        timer,
+        incorrectAnswerBehavior,
+        openOptionsBehavior
+      },
       categories: categories,
       questions: questions.map(q => ({
         category: categories[q.categoryIndex],
@@ -120,11 +126,8 @@ const QuizErstellen = ({ show, onHide }) => {
         question: q.question,
         answer: q.answer,
         options: q.options
-      })),
-      settings: {
-        timer,
-        incorrectAnswerBehavior
-      }
+      }))
+
     };
 
     const fileName = `${quizName}.json`;
@@ -317,9 +320,18 @@ const QuizErstellen = ({ show, onHide }) => {
             <Form.Group controlId="incorrectAnswerBehavior">
               <Form.Label>Verhalten bei falscher Antwort:</Form.Label>
               <Form.Select value={incorrectAnswerBehavior} onChange={(e) => setIncorrectAnswerBehavior(e.target.value)}>
-                <option value="skip">Keine Aktion</option>
-                <option value="retry">Erneut versuchen</option>
-                <option value="minus">Punktezahl abziehen</option>
+                <option value="skip">Keine Aktion - Frage wird geschlossen</option>
+                <option value="retry">Erneut versuchen - 2. Versuch</option>
+                <option value="minus">Minuspunkte - Punktezahl wird abziehen</option>
+                <option value="buzzer">Buzzer - Andere Spieler dürfen antworten</option>
+              </Form.Select>
+            </Form.Group>
+
+            <Form.Group controlId="openOptionsBehavior">
+              <Form.Label>Verhalten beim Öffnen der Antwortmöglichkeiten</Form.Label>
+              <Form.Select value={openOptionsBehavior} onChange={(e) => setOpenOptionsBehavior(e.target.value)}>
+              <option value="full">Volle Punktzahl bleibt erreichbar</option>
+                <option value="half">Die Punktzahl halbiert sich</option>
               </Form.Select>
             </Form.Group>
             
