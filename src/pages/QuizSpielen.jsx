@@ -254,7 +254,22 @@ const QuizSpielen = () => {
                 <Modal.Body className='modalBody'>
                   {selectedQuestion.question} <br />
                   <h5>Zeit verbleibend: {timer} Sekunden</h5>
-                    {!isTimerRunning && <Button onClick={handleTimerStart}>Start Timer</Button>}
+                    {!isTimerRunning && <Button className='timerButton' onClick={handleTimerStart}>Start Timer</Button>}
+
+                    <Button
+                      className='beantwortenButton richtigButton'
+                      onClick={() => handleAnswerClick(true)}
+                    >
+                      Richtig
+                    </Button>
+
+                    <Button
+                      className='beantwortenButton falschButton'
+                      onClick={() => handleAnswerClick(false)}
+                    >
+                      Falsch
+                    </Button>
+
                     <Accordion>
                       <Accordion.Item eventKey="0">
                         <Accordion.Header>Antwortmöglichkeiten</Accordion.Header>
@@ -274,13 +289,7 @@ const QuizSpielen = () => {
                     </Accordion>
                 </Modal.Body>
                 <Modal.Footer className='modalFooter'>
-                  <Button variant="secondary" onClick={() => {
-                    setSelectedQuestion(null);
-                    setTimer(0);
-                    saveResults();
-                  }}>
-                    Quiz beenden
-                  </Button>
+                  
                 </Modal.Footer>
               </Modal>
             )}

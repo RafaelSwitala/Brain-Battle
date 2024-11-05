@@ -107,6 +107,33 @@
   background-color: #0056b3;
 }
 
+.timerButton {
+  display: block !important;
+  background-color: yellow !important;
+  color: black !important;
+}
+
+.beantwortenButton {
+  display: inline-block !important;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 200px !important;
+  height: 80px !important;
+  border: 2px solid green !important;
+  font-size: 30px !important;
+  font-weight: 600 !important;
+}
+
+.richtigButton {
+  background-color: green !important;
+  margin-right: 26px;
+}
+
+.falschButton {
+  background-color: red !important;
+}
+
+
 /* Modal */
 .modal-content {
   border: 5px solid white !important;
