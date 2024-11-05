@@ -4,6 +4,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import './allPages.css';
 import spielerData from '../../public/spieler.json'; 
+import Accordion from 'react-bootstrap/Accordion';
+import axios from 'axios'; // Für das Speichern der Ergebnisse
 
 const QuizSpielen = () => {
   const { quizName } = useParams();
@@ -14,7 +16,9 @@ const QuizSpielen = () => {
   const [confirmedSpieler, setConfirmedSpieler] = useState(false);
   const [spielerPunkte, setSpielerPunkte] = useState({});
   const [currentSpielerIndex, setCurrentSpielerIndex] = useState(0);
-  const [answeredQuestions, setAnsweredQuestions] = useState(new Set()); 
+  const [answeredQuestions, setAnsweredQuestions] = useState(new Set());
+  const [timer, setTimer] = useState(0); // Timer für die Frage
+  const [isTimerRunning, setIsTimerRunning] = useState(false); // Status des Timers
 
   useEffect(() => {
     setSpieler(spielerData);
@@ -36,7 +40,9 @@ const QuizSpielen = () => {
 
   const handleCellClick = (question) => {
     if (!answeredQuestions.has(question)) {
-      setSelectedQuestion(question); 
+      setSelectedQuestion(question);
+      setTimer(question.timer || 0); // Setzt den Timer auf den Wert aus der Frage
+      setIsTimerRunning(false); // Setzt den Timer-Status zurück
     }
   };
 
@@ -68,20 +74,61 @@ const QuizSpielen = () => {
   };
 
   const handleAnswerClick = (isCorrect) => {
+    // Überprüfe, ob selectedQuestion null ist
+    if (!selectedQuestion) {
+      console.error("Selected question is null");
+      return; // Beende die Funktion, wenn keine Frage ausgewählt ist
+    }
+  
     const currentSpieler = selectedSpieler[currentSpielerIndex];
-    const points = selectedQuestion.points;
-
+    const points = selectedQuestion.points; // Dies wird jetzt sicher sein, dass selectedQuestion nicht null ist
+  
     setSpielerPunkte(prevPunkte => ({
       ...prevPunkte,
       [currentSpieler]: prevPunkte[currentSpieler] + (isCorrect ? points : -points)
     }));
-
+  
     setAnsweredQuestions(prevAnswered => new Set([...prevAnswered, selectedQuestion]));
-
+  
     setCurrentSpielerIndex((prevIndex) => (prevIndex + 1) % selectedSpieler.length);
-
     setSelectedQuestion(null);
+    setTimer(0); // Reset the timer when moving to the next question
   };
+  
+
+  const handleTimerStart = () => {
+    setIsTimerRunning(true);
+  };
+
+  useEffect(() => {
+    let interval;
+    if (isTimerRunning && timer > 0) {
+      interval = setInterval(() => {
+        setTimer(prevTimer => Math.max(prevTimer - 1, 0));
+      }, 1000);
+    } else if (timer === 0) {
+      handleAnswerClick(false); // Wenn der Timer abläuft, wird die Frage als falsch beantwortet
+    }
+
+    return () => clearInterval(interval); // Aufräumen des Intervals
+  }, [isTimerRunning, timer]);
+
+  const saveResults = async () => {
+    const results = {
+      quizName: quizName,
+      date: new Date().toLocaleDateString(),
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      scores: spielerPunkte,
+    };
+  
+    try {
+      await axios.post('http://localhost:5000/api/save-results', { quizName, results });
+      alert("Ergebnisse wurden gespeichert!");
+    } catch (error) {
+      console.error("Fehler beim Speichern der Ergebnisse:", error);
+    }
+  };
+  
 
   if (!quizData) return <div>Lade Quiz...</div>;
 
@@ -169,6 +216,9 @@ const QuizSpielen = () => {
             <h4>Aktueller Spieler:
               <br />
                {currentSpieler}</h4>
+                <Button variant="danger" onClick={saveResults}>
+                 Quiz beenden
+                </Button>
           </div>
 
           <div className='quizSpielenQuiz'>
@@ -198,18 +248,39 @@ const QuizSpielen = () => {
             {selectedQuestion && (
               <Modal className='quizModal' show={true} onHide={() => setSelectedQuestion(null)}>
                 <Modal.Header className='modalHeader' closeButton>
-                  <Modal.Title className='modalQuestion'>{selectedQuestion.question}</Modal.Title>
+                  <Modal.Title className='modalQuestion'>
+                    <small>{selectedQuestion.category} - {selectedQuestion.points} Punkte</small>
+                  </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className='modalBody'>
-                  {shuffleOptions([selectedQuestion.answer, ...selectedQuestion.options]).map((option, index) => (
-                    <Button key={index} variant="outline-primary" className="d-block mb-2" onClick={() => handleAnswerClick(option === selectedQuestion.answer)}>
-                      {option}
-                    </Button>
-                  ))}
+                  {selectedQuestion.question} <br />
+                  <h5>Zeit verbleibend: {timer} Sekunden</h5>
+                    {!isTimerRunning && <Button onClick={handleTimerStart}>Start Timer</Button>}
+                    <Accordion>
+                      <Accordion.Item eventKey="0">
+                        <Accordion.Header>Antwortmöglichkeiten</Accordion.Header>
+                        <Accordion.Body>
+                          {shuffleOptions([selectedQuestion.answer, ...selectedQuestion.options]).map((option, index) => (
+                          <Button 
+                            key={index} 
+                            variant="outline-primary" 
+                            className="d-block mb-2" 
+                            onClick={() => handleAnswerClick(option === selectedQuestion.answer)}
+                          >
+                            {option}
+                          </Button>
+                        ))}
+                        </Accordion.Body>
+                      </Accordion.Item>
+                    </Accordion>
                 </Modal.Body>
                 <Modal.Footer className='modalFooter'>
-                  <Button variant="secondary" onClick={() => setSelectedQuestion(null)}>
-                    Schließen
+                  <Button variant="secondary" onClick={() => {
+                    setSelectedQuestion(null);
+                    setTimer(0);
+                    saveResults(); // Ergebnisse speichern, wenn das Quiz beendet wird
+                  }}>
+                    Quiz beenden
                   </Button>
                 </Modal.Footer>
               </Modal>

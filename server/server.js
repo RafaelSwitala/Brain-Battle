@@ -102,6 +102,22 @@ app.post('/api/save-json', (req, res) => {
   });
 });
 
+// Route zum Speichern der Quiz-Ergebnisse
+app.post('/api/save-results', (req, res) => {
+  const { quizName, results } = req.body;
+  const filePath = path.join(__dirname, '../public/ergebnisse', `${quizName}-results.json`);
+
+  fs.writeFile(filePath, JSON.stringify(results, null, 2), (err) => {
+    if (err) {
+      console.error('Fehler beim Speichern der Ergebnisse:', err);
+      return res.status(500).json({ error: 'Fehler beim Speichern der Ergebnisse.' });
+    }
+    console.log('Ergebnisse erfolgreich gespeichert:', `${quizName}-results.json`);
+    res.status(200).json({ message: 'Ergebnisse erfolgreich gespeichert.' });
+  });
+});
+
+
 // Server starten
 app.listen(PORT, () => {
   console.log(`Server läuft auf http://localhost:${PORT}`);
