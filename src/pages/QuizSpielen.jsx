@@ -24,6 +24,7 @@ const QuizSpielen = () => {
   const [punkteOption, setPunkteOption] = useState('add');
   const currentSpieler = selectedSpieler[currentSpielerIndex];
   const [spielerReihenfolge, setSpielerReihenfolge] = useState([]);
+  const [incorrectAnswerBehavior, setIncorrectAnswerBehavior] = useState('skip');
 
   useEffect(() => {
     setSpieler(spielerData);
@@ -35,13 +36,15 @@ const QuizSpielen = () => {
         const response = await fetch(`/erstellteQuize/${quizName}.json`);
         const data = await response.json();
         setQuizData(data);
+        setIncorrectAnswerBehavior(data.settings.incorrectAnswerBehavior);
       } catch (error) {
         console.error("Fehler beim Laden des Quiz:", error);
       }
     };
-
+  
     loadQuiz();
   }, [quizName]);
+  
 
   const handleCellClick = (question) => {
     if (!answeredQuestions.has(question)) {
@@ -88,16 +91,36 @@ const QuizSpielen = () => {
     }
   
     const points = selectedQuestion.points;
-    setSpielerPunkte(prevPunkte => ({
-      ...prevPunkte,
-      [currentSpieler]: prevPunkte[currentSpieler] + (isCorrect ? points : -points)
-    }));
   
-    setAnsweredQuestions(prevAnswered => new Set([...prevAnswered, selectedQuestion]));
+    if (isCorrect) {
+      setSpielerPunkte(prevPunkte => ({
+        ...prevPunkte,
+        [currentSpieler]: prevPunkte[currentSpieler] + points
+      }));
+    } else {
+      switch (incorrectAnswerBehavior) {
+        case 'skip':
+          break;
+        case 'retry':
+          alert("Versuchen Sie es erneut!"); 
+          return;
+        case 'minus':
+          setSpielerPunkte(prevPunkte => ({
+            ...prevPunkte,
+            [currentSpieler]: Math.max(0, prevPunkte[currentSpieler] - points)
+          }));
+          break;
+        default:
+          console.error("Unbekanntes Verhalten bei falscher Antwort");
+      }
+    }
+  
+    setAnsweredQuestions(prevAnswered => new Set(prevAnswered).add(selectedQuestion));
     setCurrentSpielerIndex((prevIndex) => (prevIndex + 1) % selectedSpieler.length);
     setSelectedQuestion(null);
     setTimer(0);
   };
+  
   
   
 
