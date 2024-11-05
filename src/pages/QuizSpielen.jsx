@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import './allPages.css';
 import spielerData from '../../public/spieler.json'; 
 import Accordion from 'react-bootstrap/Accordion';
+import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
 const QuizSpielen = () => {
@@ -19,6 +20,10 @@ const QuizSpielen = () => {
   const [answeredQuestions, setAnsweredQuestions] = useState(new Set());
   const [timer, setTimer] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const [punkteAnpassen, setPunkteAnpassen] = useState(0);
+  const [punkteOption, setPunkteOption] = useState('add');
+  const currentSpieler = selectedSpieler[currentSpielerIndex];
+  const [spielerReihenfolge, setSpielerReihenfolge] = useState([]);
 
   useEffect(() => {
     setSpieler(spielerData);
@@ -62,7 +67,9 @@ const QuizSpielen = () => {
 
   const handleConfirmSpieler = () => {
     if (selectedSpieler.length > 0) {
-      const initialPunkte = selectedSpieler.reduce((acc, spielerName) => {
+      const shuffledSpieler = selectedSpieler.sort(() => Math.random() - 0.5);
+      setSpielerReihenfolge(shuffledSpieler);
+      const initialPunkte = shuffledSpieler.reduce((acc, spielerName) => {
         acc[spielerName] = 0;
         return acc;
       }, {});
@@ -72,6 +79,7 @@ const QuizSpielen = () => {
       alert("Bitte mindestens einen Spieler auswählen!");
     }
   };
+  
 
   const handleAnswerClick = (isCorrect) => {
     if (!selectedQuestion) {
@@ -79,20 +87,18 @@ const QuizSpielen = () => {
       return;
     }
   
-    const currentSpieler = selectedSpieler[currentSpielerIndex];
     const points = selectedQuestion.points;
-  
     setSpielerPunkte(prevPunkte => ({
       ...prevPunkte,
       [currentSpieler]: prevPunkte[currentSpieler] + (isCorrect ? points : -points)
     }));
   
     setAnsweredQuestions(prevAnswered => new Set([...prevAnswered, selectedQuestion]));
-  
     setCurrentSpielerIndex((prevIndex) => (prevIndex + 1) % selectedSpieler.length);
     setSelectedQuestion(null);
     setTimer(0);
   };
+  
   
 
   const handleTimerStart = () => {
@@ -151,7 +157,6 @@ const QuizSpielen = () => {
   });
   const sortedPoints = Array.from(pointsSet).sort((a, b) => a - b);
 
-  const currentSpieler = selectedSpieler[currentSpielerIndex];
 
   return (
     <div className='quizSpielenContainer'>
@@ -204,7 +209,7 @@ const QuizSpielen = () => {
                 </tr>
               </thead>
               <tbody>
-                {selectedSpieler.map((spielerName, index) => (
+                {spielerReihenfolge.map((spielerName, index) => (
                   <tr key={index}>
                     <td>{spielerName}</td>
                     <td>{spielerPunkte[spielerName]}</td>
@@ -215,9 +220,72 @@ const QuizSpielen = () => {
             <h4>Aktueller Spieler:
               <br />
                {currentSpieler}</h4>
+
+               <div className='individuellePunkte'>
+                <Form.Group controlId="individuellePunkteSpieler">
+                  <Form.Label>Spieler auswählen:</Form.Label>
+                  <Form.Select value={spielerReihenfolge[currentSpielerIndex]} onChange={(e) => {}}>
+                    {spielerReihenfolge.map((spielerName, index) => (
+                      <option key={index} value={spielerName}>
+                        {spielerName}
+                      </option>
+                    ))}
+                  </Form.Select>
+
+
+                </Form.Group>
+
+                <Form.Group controlId="punkteInput">
+                  <Form.Label>Punkte anpassen:</Form.Label>
+                  <Form.Control
+                    type="number"
+                    min="0"
+                    placeholder="Punktezahl"
+                    onChange={(e) => setPunkteAnpassen(parseInt(e.target.value))}
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="punkteOptionen">
+                  <Form.Check
+                    type="radio"
+                    id="pluspunkte"
+                    label="Punkte hinzufügen"
+                    name="punkteOptionen"
+                    onChange={() => setPunkteOption('add')}
+                    defaultChecked
+                  />
+                  <Form.Check
+                    type="radio"
+                    id="minuspunkte"
+                    label="Punkte abziehen"
+                    name="punkteOptionen"
+                    onChange={() => setPunkteOption('subtract')}
+                  />
+                </Form.Group>
+
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    if (currentSpieler && !isNaN(punkteAnpassen)) {
+                      setSpielerPunkte((prevPunkte) => ({
+                        ...prevPunkte,
+                        [currentSpieler]: Math.max(
+                          0,
+                          prevPunkte[currentSpieler] + (punkteOption === 'add' ? punkteAnpassen : -punkteAnpassen)
+                        )
+                      }));
+                    }
+                  }}
+                >
+                  Punkte aktualisieren
+                </Button>
+              </div>
+
+
                 <Button variant="danger" onClick={saveResults}>
                  Quiz beenden
                 </Button>
+
           </div>
 
           <div className='quizSpielenQuiz'>

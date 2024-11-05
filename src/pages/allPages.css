@@ -215,8 +215,6 @@
   background-color: var(--cream);
 }
 
-
-
 .question-number, .question-input, .options-container, .points-input {
   margin-bottom: 10px;
 }
@@ -351,7 +349,7 @@
   padding: 15px;
 }
 
-.tabelle-container > h3{
+.tabelle-container > h3 {
   font-size: 40px;
   margin-bottom: 65px;
   padding-bottom: 18px;
@@ -371,6 +369,16 @@
 
 .spieler-tabelle > tbody {
   border-bottom: 3px solid white;
+}
+
+.individuellePunkte {
+  height: 290px;
+  width: 250px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 3px solid white;
 }
 
 
