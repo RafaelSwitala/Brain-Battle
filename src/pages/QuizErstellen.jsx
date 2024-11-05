@@ -111,15 +111,6 @@ const QuizErstellen = ({ show, onHide }) => {
       return;
     }
 
-    // const quizExists = await checkQuizNameExists(quizName);
-    // if (quizExists && !overwriteQuiz) {
-    //   if (window.confirm("Der Quizname existiert bereits. Möchten Sie das bestehende Quiz überschreiben?")) {
-    //     setOverwriteQuiz(true);
-    //   } else {
-    //     return;
-    //   }
-    // }
-
     const jsonData = {
       name: quizName,
       categories: categories,

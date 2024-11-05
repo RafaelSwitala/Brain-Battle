@@ -14,7 +14,7 @@
   color: var(--cream);
   border: 10px solid var(--cream);
   border-radius: 35px;
-  height: 850px;
+  height: 600px;
   padding: 22px;
 }
 
@@ -37,12 +37,12 @@
 
 .quiz-list > p, .quiz-name {
   border: 2px solid white;
-  height: 50px;
+  height: 40px !important;
   background-color: var(--red);
   font-weight: 600;
-  font-size: 24px;
+  font-size: 22px !important;
   padding-left: 18px;
-  padding-top: 4px;
+  padding-top: 0px !important;
   width: 98.5%;
   border-radius: 6px;
   text-decoration: none !important;
@@ -138,7 +138,8 @@
 .modal-content {
   border: 5px solid white !important;
   border-radius: 7px !important;
-  height: 1000px !important;
+  height: 800px !important;
+  width: 1200px !important;
 }
 
 .modalQuestion {
@@ -149,7 +150,9 @@
   background-color: var(--cream) !important;
   border-right: 15px solid var(--darkgrey);
   border-left: 15px solid var(--darkgrey);
+  border-bottom: 15px solid var(--darkgrey);
   overflow-y: auto; 
+  height: 700px !important;
 }
 
 .modalHeader,
@@ -158,6 +161,7 @@
   color: var(--cream);
   border: none !important;
   border-radius: 0 !important;
+  height: 7%;
 }
 
 .modalText {
@@ -347,20 +351,21 @@
   border-radius: 20px;
   color: white;
   padding: 15px;
+  margin-right: 20px;
 }
 
 .tabelle-container > h3 {
-  font-size: 40px;
-  margin-bottom: 65px;
+  font-size: 35px;
+  margin-bottom: 15px;
   padding-bottom: 18px;
-  padding-left: 32px;
+  padding-left: 44px;
   border-bottom: 3px solid white;
 }
 
 .spieler-tabelle {
   width: 260px;
   font-size: 24px;
-  margin-bottom: 90px;
+  margin-bottom: 30px;
 }
 
 .spieler-tabelle > thead {
@@ -375,7 +380,7 @@
   height: 290px;
   width: 250px;
   margin-bottom: 50px;
-  margin-top: 50px;
+  margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
   border: 3px solid white;
