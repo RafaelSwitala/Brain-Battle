@@ -34,6 +34,22 @@ app.get('/api/spieler', (req, res) => {
   });
 });
 
+// Route zum Aktualisieren der Spieler
+app.post('/api/spieler', (req, res) => {
+  console.log('POST /api/spieler aufgerufen');
+  const spielerList = req.body; // gesamte Spieler-Liste übernehmen
+  const filePath = path.join(__dirname, '../public/spieler.json');
+
+  fs.writeFile(filePath, JSON.stringify(spielerList, null, 2), (writeErr) => {
+    if (writeErr) {
+      console.error('Fehler beim Speichern der Datei:', writeErr);
+      return res.status(500).json({ error: 'Fehler beim Speichern der Datei.' });
+    }
+    console.log('Spieler-Liste erfolgreich aktualisiert');
+    res.status(200).json({ message: 'Spieler-Liste erfolgreich aktualisiert.' });
+  });
+});
+
 // Route zum Hinzufügen eines neuen Spielers
 app.post('/api/spieler', (req, res) => {
   console.log('POST /api/spieler aufgerufen');
