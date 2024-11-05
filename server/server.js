@@ -105,7 +105,7 @@ app.post('/api/save-json', (req, res) => {
 // Route zum Speichern der Quiz-Ergebnisse
 app.post('/api/save-results', (req, res) => {
   const { quizName, results } = req.body;
-  const filePath = path.join(__dirname, '../public/ergebnisse', `${quizName}-results.json`);
+  const filePath = path.join(__dirname, '../public/ergebnisse', `Ergebnis-${quizName}.json`);
 
   fs.writeFile(filePath, JSON.stringify(results, null, 2), (err) => {
     if (err) {

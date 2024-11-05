@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import './allPages.css';
 import spielerData from '../../public/spieler.json'; 
 import Accordion from 'react-bootstrap/Accordion';
-import axios from 'axios'; // Für das Speichern der Ergebnisse
+import axios from 'axios';
 
 const QuizSpielen = () => {
   const { quizName } = useParams();
@@ -17,8 +17,8 @@ const QuizSpielen = () => {
   const [spielerPunkte, setSpielerPunkte] = useState({});
   const [currentSpielerIndex, setCurrentSpielerIndex] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState(new Set());
-  const [timer, setTimer] = useState(0); // Timer für die Frage
-  const [isTimerRunning, setIsTimerRunning] = useState(false); // Status des Timers
+  const [timer, setTimer] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
 
   useEffect(() => {
     setSpieler(spielerData);
@@ -41,8 +41,8 @@ const QuizSpielen = () => {
   const handleCellClick = (question) => {
     if (!answeredQuestions.has(question)) {
       setSelectedQuestion(question);
-      setTimer(question.timer || 0); // Setzt den Timer auf den Wert aus der Frage
-      setIsTimerRunning(false); // Setzt den Timer-Status zurück
+      setTimer(question.timer || 0);
+      setIsTimerRunning(false);
     }
   };
 
@@ -74,14 +74,13 @@ const QuizSpielen = () => {
   };
 
   const handleAnswerClick = (isCorrect) => {
-    // Überprüfe, ob selectedQuestion null ist
     if (!selectedQuestion) {
       console.error("Selected question is null");
-      return; // Beende die Funktion, wenn keine Frage ausgewählt ist
+      return;
     }
   
     const currentSpieler = selectedSpieler[currentSpielerIndex];
-    const points = selectedQuestion.points; // Dies wird jetzt sicher sein, dass selectedQuestion nicht null ist
+    const points = selectedQuestion.points;
   
     setSpielerPunkte(prevPunkte => ({
       ...prevPunkte,
@@ -92,7 +91,7 @@ const QuizSpielen = () => {
   
     setCurrentSpielerIndex((prevIndex) => (prevIndex + 1) % selectedSpieler.length);
     setSelectedQuestion(null);
-    setTimer(0); // Reset the timer when moving to the next question
+    setTimer(0);
   };
   
 
@@ -107,10 +106,10 @@ const QuizSpielen = () => {
         setTimer(prevTimer => Math.max(prevTimer - 1, 0));
       }, 1000);
     } else if (timer === 0) {
-      handleAnswerClick(false); // Wenn der Timer abläuft, wird die Frage als falsch beantwortet
+      handleAnswerClick(false);
     }
 
-    return () => clearInterval(interval); // Aufräumen des Intervals
+    return () => clearInterval(interval);
   }, [isTimerRunning, timer]);
 
   const saveResults = async () => {
@@ -278,7 +277,7 @@ const QuizSpielen = () => {
                   <Button variant="secondary" onClick={() => {
                     setSelectedQuestion(null);
                     setTimer(0);
-                    saveResults(); // Ergebnisse speichern, wenn das Quiz beendet wird
+                    saveResults();
                   }}>
                     Quiz beenden
                   </Button>
