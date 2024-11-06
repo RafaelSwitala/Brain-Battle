@@ -330,7 +330,7 @@ const QuizErstellen = ({ show, onHide }) => {
             <Form.Group controlId="openOptionsBehavior">
               <Form.Label>Verhalten beim Öffnen der Antwortmöglichkeiten</Form.Label>
               <Form.Select value={openOptionsBehavior} onChange={(e) => setOpenOptionsBehavior(e.target.value)}>
-              <option value="full">Volle Punktzahl bleibt erreichbar</option>
+                <option value="full">Volle Punktzahl bleibt erreichbar</option>
                 <option value="half">Die Punktzahl halbiert sich</option>
               </Form.Select>
             </Form.Group>

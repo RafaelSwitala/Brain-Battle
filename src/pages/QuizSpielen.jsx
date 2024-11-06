@@ -25,6 +25,8 @@ const QuizSpielen = () => {
   const currentSpieler = selectedSpieler[currentSpielerIndex];
   const [spielerReihenfolge, setSpielerReihenfolge] = useState([]);
   const [incorrectAnswerBehavior, setIncorrectAnswerBehavior] = useState('skip');
+  const [openOptionsBehavior, setOpenOptionsBehavior] = useState('full');
+  const [areOptionsOpened, setAreOptionsOpened] = useState(false);
 
   useEffect(() => {
     setSpieler(spielerData);
@@ -37,6 +39,7 @@ const QuizSpielen = () => {
         const data = await response.json();
         setQuizData(data);
         setIncorrectAnswerBehavior(data.settings.incorrectAnswerBehavior);
+        setOpenOptionsBehavior(data.settings.openOptionsBehavior);
       } catch (error) {
         console.error("Fehler beim Laden des Quiz:", error);
       }
@@ -44,6 +47,7 @@ const QuizSpielen = () => {
   
     loadQuiz();
   }, [quizName]);
+  
   
 
   const handleCellClick = (question) => {
@@ -83,31 +87,35 @@ const QuizSpielen = () => {
     }
   };
   
-
+  
   const handleAnswerClick = (isCorrect) => {
     if (!selectedQuestion) {
       console.error("Selected question is null");
       return;
     }
   
-    const points = selectedQuestion.points;
+    let points = selectedQuestion.points;
+  
+    if (areOptionsOpened && openOptionsBehavior === "half") {
+      points = Math.floor(points / 2);
+    }
   
     if (isCorrect) {
       setSpielerPunkte(prevPunkte => ({
         ...prevPunkte,
-        [currentSpieler]: prevPunkte[currentSpieler] + points
+        [currentSpieler]: prevPunkte[currentSpieler] + points,
       }));
     } else {
       switch (incorrectAnswerBehavior) {
         case 'skip':
           break;
         case 'retry':
-          alert("Versuchen Sie es erneut!"); 
+          alert("Versuchen Sie es erneut!");
           return;
         case 'minus':
           setSpielerPunkte(prevPunkte => ({
             ...prevPunkte,
-            [currentSpieler]: Math.max(0, prevPunkte[currentSpieler] - points)
+            [currentSpieler]: Math.max(0, prevPunkte[currentSpieler] - points),
           }));
           break;
         default:
@@ -119,6 +127,7 @@ const QuizSpielen = () => {
     setCurrentSpielerIndex((prevIndex) => (prevIndex + 1) % selectedSpieler.length);
     setSelectedQuestion(null);
     setTimer(0);
+    setAreOptionsOpened(false);
   };
   
   
@@ -361,23 +370,25 @@ const QuizSpielen = () => {
                       Falsch
                     </Button>
 
-                    <Accordion>
+                    <Accordion onToggle={() => setAreOptionsOpened((prev) => !prev)}>
                       <Accordion.Item eventKey="0">
                         <Accordion.Header>Antwortmöglichkeiten</Accordion.Header>
                         <Accordion.Body>
                           {shuffleOptions([selectedQuestion.answer, ...selectedQuestion.options]).map((option, index) => (
-                          <Button 
-                            key={index} 
-                            variant="outline-primary" 
-                            className="d-block mb-2" 
-                            onClick={() => handleAnswerClick(option === selectedQuestion.answer)}
-                          >
-                            {option}
-                          </Button>
-                        ))}
+                            <Button 
+                              key={index} 
+                              variant="outline-primary" 
+                              className="d-block mb-2" 
+                              onClick={() => handleAnswerClick(option === selectedQuestion.answer)}
+                            >
+                              {option}
+                            </Button>
+                          ))}
                         </Accordion.Body>
                       </Accordion.Item>
                     </Accordion>
+
+
                 </Modal.Body>
                 <Modal.Footer className='modalFooter'>
                   
