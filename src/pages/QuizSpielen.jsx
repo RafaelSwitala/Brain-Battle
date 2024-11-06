@@ -4,7 +4,6 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import './allPages.css';
 import spielerData from '../../public/spieler.json'; 
-import Accordion from 'react-bootstrap/Accordion';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
@@ -27,6 +26,7 @@ const QuizSpielen = () => {
   const [incorrectAnswerBehavior, setIncorrectAnswerBehavior] = useState('skip');
   const [openOptionsBehavior, setOpenOptionsBehavior] = useState('full');
   const [areOptionsOpened, setAreOptionsOpened] = useState(false);
+  const [isContentVisible, setIsContentVisible] = useState(false);
 
   useEffect(() => {
     setSpieler(spielerData);
@@ -86,6 +86,7 @@ const QuizSpielen = () => {
       alert("Bitte mindestens einen Spieler auswählen!");
     }
   };
+  
   
   
   const handleAnswerClick = (isCorrect) => {
@@ -188,6 +189,11 @@ const QuizSpielen = () => {
     Object.keys(pointsMap).forEach(point => pointsSet.add(point));
   });
   const sortedPoints = Array.from(pointsSet).sort((a, b) => a - b);
+
+  const toggleContentVisibility = () => {
+    setIsContentVisible((prev) => !prev);
+    console.log(isContentVisible ? "Inhalt geschlossen" : "Inhalt geöffnet");
+  };
 
 
   return (
@@ -370,10 +376,14 @@ const QuizSpielen = () => {
                       Falsch
                     </Button>
 
-                    <Accordion onToggle={() => setAreOptionsOpened((prev) => !prev)}>
-                      <Accordion.Item eventKey="0">
-                        <Accordion.Header>Antwortmöglichkeiten</Accordion.Header>
-                        <Accordion.Body>
+                    
+
+                <Button onClick={toggleContentVisibility} variant="primary">
+                        {isContentVisible ? "Schließen" : "Antwortmöglichkeiten anzeigen"}
+                      </Button>
+
+                      {isContentVisible && (
+                        <div className="mt-3">
                           {shuffleOptions([selectedQuestion.answer, ...selectedQuestion.options]).map((option, index) => (
                             <Button 
                               key={index} 
@@ -384,10 +394,8 @@ const QuizSpielen = () => {
                               {option}
                             </Button>
                           ))}
-                        </Accordion.Body>
-                      </Accordion.Item>
-                    </Accordion>
-
+                        </div>
+                      )}
 
                 </Modal.Body>
                 <Modal.Footer className='modalFooter'>
