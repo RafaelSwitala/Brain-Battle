@@ -108,8 +108,8 @@ const HomePage = () => {
                     <td>{quiz.openAnswerBehavior}</td>
                     <td>{quiz.categoryCount}</td>
                     <td>{quiz.scoreSteps}</td>
-                    <td>B</td>
-                    <td>L</td>
+                    <td className='bearbeitenIcon'></td>
+                    <td className='loeschenIcon'></td>
                   </tr>
                 ))
               ) : (

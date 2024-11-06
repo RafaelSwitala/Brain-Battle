@@ -439,3 +439,32 @@ li button {
   background-color: rgb(212, 195, 69) !important;
   color: white !important;
 } 
+
+/* Icons */
+.bearbeitenIcon, 
+.loeschenIcon {
+  background-size: 18px 18px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  width: 24px; 
+  height: 24px; 
+}
+
+.bearbeitenIcon {
+  background-image: url('../img/icons/bleistift.png');
+}
+
+.loeschenIcon {
+  background-image: url('../img/icons/mull.png');
+}
+
+
+/* .bearbeitenIcon:hover, .loeschenIcon:hover {
+  opacity: 0.7;
+}
+
+.quiz-row td {
+  vertical-align: middle;
+  padding: 10px;
+} */
