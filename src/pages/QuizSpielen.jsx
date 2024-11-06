@@ -263,9 +263,11 @@ const QuizSpielen = () => {
                 ))}
               </tbody>
             </table>
-            <h4>Aktueller Spieler:
+            <h4 className="currentSpielerStyle">Aktueller Spieler:
               <br />
-               {currentSpieler}</h4>
+              {currentSpieler}
+            </h4>
+
 
                <div className='individuellePunkte'>
                 <Form.Group controlId="individuellePunkteSpieler">
