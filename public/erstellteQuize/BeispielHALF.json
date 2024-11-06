@@ -1,0 +1,120 @@
+{
+  "name": "BeispielHALF",
+  "settings": {
+    "timer": 15,
+    "incorrectAnswerBehavior": "none",
+    "openOptionsBehavior": "half"
+  },
+  "categories": [
+    "",
+    "",
+    ""
+  ],
+  "questions": [
+    {
+      "category": "",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 400,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 500,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 400,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 500,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 400,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 500,
+      "question": "",
+      "answer": "",
+      "options": []
+    }
+  ]
+}

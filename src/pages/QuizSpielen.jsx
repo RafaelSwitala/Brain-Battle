@@ -4,7 +4,6 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import './allPages.css';
 import spielerData from '../../public/spieler.json'; 
-import Accordion from 'react-bootstrap/Accordion';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
@@ -24,6 +23,10 @@ const QuizSpielen = () => {
   const [punkteOption, setPunkteOption] = useState('add');
   const currentSpieler = selectedSpieler[currentSpielerIndex];
   const [spielerReihenfolge, setSpielerReihenfolge] = useState([]);
+  const [incorrectAnswerBehavior, setIncorrectAnswerBehavior] = useState('skip');
+  const [openOptionsBehavior, setOpenOptionsBehavior] = useState('full');
+  const [areOptionsOpened, setAreOptionsOpened] = useState(false);
+  const [isContentVisible, setIsContentVisible] = useState(false);
 
   useEffect(() => {
     setSpieler(spielerData);
@@ -35,6 +38,8 @@ const QuizSpielen = () => {
         const response = await fetch(`/erstellteQuize/${quizName}.json`);
         const data = await response.json();
         setQuizData(data);
+        setIncorrectAnswerBehavior(data.settings.incorrectAnswerBehavior);
+        setOpenOptionsBehavior(data.settings.openOptionsBehavior);
       } catch (error) {
         console.error("Fehler beim Laden des Quiz:", error);
       }
@@ -42,12 +47,13 @@ const QuizSpielen = () => {
 
     loadQuiz();
   }, [quizName]);
-
+  
   const handleCellClick = (question) => {
     if (!answeredQuestions.has(question)) {
       setSelectedQuestion(question);
       setTimer(question.timer || 0);
       setIsTimerRunning(false);
+      setIsContentVisible(false);
     }
   };
 
@@ -80,26 +86,46 @@ const QuizSpielen = () => {
     }
   };
   
-
   const handleAnswerClick = (isCorrect) => {
     if (!selectedQuestion) {
       console.error("Selected question is null");
       return;
     }
   
-    const points = selectedQuestion.points;
-    setSpielerPunkte(prevPunkte => ({
-      ...prevPunkte,
-      [currentSpieler]: prevPunkte[currentSpieler] + (isCorrect ? points : -points)
-    }));
+    let points = selectedQuestion.points;
+    if (isCorrect) {
+      if (areOptionsOpened && openOptionsBehavior === "half") {
+        points = Math.floor(points / 2);
+      }
+      setSpielerPunkte(prevPunkte => ({
+        ...prevPunkte,
+        [currentSpieler]: prevPunkte[currentSpieler] + points,
+      }));
+    } else {
+      switch (incorrectAnswerBehavior) {
+        case 'skip':
+          break;
+        case 'retry':
+          alert("Versuchen Sie es erneut!");
+          return;
+        case 'minus':
+          setSpielerPunkte(prevPunkte => ({
+            ...prevPunkte,
+            [currentSpieler]: Math.max(0, prevPunkte[currentSpieler] - points),
+          }));
+          break;
+        default:
+          console.error("Unbekanntes Verhalten bei falscher Antwort");
+      }
+    }
   
-    setAnsweredQuestions(prevAnswered => new Set([...prevAnswered, selectedQuestion]));
+    setAnsweredQuestions(prevAnswered => new Set(prevAnswered).add(selectedQuestion));
     setCurrentSpielerIndex((prevIndex) => (prevIndex + 1) % selectedSpieler.length);
     setSelectedQuestion(null);
     setTimer(0);
+    setAreOptionsOpened(false);
+    setIsContentVisible(false);
   };
-  
-  
 
   const handleTimerStart = () => {
     setIsTimerRunning(true);
@@ -134,7 +160,6 @@ const QuizSpielen = () => {
     }
   };
   
-
   if (!quizData) return <div>Lade Quiz...</div>;
 
   const categorizedQuestions = {};
@@ -156,6 +181,12 @@ const QuizSpielen = () => {
     Object.keys(pointsMap).forEach(point => pointsSet.add(point));
   });
   const sortedPoints = Array.from(pointsSet).sort((a, b) => a - b);
+
+  const toggleContentVisibility = () => {
+    setIsContentVisible(prev => !prev);
+    setAreOptionsOpened(prev => !prev);
+    console.log(isContentVisible ? "Inhalt geschlossen" : "Inhalt geöffnet");
+  };
 
 
   return (
@@ -313,7 +344,7 @@ const QuizSpielen = () => {
             </div>
 
             {selectedQuestion && (
-              <Modal className='quizModal' show={true} onHide={() => setSelectedQuestion(null)}>
+              <Modal className='quizModal' show={true} onHide={() => { setSelectedQuestion(null); setIsContentVisible(false); }}>
                 <Modal.Header className='modalHeader' closeButton>
                   <Modal.Title className='modalQuestion'>
                     <small>{selectedQuestion.category} - {selectedQuestion.points} Punkte</small>
@@ -322,45 +353,54 @@ const QuizSpielen = () => {
                 <Modal.Body className='modalBody'>
                   {selectedQuestion.question} <br />
                   <h5>Zeit verbleibend: {timer} Sekunden</h5>
-                    {!isTimerRunning && <Button className='timerButton' onClick={handleTimerStart}>Start Timer</Button>}
 
-                    <Button
-                      className='beantwortenButton richtigButton'
-                      onClick={() => handleAnswerClick(true)}
-                    >
-                      Richtig
+                  {!isTimerRunning && (
+                    <Button className='timerButton' onClick={handleTimerStart}>
+                      Start Timer
                     </Button>
+                  )}
 
-                    <Button
-                      className='beantwortenButton falschButton'
-                      onClick={() => handleAnswerClick(false)}
-                    >
-                      Falsch
-                    </Button>
+                  <Button
+                    className='beantwortenButton richtigButton'
+                    onClick={() => handleAnswerClick(true)}
+                  >
+                    Richtig
+                  </Button>
 
-                    <Accordion>
-                      <Accordion.Item eventKey="0">
-                        <Accordion.Header>Antwortmöglichkeiten</Accordion.Header>
-                        <Accordion.Body>
-                          {shuffleOptions([selectedQuestion.answer, ...selectedQuestion.options]).map((option, index) => (
-                          <Button 
-                            key={index} 
-                            variant="outline-primary" 
-                            className="d-block mb-2" 
+                  <Button
+                    className='beantwortenButton falschButton'
+                    onClick={() => handleAnswerClick(false)}
+                  >
+                    Falsch
+                  </Button>
+
+                  <Button onClick={toggleContentVisibility} variant="primary">
+                    {isContentVisible ? "Schließen" : "Antwortmöglichkeiten anzeigen"}
+                  </Button>
+
+                  {isContentVisible && (
+                    <div className="mt-3">
+                      {shuffleOptions([selectedQuestion.answer, ...selectedQuestion.options]).map(
+                        (option, index) => (
+                          <Button
+                            key={index}
+                            variant="outline-primary"
+                            className="d-block mb-2"
                             onClick={() => handleAnswerClick(option === selectedQuestion.answer)}
                           >
                             {option}
                           </Button>
-                        ))}
-                        </Accordion.Body>
-                      </Accordion.Item>
-                    </Accordion>
+                        )
+                      )}
+                    </div>
+                  )}
                 </Modal.Body>
                 <Modal.Footer className='modalFooter'>
-                  
+
                 </Modal.Footer>
               </Modal>
             )}
+
           </div>
         </>
       )}
