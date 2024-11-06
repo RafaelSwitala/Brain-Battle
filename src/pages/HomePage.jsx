@@ -60,7 +60,7 @@ const HomePage = () => {
         </Col>
       </Row>
       <Row>
-        <Col xs={12} md={4} className="left-column">
+        <Col xs={12} md={2} className="left-column">
           <h2>Dashboard</h2>
           <div className="link-container">
             <Link to="/QuizBearbeiten" className="button-2">Quiz Bearbeiten</Link>
@@ -79,7 +79,7 @@ const HomePage = () => {
           </div>
         </Col>
 
-        <Col xs={12} md={8} className="right-column">
+        <Col xs={12} md={10} className="right-column">
           <h2>Quiz spielen</h2>
           <Table striped bordered hover variant="dark" className="quiz-table">
             <thead>
