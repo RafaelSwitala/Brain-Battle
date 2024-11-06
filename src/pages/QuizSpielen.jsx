@@ -44,17 +44,16 @@ const QuizSpielen = () => {
         console.error("Fehler beim Laden des Quiz:", error);
       }
     };
-  
+
     loadQuiz();
   }, [quizName]);
   
-  
-
   const handleCellClick = (question) => {
     if (!answeredQuestions.has(question)) {
       setSelectedQuestion(question);
       setTimer(question.timer || 0);
       setIsTimerRunning(false);
+      setIsContentVisible(false);
     }
   };
 
@@ -87,8 +86,6 @@ const QuizSpielen = () => {
     }
   };
   
-  
-  
   const handleAnswerClick = (isCorrect) => {
     if (!selectedQuestion) {
       console.error("Selected question is null");
@@ -96,12 +93,10 @@ const QuizSpielen = () => {
     }
   
     let points = selectedQuestion.points;
-  
-    if (areOptionsOpened && openOptionsBehavior === "half") {
-      points = Math.floor(points / 2);
-    }
-  
     if (isCorrect) {
+      if (areOptionsOpened && openOptionsBehavior === "half") {
+        points = Math.floor(points / 2);
+      }
       setSpielerPunkte(prevPunkte => ({
         ...prevPunkte,
         [currentSpieler]: prevPunkte[currentSpieler] + points,
@@ -129,10 +124,8 @@ const QuizSpielen = () => {
     setSelectedQuestion(null);
     setTimer(0);
     setAreOptionsOpened(false);
+    setIsContentVisible(false);
   };
-  
-  
-  
 
   const handleTimerStart = () => {
     setIsTimerRunning(true);
@@ -167,7 +160,6 @@ const QuizSpielen = () => {
     }
   };
   
-
   if (!quizData) return <div>Lade Quiz...</div>;
 
   const categorizedQuestions = {};
@@ -191,7 +183,8 @@ const QuizSpielen = () => {
   const sortedPoints = Array.from(pointsSet).sort((a, b) => a - b);
 
   const toggleContentVisibility = () => {
-    setIsContentVisible((prev) => !prev);
+    setIsContentVisible(prev => !prev);
+    setAreOptionsOpened(prev => !prev);
     console.log(isContentVisible ? "Inhalt geschlossen" : "Inhalt geöffnet");
   };
 
@@ -351,7 +344,7 @@ const QuizSpielen = () => {
             </div>
 
             {selectedQuestion && (
-              <Modal className='quizModal' show={true} onHide={() => setSelectedQuestion(null)}>
+              <Modal className='quizModal' show={true} onHide={() => { setSelectedQuestion(null); setIsContentVisible(false); }}>
                 <Modal.Header className='modalHeader' closeButton>
                   <Modal.Title className='modalQuestion'>
                     <small>{selectedQuestion.category} - {selectedQuestion.points} Punkte</small>
@@ -360,49 +353,54 @@ const QuizSpielen = () => {
                 <Modal.Body className='modalBody'>
                   {selectedQuestion.question} <br />
                   <h5>Zeit verbleibend: {timer} Sekunden</h5>
-                    {!isTimerRunning && <Button className='timerButton' onClick={handleTimerStart}>Start Timer</Button>}
 
-                    <Button
-                      className='beantwortenButton richtigButton'
-                      onClick={() => handleAnswerClick(true)}
-                    >
-                      Richtig
+                  {!isTimerRunning && (
+                    <Button className='timerButton' onClick={handleTimerStart}>
+                      Start Timer
                     </Button>
+                  )}
 
-                    <Button
-                      className='beantwortenButton falschButton'
-                      onClick={() => handleAnswerClick(false)}
-                    >
-                      Falsch
-                    </Button>
+                  <Button
+                    className='beantwortenButton richtigButton'
+                    onClick={() => handleAnswerClick(true)}
+                  >
+                    Richtig
+                  </Button>
 
-                    
+                  <Button
+                    className='beantwortenButton falschButton'
+                    onClick={() => handleAnswerClick(false)}
+                  >
+                    Falsch
+                  </Button>
 
-                <Button onClick={toggleContentVisibility} variant="primary">
-                        {isContentVisible ? "Schließen" : "Antwortmöglichkeiten anzeigen"}
-                      </Button>
+                  <Button onClick={toggleContentVisibility} variant="primary">
+                    {isContentVisible ? "Schließen" : "Antwortmöglichkeiten anzeigen"}
+                  </Button>
 
-                      {isContentVisible && (
-                        <div className="mt-3">
-                          {shuffleOptions([selectedQuestion.answer, ...selectedQuestion.options]).map((option, index) => (
-                            <Button 
-                              key={index} 
-                              variant="outline-primary" 
-                              className="d-block mb-2" 
-                              onClick={() => handleAnswerClick(option === selectedQuestion.answer)}
-                            >
-                              {option}
-                            </Button>
-                          ))}
-                        </div>
+                  {isContentVisible && (
+                    <div className="mt-3">
+                      {shuffleOptions([selectedQuestion.answer, ...selectedQuestion.options]).map(
+                        (option, index) => (
+                          <Button
+                            key={index}
+                            variant="outline-primary"
+                            className="d-block mb-2"
+                            onClick={() => handleAnswerClick(option === selectedQuestion.answer)}
+                          >
+                            {option}
+                          </Button>
+                        )
                       )}
-
+                    </div>
+                  )}
                 </Modal.Body>
                 <Modal.Footer className='modalFooter'>
-                  
+
                 </Modal.Footer>
               </Modal>
             )}
+
           </div>
         </>
       )}
