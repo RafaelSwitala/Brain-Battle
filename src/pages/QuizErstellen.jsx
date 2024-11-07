@@ -17,6 +17,7 @@ const QuizErstellen = ({ show, onHide }) => {
   const [openOptionsBehavior, setOpenOptionsBehavior] = useState('none');
   const [creationStatus, setCreationStatus] = useState('');
   const [overwriteQuiz, setOverwriteQuiz] = useState(false);
+  const [showOverwriteDialog, setShowOverwriteDialog] = useState(false);
 
   const isQuiznameValid = (name) => {
     const regexQuizname = /^[a-zA-Z0-9_-]+$/;
@@ -106,12 +107,24 @@ const QuizErstellen = ({ show, onHide }) => {
     }
   };
 
-  const handleCreateJson = () => {
+
+
+  const handleCreateJson = async () => {
     if (!isQuiznameValid(quizName)) {
       alert("Der Quizname ist ungültig! Er darf keine Leerzeichen, Sonderzeichen oder Punkte enthalten und muss mindestens 3 Zeichen lang sein.");
       return;
     }
 
+    const nameExists = await checkQuizNameExists(quizName);
+
+    if (nameExists) {
+      setShowOverwriteDialog(true);
+    } else {
+      saveQuizData();
+    }
+  };
+
+  const saveQuizData = () => {
     const jsonData = {
       name: quizName,
       settings: {
@@ -127,7 +140,6 @@ const QuizErstellen = ({ show, onHide }) => {
         answer: q.answer,
         options: q.options
       }))
-
     };
 
     const fileName = `${quizName}.json`;
@@ -142,44 +154,72 @@ const QuizErstellen = ({ show, onHide }) => {
       .then(response => response.json())
       .then(data => {
         console.log(data.message);
+        setCreationStatus('Quiz erfolgreich gespeichert!');
       })
       .catch(error => {
         console.error('Fehler beim Speichern der Datei:', error);
         setCreationStatus('Fehler beim Speichern der Datei');
-        setCurrentPage(4);
       });
+  };
+
+  const handleOverwriteConfirm = () => {
+    setShowOverwriteDialog(false);
+    saveQuizData();
+  };
+
+  const handleRenameQuiz = () => {
+    setQuizName(''); 
+    setShowOverwriteDialog(false);
   };
 
   return (
     <Modal
-  className='quizModal'
-  show={show}
-  onHide={onHide}
-  size="xl"
-  aria-labelledby="contained-modal-title-vcenter"
-  centered
->
-  <Modal.Header className='modalHeader' closeButton>
-    <Modal.Title id="contained-modal-title-vcenter">
-      Neues Quiz Erstellen
-    </Modal.Title>
-  </Modal.Header>
-  <Modal.Body className='modalBody'>
-    {currentPage === 1 && (
+      className='quizModal'
+      show={show}
+      onHide={onHide}
+      size="xl"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+    <Modal.Header className='modalHeader' closeButton>
+      <Modal.Title id="contained-modal-title-vcenter">
+        Neues Quiz Erstellen
+      </Modal.Title>
+    </Modal.Header>
+
+      <Modal.Body className='modalBody'>
+        <Modal show={showOverwriteDialog} onHide={() => setShowOverwriteDialog(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Quizname existiert bereits</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Ein Quiz mit diesem Namen existiert bereits. Möchten Sie den Namen ändern oder das bestehende Quiz überschreiben?</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleRenameQuiz}>
+              Namen ändern
+            </Button>
+            <Button variant="primary" onClick={handleOverwriteConfirm}>
+              Überschreiben
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        {currentPage === 1 && (
       <>
-        <Form>
-          <Form.Group controlId="formQuizName">
-            <Form.Label className='modalText'>Name des Quizzes</Form.Label>
-            <Form.Control 
-              className={`modalInput ${isQuiznameValid(quizName) ? '' : 'is-invalid'}`}
-              type="text" 
-              placeholder="Gib den Namen des Quizzes ein"
-              value={quizName}
-              onChange={(e) => setQuizName(e.target.value)} 
-            />
-            { !isQuiznameValid(quizName) && <p className="error-text">Ungültiger Quizname!</p> }
-          </Form.Group>
-        </Form>
+          <Form>
+            <Form.Group controlId="formQuizName">
+              <Form.Label className='modalText'>Name des Quizzes</Form.Label>
+              <Form.Control 
+                className={`modalInput ${isQuiznameValid(quizName) ? '' : 'is-invalid'}`}
+                type="text" 
+                placeholder="Gib den Namen des Quizzes ein"
+                value={quizName}
+                onChange={(e) => setQuizName(e.target.value)} 
+              />
+              { !isQuiznameValid(quizName) && <p className="error-text">Ungültiger Quizname!</p> }
+            </Form.Group>
+          </Form>
 
         <h4 className='modalText'>Einstellungen</h4>
         <div className="quiz-settings numberCategories">
