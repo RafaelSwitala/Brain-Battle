@@ -1,0 +1,128 @@
+{
+  "name": "DesignAnpassungen",
+  "settings": {
+    "timer": 15,
+    "incorrectAnswerBehavior": "none",
+    "openOptionsBehavior": "full"
+  },
+  "categories": [
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "questions": [
+    {
+      "category": "1",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "1",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "1",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "1",
+      "points": 400,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "2",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "2",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "2",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "2",
+      "points": 400,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "3",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "3",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "3",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "3",
+      "points": 400,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "4",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "4",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "4",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "4",
+      "points": 400,
+      "question": "",
+      "answer": "",
+      "options": []
+    }
+  ]
+}

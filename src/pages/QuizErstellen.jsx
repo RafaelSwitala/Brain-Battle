@@ -209,7 +209,7 @@ const QuizErstellen = ({ show, onHide }) => {
         <div className="quiz-settings pointSteps">
           <h4 className='modalText'>Punkteschritte</h4>
           <Form.Select
-            className='modalInput'
+            className='modalInputPunkteschritte'
             value={pointStep}
             onChange={handlePointStepChange}
           >
@@ -223,7 +223,7 @@ const QuizErstellen = ({ show, onHide }) => {
             <option value={1000}>1000er Schritte</option>
           </Form.Select>
         </div>
-
+        <br />
         <Button className="button-1" onClick={generateQuestions}>
           Fragenfelder generieren
         </Button>
@@ -301,10 +301,11 @@ const QuizErstellen = ({ show, onHide }) => {
           ))}
         </div>
 
-        <Button onClick={() => setCurrentPage(3)}>Weiter zu Seite 3</Button>
         <Button className="button-secondary" onClick={() => setCurrentPage(1)}>
           Zurück zu Seite 1
         </Button>
+        <Button className="button-secondary weiterButton" onClick={() => setCurrentPage(3)}>Weiter zu Seite 3</Button>
+
       </>
     )}
 
@@ -339,23 +340,14 @@ const QuizErstellen = ({ show, onHide }) => {
           </Form.Select>
         </Form.Group>
 
-        <Button onClick={handleCreateJson}>Quiz erstellen</Button>
         <Button className="button-secondary" onClick={() => setCurrentPage(2)}>
           Zurück zu Seite 2
         </Button>
+        <Button className="button-secondary weiterButton" onClick={handleCreateJson}>Quiz erstellen</Button>
       </>
     )}
 
-    {currentPage === 4 && (
-      <>
-        {/* Seite 4: Status der Erstellung */}
-        <h4>{creationStatus}</h4>
-        <Button onClick={onHide}>Schließen</Button>
-        <Button className="button-secondary" onClick={() => setCurrentPage(3)}>
-          Zurück zu Seite 3
-        </Button>
-      </>
-    )}
+
   </Modal.Body>
 </Modal>
 

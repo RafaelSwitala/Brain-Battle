@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
-// import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import QuizErstellen from './pages/QuizErstellen';

@@ -1,0 +1,120 @@
+{
+  "name": "OhnePage4",
+  "settings": {
+    "timer": 15,
+    "incorrectAnswerBehavior": "minus",
+    "openOptionsBehavior": "half"
+  },
+  "categories": [
+    "11",
+    "222",
+    "34256236"
+  ],
+  "questions": [
+    {
+      "category": "11",
+      "points": 10,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "11",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "11",
+      "points": 30,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "11",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "11",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "222",
+      "points": 10,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "222",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "222",
+      "points": 30,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "222",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "222",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "34256236",
+      "points": 10,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "34256236",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "34256236",
+      "points": 30,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "34256236",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "34256236",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    }
+  ]
+}

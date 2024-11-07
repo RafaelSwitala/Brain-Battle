@@ -95,7 +95,7 @@
   margin: 10px 0;
   padding: 10px;
   color: white;
-  border: 3px solid var(--cream);
+  border: 2px solid var(--cream);
   background-color: var(--darkBlue);
   text-decoration: none;
   text-align: center;
@@ -107,7 +107,7 @@
 .button-2:hover,
 .link-container > Button:hover {
   background-color: var(--darkBlueHover);
-  border: 3px solid var(--white) !important;
+  border: 2px solid var(--white) !important;
 }
 
 .timerButton {
@@ -187,12 +187,20 @@
   width: 514px;
   margin-right: 20px;
   border: 3px solid var(--darkgrey);
-  background-color: var(--pattyGreen);
+  background-color: var(--darkBlueHover);
   border-radius: 20px;
   padding: 10px;
   font-size: 24px;
   color: white;
   margin-bottom: 25px;
+}
+
+.modalInputPunkteschritte {
+  background-color: var(--cream) !important;
+}
+
+.pointSteps {
+  margin-left: 270px;
 }
     
 .settings-label-h1 {
@@ -222,15 +230,29 @@
   background-color: var(--cream);
 }
 
-.question-number, .question-input, .options-container, .points-input {
+.question-number, 
+.question-input, 
+.options-container, 
+.points-input {
   margin-bottom: 10px;
 }
 
-.button-secondary, .button-remove {
+.button-secondary, 
+.button-remove {
   margin-top: 10px;
-  background-color: var(--pattyGreen) !important;
+  background-color: var(--darkBlue) !important;
   color: white !important;
   font-size: 20px !important;
+  border: 2px solid var(--darkBlue) !important;
+}
+
+.weiterButton {
+  margin-left: 700px;
+}
+
+.button-danger {
+  background-color: var(--red) !important;
+  border: 2px solid var(--darkBlue) !important;
 }
 
 /* Quiz Spielen */
