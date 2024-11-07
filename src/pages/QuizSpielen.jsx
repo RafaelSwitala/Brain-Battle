@@ -97,10 +97,17 @@ const QuizSpielen = () => {
       if (areOptionsOpened && openOptionsBehavior === "half") {
         points = Math.floor(points / 2);
       }
-      setSpielerPunkte(prevPunkte => ({
-        ...prevPunkte,
-        [currentSpieler]: prevPunkte[currentSpieler] + points,
-      }));
+      setSpielerPunkte(prevPunkte => {
+        const newPunkte = {
+          ...prevPunkte,
+          [currentSpieler]: prevPunkte[currentSpieler] + points,
+        };
+        const sortedSpieler = Object.entries(newPunkte)
+          .sort(([, a], [, b]) => b - a) 
+          .map(([spieler]) => spieler); 
+        setSpielerReihenfolge(sortedSpieler);
+        return newPunkte;
+      });
     } else {
       switch (incorrectAnswerBehavior) {
         case 'skip':
@@ -109,10 +116,17 @@ const QuizSpielen = () => {
           alert("Versuchen Sie es erneut!");
           return;
         case 'minus':
-          setSpielerPunkte(prevPunkte => ({
-            ...prevPunkte,
-            [currentSpieler]: Math.max(0, prevPunkte[currentSpieler] - points),
-          }));
+          setSpielerPunkte(prevPunkte => {
+            const newPunkte = {
+              ...prevPunkte,
+              [currentSpieler]: Math.max(0, prevPunkte[currentSpieler] - points),
+            };
+            const sortedSpieler = Object.entries(newPunkte)
+              .sort(([, a], [, b]) => b - a) 
+              .map(([spieler]) => spieler);
+            setSpielerReihenfolge(sortedSpieler);
+            return newPunkte;
+          });
           break;
         default:
           console.error("Unbekanntes Verhalten bei falscher Antwort");
@@ -126,6 +140,7 @@ const QuizSpielen = () => {
     setAreOptionsOpened(false);
     setIsContentVisible(false);
   };
+  
 
   const handleTimerStart = () => {
     setIsTimerRunning(true);
@@ -248,9 +263,11 @@ const QuizSpielen = () => {
                 ))}
               </tbody>
             </table>
-            <h4>Aktueller Spieler:
+            <h4 className="currentSpielerStyle">Aktueller Spieler:
               <br />
-               {currentSpieler}</h4>
+              {currentSpieler}
+            </h4>
+
 
                <div className='individuellePunkte'>
                 <Form.Group controlId="individuellePunkteSpieler">

@@ -1,0 +1,56 @@
+{
+  "name": "Hallo",
+  "settings": {
+    "timer": 45,
+    "incorrectAnswerBehavior": "minus",
+    "openOptionsBehavior": "half"
+  },
+  "categories": [
+    "Hallo333",
+    ""
+  ],
+  "questions": [
+    {
+      "category": "Hallo333",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Hallo333",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Hallo333",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    }
+  ]
+}
