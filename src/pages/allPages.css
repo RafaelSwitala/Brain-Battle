@@ -19,6 +19,8 @@
   overflow: hidden; 
 }
 
+
+
 .link-container {
   display: flex;
   flex-direction: column;
@@ -52,6 +54,21 @@
 .spalte7 {  width: 3%   !important; }
 .spalte8 {  width: 3%   !important; }
 
+.table>:not(caption)>*>* {
+  box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state) !important;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+  background-color: rgba(10, 5, 36, 0.927);
+}
+
+.table-striped>tbody>tr:nth-of-type(even)>* {
+  background-color: rgba(6, 5, 8, 0.927);
+}
+
+.quiz-table > thead > tr > th {
+  background-color: rgba(6, 5, 8, 0.927);
+}
 
 /* Button-Stile */
 .button-1 {
