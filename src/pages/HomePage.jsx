@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Button, Table } from 'react-bootstrap';
+import { Container, Row, Col, Button, Table, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import QuizErstellen from './QuizErstellen';
 
 const HomePage = () => {
   const [quizFiles, setQuizFiles] = useState([]);
   const [modalShow, setModalShow] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [quizToDelete, setQuizToDelete] = useState(null);
 
   useEffect(() => {
     const loadQuizFiles = async () => {
@@ -50,6 +52,26 @@ const HomePage = () => {
 
     loadQuizFiles();
   }, []);
+
+  const handleDeleteClick = (quizName) => {
+    setQuizToDelete(quizName);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDeleteQuiz = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/deleteQuiz/${quizToDelete}`, { method: 'DELETE' });
+      if (response.ok) {
+        setQuizFiles(prevFiles => prevFiles.filter(quiz => quiz.name !== quizToDelete));
+        setShowDeleteModal(false);
+        setQuizToDelete(null);
+      } else {
+        console.error('Error deleting quiz:', response.statusText);
+      }
+    } catch (error) {
+      console.error("Error deleting quiz:", error);
+    }
+  };
 
   return (
     <Container>
@@ -103,19 +125,33 @@ const HomePage = () => {
                     <td>{quiz.categoryCount}</td>
                     <td>{quiz.scoreSteps}</td>
                     <td className='bearbeitenIcon'></td>
-                    <td className='loeschenIcon'></td>
+                    <td className='loeschenIcon' onClick={() => handleDeleteClick(quiz.name)}></td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="7">Kein Quiz gefunden</td>
+                  <td colSpan="8">Kein Quiz gefunden</td>
                 </tr>
               )}
             </tbody>
-
           </Table>
         </Col>
       </Row>
+
+      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Quiz löschen</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Möchten Sie das Quiz "{quizToDelete}" wirklich löschen?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+            Abbrechen
+          </Button>
+          <Button variant="danger" onClick={confirmDeleteQuiz}>
+            Löschen
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

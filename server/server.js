@@ -7,6 +7,10 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 5000;
 
+app.use(cors({
+  origin: 'http://localhost:9000',
+}));
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -37,7 +41,7 @@ app.get('/api/spieler', (req, res) => {
 // Route zum Aktualisieren der Spieler
 app.post('/api/spieler', (req, res) => {
   console.log('POST /api/spieler aufgerufen');
-  const spielerList = req.body; // gesamte Spieler-Liste übernehmen
+  const spielerList = req.body;
   const filePath = path.join(__dirname, '../public/spieler.json');
 
   fs.writeFile(filePath, JSON.stringify(spielerList, null, 2), (writeErr) => {
@@ -94,10 +98,8 @@ app.get('/api/check-quiz-name/:name', (req, res) => {
 
   fs.access(filePath, fs.constants.F_OK, (err) => {
     if (err) {
-      // Datei existiert nicht
       res.json({ exists: false });
     } else {
-      // Datei existiert
       res.json({ exists: true });
     }
   });
@@ -156,6 +158,19 @@ app.get('/api/ergebnisse', (req, res) => {
   });
 });
 
+// Route zum Löschen eines Quiz
+app.delete('/api/deleteQuiz/:quizName', (req, res) => {
+  const { quizName } = req.params;
+  const filePath = path.join(__dirname, '../public/erstellteQuize', `${quizName}.json`);
+
+  fs.unlink(filePath, (err) => {
+    if (err) {
+      console.error('Fehler beim Löschen der Datei:', err);
+      return res.status(500).json({ error: 'Fehler beim Löschen des Quiz' });
+    }
+    res.status(200).json({ message: 'Quiz erfolgreich gelöscht' });
+  });
+});
 
 
 
