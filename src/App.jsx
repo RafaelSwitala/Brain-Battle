@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
-import Header from './components/Header';
+// import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import QuizErstellen from './pages/QuizErstellen';
@@ -19,9 +19,6 @@ const App = () => {
     <div className="app-container">
       <div className='navBar-container'>
         <NavBar />
-      </div>
-      <div className='header-container'>
-        <Header />
       </div>
       <div className='body-container'>
         <div className='mainPage-container'>

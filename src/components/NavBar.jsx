@@ -9,20 +9,7 @@ const NavBar = () => {
       <Link to="/">
         <div className="navbar-logo"></div>
       </Link>
-      <div className="navbar-buttons-container">
-        <Link to="/">
-          <button className="navbar-buttons">Button1</button>
-        </Link>
-        <Link to="/">
-          <button className="navbar-buttons">Button2</button>
-        </Link>
-        <Link to="/">
-          <button className="navbar-buttons">Button3</button>
-        </Link>
-        <Link to="/">
-          <button className="navbar-buttons">Einstellungen</button>
-        </Link>
-      </div>
+      <h2 className='navbarTitle'>Tab It Right, Bone It Out</h2>
     </nav>
   );
 };

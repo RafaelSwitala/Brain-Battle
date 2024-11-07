@@ -1,18 +1,15 @@
-/* .navBar-container {
-  height: 100px;
-} */
-
 .navbar {
   display: flex;
   align-items: center;
   height: 120px;
   padding-left: 30px;
   justify-content: space-between;
+  color: var(--cream);
 }
 
 .navbar-logo {
   margin-left: 10px !important;
-  width: 230px;
+  width: 240px;
   height: 80px;
   background-image: url('../img/LogoDunkelNavBar.png');
   background-size: contain;
@@ -22,24 +19,8 @@
   margin-top: -20px;
 }
 
-.navbar-buttons-container {
-  display: flex;
-  align-items: center;
-  margin-right: 30px;
-}
-
-.navbar-buttons {
-  background-color: #e6e6dd;
-  height: 60px;
-  width: 190px;
-  margin-right: 20px; 
-  margin-top: -20px; 
-  cursor: pointer;
-  border: none;
-  border-radius: 15px;
-  transition: background-color 0.3s ease;
-}
-
-.navbar-buttons:hover {
-  background-color: #959350;
+.navbarTitle {
+  margin-right: 60px;
+  margin-bottom: 25px;
+  font-size: 50px;
 }

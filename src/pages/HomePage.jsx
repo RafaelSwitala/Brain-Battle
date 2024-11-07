@@ -54,12 +54,6 @@ const HomePage = () => {
   return (
     <Container>
       <Row>
-        <Col>
-          <h3>Home Page Content</h3>
-          <p>Text</p>
-        </Col>
-      </Row>
-      <Row>
         <Col xs={12} md={2} className="left-column">
           <h2>Dashboard</h2>
           <div className="link-container">
