@@ -7,6 +7,8 @@
     --milenaFarbe: #852479;
     --red: #8c1818e0;
     --pattyGreen: #155b55b3;
+    --darkBlue: #0a0524ec;
+    --darkBlueHover: #1e1062ec;
 }
 /* Home Page */
 .left-column, .right-column {
@@ -57,7 +59,7 @@
 }
 
 .table-striped>tbody>tr:nth-of-type(odd)>* {
-  background-color: rgba(10, 5, 36, 0.927);
+  background-color: var(--darkBlue);
 }
 
 .table-striped>tbody>tr:nth-of-type(even)>* {
@@ -88,19 +90,24 @@
   background-color: #ffffffbb !important;
 }
 
-.button-2 {
+.button-2,
+.link-container > Button {
   margin: 10px 0;
   padding: 10px;
   color: white;
-  background-color: #007BFF;
+  border: 3px solid var(--cream);
+  background-color: var(--darkBlue);
   text-decoration: none;
   text-align: center;
   border-radius: 5px;
   transition: background-color 0.3s;
+  font-size: 20px;
 }
 
-.button-2:hover {
-  background-color: #0056b3;
+.button-2:hover,
+.link-container > Button:hover {
+  background-color: var(--darkBlueHover);
+  border: 3px solid var(--white) !important;
 }
 
 .timerButton {
