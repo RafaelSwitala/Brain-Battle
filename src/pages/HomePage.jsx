@@ -114,15 +114,35 @@ const HomePage = () => {
                 quizFiles.map((quiz, index) => (
                   <tr key={index} className="quiz-row">
                     <td>
-                      <Link to={`/QuizSpielen/${quiz.name}`} className="quiz-link">
+                      <Link to={`/QuizSpielen/${quiz.name}`} className="quiz-link" style={{ display: 'block', width: '100%', height: '100%' }}>
                         {quiz.name}
                       </Link>
                     </td>
-                    <td>{quiz.timerLength} Sekunden</td>
-                    <td>{quiz.wrongAnswerBehavior}</td>
-                    <td>{quiz.openAnswerBehavior}</td>
-                    <td>{quiz.categoryCount}</td>
-                    <td>{quiz.scoreSteps}</td>
+                    <td>
+                      <Link to={`/QuizSpielen/${quiz.name}`} className="quiz-link" style={{ display: 'block', width: '100%', height: '100%' }}>
+                        {quiz.timerLength} Sekunden
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/QuizSpielen/${quiz.name}`} className="quiz-link" style={{ display: 'block', width: '100%', height: '100%' }}>
+                        {quiz.wrongAnswerBehavior}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/QuizSpielen/${quiz.name}`} className="quiz-link" style={{ display: 'block', width: '100%', height: '100%' }}>
+                        {quiz.openAnswerBehavior}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/QuizSpielen/${quiz.name}`} className="quiz-link" style={{ display: 'block', width: '100%', height: '100%' }}>
+                        {quiz.categoryCount}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/QuizSpielen/${quiz.name}`} className="quiz-link" style={{ display: 'block', width: '100%', height: '100%' }}>
+                        {quiz.scoreSteps}
+                      </Link>
+                    </td>
                     <td className='bearbeitenIcon'></td>
                     <td className='loeschenIcon' onClick={() => handleDeleteClick(quiz.name)}></td>
                   </tr>
@@ -133,6 +153,7 @@ const HomePage = () => {
                 </tr>
               )}
             </tbody>
+
           </Table>
         </Col>
       </Row>
