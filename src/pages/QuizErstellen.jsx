@@ -16,7 +16,6 @@ const QuizErstellen = ({ show, onHide }) => {
   const [incorrectAnswerBehavior, setIncorrectAnswerBehavior] = useState('none');
   const [openOptionsBehavior, setOpenOptionsBehavior] = useState('none');
   const [creationStatus, setCreationStatus] = useState('');
-  const [overwriteQuiz, setOverwriteQuiz] = useState(false);
   const [showOverwriteDialog, setShowOverwriteDialog] = useState(false);
 
   const isQuiznameValid = (name) => {
@@ -368,7 +367,6 @@ const QuizErstellen = ({ show, onHide }) => {
             <option value="skip">Keine Aktion - Frage wird geschlossen</option>
             <option value="retry">Erneut versuchen - 2. Versuch</option>
             <option value="minus">Minuspunkte - Punktezahl wird abziehen</option>
-            <option value="buzzer">Buzzer - Andere Spieler dürfen antworten</option>
           </Form.Select>
         </Form.Group>
 

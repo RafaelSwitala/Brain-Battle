@@ -79,7 +79,6 @@ const HomePage = () => {
         <Col xs={12} md={2} className="left-column">
           <h2>Dashboard</h2>
           <div className="link-container">
-            <Link to="/QuizBearbeiten" className="button-2">Quiz Bearbeiten</Link>
             <Link to="/Spielerverwaltung" className="button-2">Spielerverwaltung</Link>
             <Link to="/Anleitungen" className="button-2">Anleitungen</Link>
             <Link to="/Ergebnisse" className="button-2">Quiz Ergebnisse</Link>
