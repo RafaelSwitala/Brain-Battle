@@ -172,6 +172,33 @@ app.delete('/api/deleteQuiz/:quizName', (req, res) => {
   });
 });
 
+// Route zum Löschen eines Quiz-Ergebnisses
+app.delete('/api/deleteQuizResult/:quizResultName', (req, res) => {
+  const { quizResultName } = req.params;
+  const filePath = path.resolve(__dirname, '../public/ergebnisse', `${quizResultName}.json`);
+
+  console.log("Dateipfad zum Löschen:", filePath);
+
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      console.error("Die Datei existiert nicht oder ist nicht zugreifbar:", err);
+      return res.status(404).json({ error: "Datei nicht gefunden" });
+    }
+
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error("Fehler beim Löschen der Datei:", err);
+        return res.status(500).json({ error: "Fehler beim Löschen des Quiz-Ergebnisses" });
+      }
+      res.status(200).json({ message: "Quiz-Ergebnisse erfolgreich gelöscht" });
+    });
+  });
+});
+
+
+
+
+
 
 
 // Server starten
