@@ -137,11 +137,14 @@ const HomePage = () => {
         </Col>
       </Row>
 
-      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
-        <Modal.Header closeButton>
+      <Modal 
+        className='loeschenModal'
+        show={showDeleteModal} 
+        onHide={() => setShowDeleteModal(false)}>
+        <Modal.Header className='loeschenModalHeader' closeButton>
           <Modal.Title>Quiz löschen</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Möchten Sie das Quiz "{quizToDelete}" wirklich löschen?</Modal.Body>
+        <Modal.Body className='loeschenModalBody'>Möchtest Du das Quiz "{quizToDelete}" wirklich löschen?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
             Abbrechen

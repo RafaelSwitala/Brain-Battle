@@ -10,6 +10,7 @@
     --darkBlue: #0a0524ec;
     --darkBlueHover: #1e1062ec;
 }
+
 /* Home Page */
 .left-column, .right-column {
   background-color: var(--darkgrey);
@@ -69,6 +70,44 @@
 .quiz-table > thead > tr > th {
   background-color: rgba(6, 5, 8, 0.927);
 }
+
+.loeschenModal .modal-content {
+  border: 8px solid red !important;
+  border-radius: 8px !important;
+  width: 500px !important;
+  height: 200px !important;
+  background-color: var(--darkBlueHover);
+  margin-top: 300px;
+}
+
+.loeschenModal {
+  background-color: rgba(9, 6, 40, 0.369);
+}
+
+.loeschenModalHeader {
+  background-color: var(--darkBlue); 
+  color: var(--cream);
+  border-bottom: none;
+}
+
+.loeschenModalBody {
+  color: var(--cream);
+}
+
+.loeschenModal .modal-footer {
+  border-top: none;
+}
+
+.loeschenModal .btn-secondary {
+  background-color: gray;
+  border: none;
+}
+
+.loeschenModal .btn-danger {
+  background-color: darkred;
+  border: none;
+}
+
 
 /* Button-Stile */
 .button-1 {
