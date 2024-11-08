@@ -23,12 +23,6 @@ const Anleitungen = () => {
         title="Quiz Erstellen">
         Anleitung zum Erstellen, Bearbeiten und Löschen eines Quizzes
       </Tab>
-      <Tab 
-        className='anleitungTab'
-        eventKey="mobileConnection" 
-        title="Verbindung mit Mobilgeräten">
-        Auf diese Art und Weise lässt sich ein Handy mit der App verbinden
-      </Tab>
     </Tabs>
     </div>
   );

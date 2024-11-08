@@ -105,8 +105,8 @@ const HomePage = () => {
                 <th className='spalte4'>Antwortoptionen</th>
                 <th className='spalte5'>Kategorien</th>
                 <th className='spalte6'>Level</th>
-                <th className='spalte7'>B</th>
-                <th className='spalte8'>L</th>
+                <th className='spalte7'></th>
+                <th className='spalte8'></th>
               </tr>
             </thead>
             <tbody>
