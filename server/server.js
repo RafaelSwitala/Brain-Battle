@@ -172,6 +172,20 @@ app.delete('/api/deleteQuiz/:quizName', (req, res) => {
   });
 });
 
+// Route zum Bearbeiten eines Quiz
+app.edit('/api/editQuiz/:quizName', (req, res) => {
+  const { quizName } = req.params;
+  const filePath = path.join(__dirname, '../public/erstellteQuize', `${quizName}.json`);
+
+  fs.unlink(filePath, (err) => {
+    if (err) {
+      console.error('Fehler beim Bearbeiten der Datei:', err);
+      return res.status(500).json({ error: 'Fehler beim Bearbeiten des Quiz' });
+    }
+    res.status(200).json({ message: 'Quiz erfolgreich aktualisiert' });
+  });
+});
+
 // Route zum Löschen eines Quiz-Ergebnisses
 app.delete('/api/deleteQuizResult/:quizResultName', (req, res) => {
   const { quizResultName } = req.params;
