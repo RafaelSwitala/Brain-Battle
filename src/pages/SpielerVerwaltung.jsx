@@ -75,9 +75,9 @@ const SpielerVerwaltung = () => {
   }, []);
 
   return (
-    <div>
+    <div className='spielerVerwaltungContainer'>
       <h3>Spielerverwaltung</h3>
-      <div className='mainPage-container'>
+      <div className='mainPage-container mainPage-container-spielerVerwaltung'>
         <input
           type="text"
           value={spielerName}

@@ -499,18 +499,42 @@
 
 
 /* Spielerverwaltung */
+.spielerVerwaltungContainer {
+  padding: 10px;
+  margin-top: 50px;
+  color: var(--cream);
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: var(--darkgrey);
+  border-radius: 10px;
+}
+
+.mainPage-container-spielerVerwaltung {
+  background-color: var(--pattyGreen) !important;
+  overflow: auto !important;
+  height: 650px !important;
+}
+
+.mainPage-container-spielerVerwaltung > button {
+  margin-left: 20px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: var(--cream);
+}
+
 input[type="text"] {
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 5px;
   margin-bottom: 10px;
-  width: calc(100% - 22px);
+  width: calc(30%);
 }
 
 ul {
   list-style-type: none;
   padding: 0;
   margin: 0; 
+  width: 50%;
 }
 
 li {
@@ -518,7 +542,6 @@ li {
   color: var(--darkgrey);
   font-weight: 500;
   padding: 10px;
-  /* margin: 5px 0; */
   margin-bottom: 5px;
   margin-right: auto;
   margin-left: auto;
@@ -539,8 +562,8 @@ li span {
 }
 
 li button {
-  background-color: rgb(190, 22, 22);
-  color: black;
+  background-color: var(--red);
+  color: var(--cream);
 }
 
 
