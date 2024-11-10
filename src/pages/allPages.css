@@ -5,7 +5,7 @@
     --cream: #e6e6dd;
     --gold: #959350;
     --milenaFarbe: #852479;
-    --red: #8c1818e0;
+    --red: #760606;
     --pattyGreen: #155b55b3;
     --darkBlue: #0a0524ec;
     --darkBlueHover: #1e1062ec;
@@ -514,15 +514,19 @@ ul {
 }
 
 li {
-  background-color: var(--milenaFarbe);
-  color: white;
+  background-color: var(--cream);
+  color: var(--darkgrey);
+  font-weight: 500;
   padding: 10px;
-  margin: 5px 0;
+  /* margin: 5px 0; */
+  margin-bottom: 5px;
+  margin-right: auto;
+  margin-left: auto;
   border-radius: 5px; 
   display: flex; 
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 95%;
 }
 
 li span {
@@ -577,12 +581,57 @@ li button {
   background-image: url('../img/icons/mull.png');
 }
 
-
-/* .bearbeitenIcon:hover, .loeschenIcon:hover {
-  opacity: 0.7;
+.quizErgebnisseContainer {
+  width: 1400px;
+  height: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: auto;
 }
 
-.quiz-row td {
-  vertical-align: middle;
-  padding: 10px;
-} */
+.quizErgebnisseHeader,
+.accordion-button {
+  background-color: var(--darkBlue) !important;
+  color: white !important;
+}
+
+.quizErgebnisseHeader {
+  display: flex;
+  align-items: center;
+}
+
+.quizErgebnisseBody {
+  background-color: var(--red) !important;
+  color: white;
+  border-left: 30px solid var(--darkBlue);
+  border-right: 30px solid var(--darkBlue);
+}
+
+.quizErgebnisseBody > #text {
+  border: 2px solid yellow !important;
+}
+
+.quizErgebnisseBody > p,
+.quizErgebnisseBody > h4 {
+  padding-left: 65px !important;
+}
+
+.fileName {
+  width: 1260px;
+  height: 30px;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 10px;
+}
+
+.loeschenIconEnde {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.accordion-button::after {
+  background-color: var(--cream);
+  border-radius: 4px;
+  padding: 6px !important;
+}

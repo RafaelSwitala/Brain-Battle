@@ -50,20 +50,24 @@ const Ergebnisse = () => {
     <div>
       <h3>Ergebnisse</h3>
       <div className='mainPage-container'>
-        <Accordion defaultActiveKey="0">
+        <Accordion className='quizErgebnisseContainer' defaultActiveKey="0">
           {quizResults.map((result, index) => (
             <Accordion.Item eventKey={index.toString()} key={index}>
-              <Accordion.Header>
-                {result.fileName.replace('.json', '')} 
+              <Accordion.Header className="quizErgebnisseHeader">
+                <span className="fileName">
+                  {result.fileName.replace('.json', '')}
+                </span>
                 <span 
-                  className='loeschenIcon' 
+                  className="loeschenIcon loeschenIconEnde" 
                   onClick={(e) => {
                     e.stopPropagation();
                     handleDeleteClick(result.fileName);
                   }}>
+                  
                 </span>
               </Accordion.Header>
-              <Accordion.Body>
+
+              <Accordion.Body className='quizErgebnisseBody'>
                 <p><strong>Datum:</strong> {result.data.date}</p>
                 <p><strong>Uhrzeit:</strong> {result.data.time}</p>
                 <h4>Punkte:</h4>
