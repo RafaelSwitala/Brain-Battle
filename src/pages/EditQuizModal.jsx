@@ -9,13 +9,12 @@ const EditQuizModal = ({ show, onHide, quizToEdit, quizFiles, setQuizFiles }) =>
     if (quizToEdit) {
       const selectedQuiz = quizFiles.find((quiz) => quiz.name === quizToEdit);
       if (selectedQuiz) {
-        // Sicherstellen, dass categories und questions immer Arrays sind
         setQuizData(selectedQuiz);
         setEditedData({
           ...selectedQuiz,
           settings: selectedQuiz.settings || { timer: 0, incorrectAnswerBehavior: 'retry', openOptionsBehavior: 'half' },
-          categories: selectedQuiz.categories || [], // Fallback zu leeren Array
-          questions: selectedQuiz.questions || [], // Fallback zu leeren Array
+          categories: selectedQuiz.categories || [],
+          questions: selectedQuiz.questions || [],
         });
       }
     }
@@ -64,7 +63,6 @@ const EditQuizModal = ({ show, onHide, quizToEdit, quizFiles, setQuizFiles }) =>
     }
   };
 
-  // Sicherheitsprüfung für den Fall, dass quizData oder editedData nicht verfügbar sind
   if (!quizData || !editedData) return null;
 
   return (
@@ -74,13 +72,22 @@ const EditQuizModal = ({ show, onHide, quizToEdit, quizFiles, setQuizFiles }) =>
       </Modal.Header>
       <Modal.Body>
         <Form>
+          <Form.Group controlId="quizName">
+            <Form.Label>Quizname</Form.Label>
+            <Form.Control
+              type="text"
+              value={quizToEdit}
+              readOnly
+            />
+          </Form.Group>
+
           <Form.Group controlId="timer">
             <Form.Label>Timer (in Sekunden)</Form.Label>
             <Form.Control
               type="number"
               name="timer"
-              value={editedData.settings.timer || 0}  // Default-Wert für timer setzen
-              onChange={handleInputChange}
+              value={editedData.settings.timer || 0}
+              readOnly
             />
           </Form.Group>
 
@@ -89,12 +96,12 @@ const EditQuizModal = ({ show, onHide, quizToEdit, quizFiles, setQuizFiles }) =>
             <Form.Control
               as="select"
               name="incorrectAnswerBehavior"
-              value={editedData.settings.incorrectAnswerBehavior || 'retry'}  // Default-Wert für incorrectAnswerBehavior setzen
+              value={editedData.settings.incorrectAnswerBehavior || 'retry'}
               onChange={handleInputChange}
             >
-              <option value="retry">Retry</option>
-              <option value="skip">Skip</option>
-              <option value="end">End Quiz</option>
+              <option value="retry">Frage wird wiederholt</option>
+              <option value="skip">Punktzahl wird nicht abgezogen</option>
+              <option value="minus">Punktzahl wird abgezogen</option>
             </Form.Control>
           </Form.Group>
 
@@ -103,11 +110,11 @@ const EditQuizModal = ({ show, onHide, quizToEdit, quizFiles, setQuizFiles }) =>
             <Form.Control
               as="select"
               name="openOptionsBehavior"
-              value={editedData.settings.openOptionsBehavior || 'half'}  // Default-Wert für openOptionsBehavior setzen
+              value={editedData.settings.openOptionsBehavior || 'half'}
               onChange={handleInputChange}
             >
-              <option value="half">Half</option>
-              <option value="all">All</option>
+              <option value="half">Halbe Punktzahl</option>
+              <option value="full">Volle Punktzahl</option>
             </Form.Control>
           </Form.Group>
 
@@ -133,14 +140,7 @@ const EditQuizModal = ({ show, onHide, quizToEdit, quizFiles, setQuizFiles }) =>
                   <Form.Control
                     type="text"
                     value={question.question}
-                    onChange={(e) => {
-                      const updatedQuestions = [...editedData.questions];
-                      updatedQuestions[index].question = e.target.value;
-                      setEditedData((prevData) => ({
-                        ...prevData,
-                        questions: updatedQuestions,
-                      }));
-                    }}
+                    readOnly
                   />
                 </Form.Group>
                 <Form.Group>
@@ -148,14 +148,15 @@ const EditQuizModal = ({ show, onHide, quizToEdit, quizFiles, setQuizFiles }) =>
                   <Form.Control
                     type="text"
                     value={question.answer}
-                    onChange={(e) => {
-                      const updatedQuestions = [...editedData.questions];
-                      updatedQuestions[index].answer = e.target.value;
-                      setEditedData((prevData) => ({
-                        ...prevData,
-                        questions: updatedQuestions,
-                      }));
-                    }}
+                    readOnly
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Antwortoptionen</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={question.options.join(", ")}
+                    readOnly
                   />
                 </Form.Group>
               </div>
