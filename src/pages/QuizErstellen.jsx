@@ -171,6 +171,10 @@ const QuizErstellen = ({ show, onHide }) => {
     setShowOverwriteDialog(false);
   };
 
+  const areAllCategoriesFilled = () => {
+    return categories.every(category => category.trim() !== '');
+  };  
+
   return (
     <Modal
       className='quizModal'
@@ -273,6 +277,7 @@ const QuizErstellen = ({ show, onHide }) => {
       <>
         <div className="category-inputs">
           <h4>Kategorien eingeben:</h4>
+          <p>Alle Kategorien müssen benannt werden!</p>
           {categories.map((category, index) => (
             <Form.Group key={index} controlId={`category-${index}`}>
               <Form.Label>Kategorie {index + 1}</Form.Label>
@@ -343,7 +348,14 @@ const QuizErstellen = ({ show, onHide }) => {
         <Button className="button-secondary" onClick={() => setCurrentPage(1)}>
           Zurück zu Seite 1
         </Button>
-        <Button className="button-secondary weiterButton" onClick={() => setCurrentPage(3)}>Weiter zu Seite 3</Button>
+        <Button 
+          className="button-secondary weiterButton" 
+          onClick={() => setCurrentPage(3)}
+          disabled={!areAllCategoriesFilled()}
+        >
+          Weiter zu Seite 3
+        </Button>
+
 
       </>
     )}

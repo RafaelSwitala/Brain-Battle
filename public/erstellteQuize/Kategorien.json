@@ -1,0 +1,192 @@
+{
+  "name": "Kategorien",
+  "settings": {
+    "timer": 15,
+    "incorrectAnswerBehavior": "retry",
+    "openOptionsBehavior": "half"
+  },
+  "categories": [
+    "Mathematik",
+    "Hauptstädte",
+    "Musik",
+    "ddf",
+    "5"
+  ],
+  "questions": [
+    {
+      "category": "Mathematik",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Mathematik",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Mathematik",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Mathematik",
+      "points": 80,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Mathematik",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Hauptstädte",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Hauptstädte",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Hauptstädte",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Hauptstädte",
+      "points": 80,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Hauptstädte",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Musik",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Musik",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Musik",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Musik",
+      "points": 80,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Musik",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ddf",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ddf",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ddf",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ddf",
+      "points": 80,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ddf",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "5",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "5",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "5",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "5",
+      "points": 80,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "5",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    }
+  ]
+}
