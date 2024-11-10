@@ -127,7 +127,6 @@ const HomePage = () => {
                 <th className='spalte5'>Kategorien</th>
                 <th className='spalte6'>Level</th>
                 <th className='spalte7'></th>
-                <th className='spalte8'></th>
               </tr>
             </thead>
             <tbody>
@@ -164,7 +163,6 @@ const HomePage = () => {
                         {quiz.scoreSteps}
                       </Link>
                     </td>
-                    <td className='bearbeitenIcon' onClick={() => handleEditClick(quiz.name)}></td>
                     <td className='loeschenIcon' onClick={() => handleDeleteClick(quiz.name)}></td>
                   </tr>
                 ))
