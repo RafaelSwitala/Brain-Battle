@@ -116,7 +116,7 @@ const HomePage = () => {
         </Col>
 
         <Col xs={12} md={10} className="right-column">
-          <h2>Quiz spielen</h2>
+          <h2>Quiz Übersicht</h2>
           <Table striped bordered hover variant="dark" className="quiz-table">
             <thead>
               <tr>

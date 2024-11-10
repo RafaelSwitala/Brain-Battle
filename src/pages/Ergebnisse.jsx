@@ -58,7 +58,7 @@ const Ergebnisse = () => {
                 <span 
                   className='loeschenIcon' 
                   onClick={(e) => {
-                    e.stopPropagation(); // Verhindert das Öffnen des Accordions beim Klicken auf das Löschen-Icon
+                    e.stopPropagation();
                     handleDeleteClick(result.fileName);
                   }}>
                 </span>
