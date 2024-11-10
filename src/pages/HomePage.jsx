@@ -8,6 +8,8 @@ const HomePage = () => {
   const [modalShow, setModalShow] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [quizToDelete, setQuizToDelete] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [quizToEdit, setQuizToEdit] = useState(null);
 
   useEffect(() => {
     const loadQuizFiles = async () => {
@@ -33,7 +35,6 @@ const HomePage = () => {
                 wrongAnswerBehavior: quizData.settings?.incorrectAnswerBehavior || 'N/A',
                 openAnswerBehavior: quizData.settings?.openOptionsBehavior || 'N/A',
                 categoryCount: quizData.categories?.length || 0,
-                difficultyLevels: new Set(quizData.questions.map(q => q.points)).size,
                 scoreSteps: [...new Set(quizData.questions.map(q => q.points))].sort((a, b) => a - b).join(', ')
               };
             }
@@ -58,6 +59,11 @@ const HomePage = () => {
     setShowDeleteModal(true);
   };
 
+  const handleEditClick = (quizName) => {
+    setQuizToEdit(quizName);
+    setShowEditModal(true);
+  };
+
   const confirmDeleteQuiz = async () => {
     try {
       const response = await fetch(`http://localhost:5000/api/deleteQuiz/${quizToDelete}`, { method: 'DELETE' });
@@ -73,13 +79,27 @@ const HomePage = () => {
     }
   };
 
+  const confirmEditQuiz = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/editQuiz/${quizToEdit}`, { method: 'POST' });
+      if (response.ok) {
+        setQuizFiles(prevFiles => prevFiles.filter(quiz => quiz.name !== quizToEdit));
+        setShowEditModal(false);
+        setQuizToEdit(null);
+      } else {
+        console.error('Error editing quiz:', response.statusText);
+      }
+    } catch (error) {
+      console.error("Error editing quiz:", error);
+    }
+  };
+
   return (
     <Container>
       <Row>
         <Col xs={12} md={2} className="left-column">
           <h2>Dashboard</h2>
           <div className="link-container">
-            <Link to="/QuizBearbeiten" className="button-2">Quiz Bearbeiten</Link>
             <Link to="/Spielerverwaltung" className="button-2">Spielerverwaltung</Link>
             <Link to="/Anleitungen" className="button-2">Anleitungen</Link>
             <Link to="/Ergebnisse" className="button-2">Quiz Ergebnisse</Link>
@@ -96,7 +116,7 @@ const HomePage = () => {
         </Col>
 
         <Col xs={12} md={10} className="right-column">
-          <h2>Quiz spielen</h2>
+          <h2>Quiz Übersicht</h2>
           <Table striped bordered hover variant="dark" className="quiz-table">
             <thead>
               <tr>
@@ -106,8 +126,7 @@ const HomePage = () => {
                 <th className='spalte4'>Antwortoptionen</th>
                 <th className='spalte5'>Kategorien</th>
                 <th className='spalte6'>Level</th>
-                <th className='spalte7'>B</th>
-                <th className='spalte8'>L</th>
+                <th className='spalte7'></th>
               </tr>
             </thead>
             <tbody>
@@ -115,16 +134,35 @@ const HomePage = () => {
                 quizFiles.map((quiz, index) => (
                   <tr key={index} className="quiz-row">
                     <td>
-                      <Link to={`/QuizSpielen/${quiz.name}`} className="quiz-link">
+                      <Link to={`/QuizSpielen/${quiz.name}`} className="quiz-link" style={{ display: 'block', width: '100%', height: '100%' }}>
                         {quiz.name}
                       </Link>
                     </td>
-                    <td>{quiz.timerLength} Sekunden</td>
-                    <td>{quiz.wrongAnswerBehavior}</td>
-                    <td>{quiz.openAnswerBehavior}</td>
-                    <td>{quiz.categoryCount}</td>
-                    <td>{quiz.scoreSteps}</td>
-                    <td className='bearbeitenIcon'></td>
+                    <td>
+                      <Link to={`/QuizSpielen/${quiz.name}`} className="quiz-link" style={{ display: 'block', width: '100%', height: '100%' }}>
+                        {quiz.timerLength} Sekunden
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/QuizSpielen/${quiz.name}`} className="quiz-link" style={{ display: 'block', width: '100%', height: '100%' }}>
+                        {quiz.wrongAnswerBehavior}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/QuizSpielen/${quiz.name}`} className="quiz-link" style={{ display: 'block', width: '100%', height: '100%' }}>
+                        {quiz.openAnswerBehavior}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/QuizSpielen/${quiz.name}`} className="quiz-link" style={{ display: 'block', width: '100%', height: '100%' }}>
+                        {quiz.categoryCount}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/QuizSpielen/${quiz.name}`} className="quiz-link" style={{ display: 'block', width: '100%', height: '100%' }}>
+                        {quiz.scoreSteps}
+                      </Link>
+                    </td>
                     <td className='loeschenIcon' onClick={() => handleDeleteClick(quiz.name)}></td>
                   </tr>
                 ))
@@ -134,21 +172,45 @@ const HomePage = () => {
                 </tr>
               )}
             </tbody>
+
           </Table>
         </Col>
       </Row>
 
-      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
-        <Modal.Header closeButton>
+      <Modal 
+        className='loeschenModal'
+        show={showDeleteModal} 
+        onHide={() => setShowDeleteModal(false)}>
+        <Modal.Header className='loeschenModalHeader' closeButton>
           <Modal.Title>Quiz löschen</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Möchten Sie das Quiz "{quizToDelete}" wirklich löschen?</Modal.Body>
+        <Modal.Body className='loeschenModalBody'>Möchtest Du das Quiz "{quizToDelete}" wirklich löschen?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
             Abbrechen
           </Button>
           <Button variant="danger" onClick={confirmDeleteQuiz}>
             Löschen
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal 
+        className='bearbeitenModal'
+        show={showEditModal} 
+        onHide={() => setShowEditModal(false)}>
+        <Modal.Header className='editModalHeader' closeButton>
+          <Modal.Title>Quiz: "{quizToEdit}" bearbeiten</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className='editModalBody'>
+          
+          </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowEditModal(false)}>
+            Abbrechen
+          </Button>
+          <Button variant="danger" onClick={confirmEditQuiz}>
+            Bearbeiten
           </Button>
         </Modal.Footer>
       </Modal>

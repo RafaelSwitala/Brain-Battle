@@ -5,11 +5,12 @@
     --cream: #e6e6dd;
     --gold: #959350;
     --milenaFarbe: #852479;
-    --red: #8c1818e0;
+    --red: #760606;
     --pattyGreen: #155b55b3;
     --darkBlue: #0a0524ec;
     --darkBlueHover: #1e1062ec;
 }
+
 /* Home Page */
 .left-column, .right-column {
   background-color: var(--darkgrey);
@@ -69,6 +70,49 @@
 .quiz-table > thead > tr > th {
   background-color: rgba(6, 5, 8, 0.927);
 }
+
+.loeschenModal .modal-content {
+  border: 8px solid red !important;
+  border-radius: 8px !important;
+  width: 500px !important;
+  height: 200px !important;
+  background-color: var(--darkBlueHover);
+  margin-top: 300px;
+}
+
+.loeschenModal {
+  background-color: rgba(9, 6, 40, 0.369);
+}
+
+.loeschenModalHeader {
+  background-color: var(--darkBlue); 
+  color: var(--cream);
+  border-bottom: none;
+}
+
+.loeschenModalBody {
+  color: var(--cream);
+}
+
+.loeschenModal .modal-footer {
+  border-top: none;
+}
+
+.loeschenModal .btn-secondary {
+  background-color: gray;
+  border: none;
+}
+
+.loeschenModal .btn-danger {
+  background-color: darkred;
+  border: none;
+}
+
+.quiz-row:hover {
+  background-color: rgb(255, 255, 255) !important;
+  --bs-table-hover-bg: none;
+}
+
 
 /* Button-Stile */
 .button-1 {
@@ -264,13 +308,76 @@
 .quizSpielenQuiz {
   display: inline-block;
   padding: 20px;
+  padding-left: 150px;
   height: 700px;
   margin-left: auto !important;
   margin-right: auto !important;
-  background-color: var(--pattyGreen);
-  border: 4px solid black;
-  width: 2000px !important;
+  background-color: var(--darkgrey);
+  border: 4px solid var(--darkBlue);
+  width: 1200px !important;
   border-radius: 20px;
+  color: var(--cream);
+}
+
+.spieler-auswahl,
+.ausgewählte-spieler {
+  height: 500px;
+  padding-top: 10px;
+  padding-left: 20px;
+  margin-left: 20px;
+  border: 4px solid var(--cream);
+  overflow-y: auto;
+  margin-top: 30px;
+  display: block;
+  width: 400px;
+
+}
+
+.spieler-auswahl {
+  border-radius: 20px 0 0 20px;
+  margin-right: 30px;
+}
+
+.ausgewählte-spieler {
+  border-radius: 0 20px 20px 0;
+}
+
+.spielerNameLabel,
+.spielerNameGewaehlt {
+  font-size: 24px;
+  margin-left: 8px;
+  width: 82%;
+  height: 40px;
+  margin-bottom: 14px;
+  background-color: var(--red);
+  color: white;
+  padding-left: 6px;
+  border-radius: 6px;
+}
+
+.spielerNameGewaehlt {
+  margin-left: -30px;
+  background-color: white;
+  color: rgb(0, 0, 0);
+
+}
+
+.quizStartenButton {
+  display: block !important;
+  color: var(--darkgrey) !important;
+  font-weight: 500 !important;
+  font-size: 20px !important;
+  border: none !important;
+  height: 60px;
+  width: 200px;
+  background-color: var(--cream) !important;
+  margin-top: 50px;
+  margin-left: 820px;
+}
+
+.quizStartenButton:hover {
+  background-color: var(--gold) !important;
+  color: white !important;
 }
 
 .currentSpielerStyle {
@@ -345,42 +452,9 @@
   height: 500px;
 }
 
-.spieler-auswahl,
-.ausgewählte-spieler {
-  display: inline-block;
-  height: 500px;
-  padding-top: 10px;
-  margin-left: 20px;
-}
 
-.spieler-auswahl {
-  border-radius: 20px 0 0 20px;
-  width: 300px;
-}
 
-.ausgewählte-spieler {
-  border-radius: 0 20px 20px 0;
-  width: 1300px;
-}
 
-.spielerNameLabel,
-.spielerNameGewaehlt {
-  font-size: 24px;
-  margin-left: 8px;
-  width: 130px;
-  margin-bottom: 10px;
-  background-color: var(--gold);
-  color: white;
-  padding-left: 6px;
-}
-
-.spielerNameGewaehlt {
-  margin-left: -30px;
-  width: 180px;
-  background-color: white;
-  color: var(--darkgrey);
-  border: 1px solid var(--darkgrey);
-}
 
 .tabelle-container {
   background-color: var(--darkgrey);
@@ -425,30 +499,57 @@
 
 
 /* Spielerverwaltung */
+.spielerVerwaltungContainer {
+  padding: 10px;
+  margin-top: 50px;
+  color: var(--cream);
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: var(--darkgrey);
+  border-radius: 10px;
+}
+
+.mainPage-container-spielerVerwaltung {
+  background-color: var(--pattyGreen) !important;
+  overflow: auto !important;
+  height: 650px !important;
+}
+
+.mainPage-container-spielerVerwaltung > button {
+  margin-left: 20px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: var(--cream);
+}
+
 input[type="text"] {
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 5px;
   margin-bottom: 10px;
-  width: calc(100% - 22px);
+  width: calc(30%);
 }
 
 ul {
   list-style-type: none;
   padding: 0;
   margin: 0; 
+  width: 50%;
 }
 
 li {
-  background-color: var(--milenaFarbe);
-  color: white;
+  background-color: var(--cream);
+  color: var(--darkgrey);
+  font-weight: 500;
   padding: 10px;
-  margin: 5px 0;
+  margin-bottom: 5px;
+  margin-right: auto;
+  margin-left: auto;
   border-radius: 5px; 
   display: flex; 
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 95%;
 }
 
 li span {
@@ -461,8 +562,8 @@ li span {
 }
 
 li button {
-  background-color: rgb(190, 22, 22);
-  color: black;
+  background-color: var(--red);
+  color: var(--cream);
 }
 
 
@@ -503,12 +604,57 @@ li button {
   background-image: url('../img/icons/mull.png');
 }
 
-
-/* .bearbeitenIcon:hover, .loeschenIcon:hover {
-  opacity: 0.7;
+.quizErgebnisseContainer {
+  width: 1400px;
+  height: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: auto;
 }
 
-.quiz-row td {
-  vertical-align: middle;
-  padding: 10px;
-} */
+.quizErgebnisseHeader,
+.accordion-button {
+  background-color: var(--darkBlue) !important;
+  color: white !important;
+}
+
+.quizErgebnisseHeader {
+  display: flex;
+  align-items: center;
+}
+
+.quizErgebnisseBody {
+  background-color: var(--red) !important;
+  color: white;
+  border-left: 30px solid var(--darkBlue);
+  border-right: 30px solid var(--darkBlue);
+}
+
+.quizErgebnisseBody > #text {
+  border: 2px solid yellow !important;
+}
+
+.quizErgebnisseBody > p,
+.quizErgebnisseBody > h4 {
+  padding-left: 65px !important;
+}
+
+.fileName {
+  width: 1260px;
+  height: 30px;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 10px;
+}
+
+.loeschenIconEnde {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.accordion-button::after {
+  background-color: var(--cream);
+  border-radius: 4px;
+  padding: 6px !important;
+}

@@ -237,11 +237,14 @@ const QuizSpielen = () => {
                   <li className='spielerNameGewaehlt' key={index}>{spielerName}</li>
                 ))}
               </ul>
-              <Button variant="primary" onClick={handleConfirmSpieler}>
-                Mit ausgewählten Spielern spielen
-              </Button>
+
             </div>
+            <br />
+
           </div>
+          <Button className='quizStartenButton' variant="primary" onClick={handleConfirmSpieler}>
+            Quiz beginnen
+          </Button>
         </div>
       ) : (
         <>

@@ -43,7 +43,7 @@ const SpielerVerwaltung = () => {
 
       try {
         await axios.post('http://localhost:5000/api/spieler', neueSpielerList);
-        setSpielerList(neueSpielerList); 
+        setSpielerList(neueSpielerList);
         setBearbeiteterSpieler('');
         setBearbeitenIndex(null);
       } catch (error) {
@@ -70,9 +70,9 @@ const SpielerVerwaltung = () => {
   }, []);
 
   return (
-    <div>
+    <div className='spielerVerwaltungContainer'>
       <h3>Spielerverwaltung</h3>
-      <div className='mainPage-container'>
+      <div className='mainPage-container mainPage-container-spielerVerwaltung'>
         <input
           type="text"
           value={spielerName}

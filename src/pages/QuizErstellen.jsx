@@ -16,7 +16,6 @@ const QuizErstellen = ({ show, onHide }) => {
   const [incorrectAnswerBehavior, setIncorrectAnswerBehavior] = useState('none');
   const [openOptionsBehavior, setOpenOptionsBehavior] = useState('none');
   const [creationStatus, setCreationStatus] = useState('');
-  const [overwriteQuiz, setOverwriteQuiz] = useState(false);
   const [showOverwriteDialog, setShowOverwriteDialog] = useState(false);
 
   const isQuiznameValid = (name) => {
@@ -172,6 +171,10 @@ const QuizErstellen = ({ show, onHide }) => {
     setShowOverwriteDialog(false);
   };
 
+  const areAllCategoriesFilled = () => {
+    return categories.every(category => category.trim() !== '');
+  };  
+
   return (
     <Modal
       className='quizModal'
@@ -274,6 +277,7 @@ const QuizErstellen = ({ show, onHide }) => {
       <>
         <div className="category-inputs">
           <h4>Kategorien eingeben:</h4>
+          <p>Alle Kategorien müssen benannt werden!</p>
           {categories.map((category, index) => (
             <Form.Group key={index} controlId={`category-${index}`}>
               <Form.Label>Kategorie {index + 1}</Form.Label>
@@ -344,7 +348,14 @@ const QuizErstellen = ({ show, onHide }) => {
         <Button className="button-secondary" onClick={() => setCurrentPage(1)}>
           Zurück zu Seite 1
         </Button>
-        <Button className="button-secondary weiterButton" onClick={() => setCurrentPage(3)}>Weiter zu Seite 3</Button>
+        <Button 
+          className="button-secondary weiterButton" 
+          onClick={() => setCurrentPage(3)}
+          disabled={!areAllCategoriesFilled()}
+        >
+          Weiter zu Seite 3
+        </Button>
+
 
       </>
     )}
@@ -368,7 +379,6 @@ const QuizErstellen = ({ show, onHide }) => {
             <option value="skip">Keine Aktion - Frage wird geschlossen</option>
             <option value="retry">Erneut versuchen - 2. Versuch</option>
             <option value="minus">Minuspunkte - Punktezahl wird abziehen</option>
-            <option value="buzzer">Buzzer - Andere Spieler dürfen antworten</option>
           </Form.Select>
         </Form.Group>
 
