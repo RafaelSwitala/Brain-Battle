@@ -172,6 +172,20 @@ app.delete('/api/deleteQuiz/:quizName', (req, res) => {
   });
 });
 
+// Route zum Bearbeiten eines Quiz
+// app.edit('/api/editQuiz/:quizName', (req, res) => {
+//   const { quizName } = req.params;
+//   const filePath = path.join(__dirname, '../public/erstellteQuize', `${quizName}.json`);
+
+//   fs.unlink(filePath, (err) => {
+//     if (err) {
+//       console.error('Fehler beim Bearbeiten der Datei:', err);
+//       return res.status(500).json({ error: 'Fehler beim Bearbeiten des Quiz' });
+//     }
+//     res.status(200).json({ message: 'Quiz erfolgreich aktualisiert' });
+//   });
+// });
+
 // Route zum Löschen eines Quiz-Ergebnisses
 app.delete('/api/deleteQuizResult/:quizResultName', (req, res) => {
   const { quizResultName } = req.params;
@@ -194,33 +208,6 @@ app.delete('/api/deleteQuizResult/:quizResultName', (req, res) => {
     });
   });
 });
-
-// Route zum Bearbeiten eines Quiz
-app.put('/api/editQuiz/:quizName', (req, res) => {
-  const { quizName } = req.params;  // Den Namen des Quizzes aus der URL holen
-  const updatedQuizData = req.body;  // Die neuen Daten des Quizzes
-
-  const filePath = path.join(__dirname, '../public/erstellteQuize', `${quizName}.json`);
-
-  fs.access(filePath, fs.constants.F_OK, (err) => {
-    if (err) {
-      return res.status(404).json({ error: 'Quiz nicht gefunden' });
-    }
-
-    fs.writeFile(filePath, JSON.stringify(updatedQuizData, null, 2), (writeErr) => {
-      if (writeErr) {
-        console.error('Fehler beim Aktualisieren der Datei:', writeErr);
-        return res.status(500).json({ error: 'Fehler beim Speichern der Datei' });
-      }
-
-      console.log(`Quiz "${quizName}" erfolgreich bearbeitet`);
-      res.status(200).json({ message: `Quiz "${quizName}" erfolgreich bearbeitet` });
-    });
-  });
-});
-
-
-
 
 
 
