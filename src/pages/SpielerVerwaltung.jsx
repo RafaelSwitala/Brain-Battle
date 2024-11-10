@@ -20,9 +20,10 @@ const SpielerVerwaltung = () => {
   const addSpieler = async () => {
     if (spielerName) {
       if (!spielerList.includes(spielerName)) {
+        const neueSpielerList = [...spielerList, spielerName];
         try {
-          await axios.post('http://localhost:5000/api/addSpieler', { spielerName });
-          setSpielerList(prevList => [...prevList, spielerName]);
+          await axios.post('http://localhost:5000/api/spieler', neueSpielerList);
+          setSpielerList(neueSpielerList);
           setSpielerName('');
         } catch (error) {
           console.error('Fehler beim Hinzufügen des Spielers:', error);
@@ -37,32 +38,26 @@ const SpielerVerwaltung = () => {
 
   const updateSpieler = async () => {
     if (bearbeitenIndex !== null) {
-      const alteSpielerName = spielerList[bearbeitenIndex];
-      const neueSpielerName = bearbeiteterSpieler;
+      const neueSpielerList = [...spielerList];
+      neueSpielerList[bearbeitenIndex] = bearbeiteterSpieler;
 
-      if (alteSpielerName !== neueSpielerName) {
-        try {
-          await axios.post('http://localhost:5000/api/updateSpieler', { alteSpielerName, neueSpielerName });
-          const neueSpielerList = [...spielerList];
-          neueSpielerList[bearbeitenIndex] = neueSpielerName;
-          setSpielerList(neueSpielerList);
-          setBearbeiteterSpieler('');
-          setBearbeitenIndex(null);
-        } catch (error) {
-          console.error('Fehler beim Aktualisieren des Spielers:', error);
-        }
-      } else {
-        alert('Der Name ist bereits derselbe!');
+      try {
+        await axios.post('http://localhost:5000/api/spieler', neueSpielerList);
+        setSpielerList(neueSpielerList);
+        setBearbeiteterSpieler('');
+        setBearbeitenIndex(null);
+      } catch (error) {
+        console.error('Fehler beim Aktualisieren der Spieler:', error);
       }
     }
   };
 
   const deleteSpieler = async (index) => {
-    const spielerNameToDelete = spielerList[index];
-    if (window.confirm(`Möchten Sie ${spielerNameToDelete} wirklich löschen?`)) {
+    if (window.confirm('Möchten Sie diesen Spieler wirklich löschen?')) {
+      const neueSpielerList = spielerList.filter((_, i) => i !== index);
+
       try {
-        await axios.post('http://localhost:5000/api/deleteSpieler', { spielerName: spielerNameToDelete });
-        const neueSpielerList = spielerList.filter((_, i) => i !== index);
+        await axios.post('http://localhost:5000/api/spieler', neueSpielerList);
         setSpielerList(neueSpielerList);
       } catch (error) {
         console.error('Fehler beim Löschen des Spielers:', error);

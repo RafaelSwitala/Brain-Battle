@@ -41,7 +41,7 @@ app.get('/api/spieler', (req, res) => {
 // Route zum Aktualisieren der Spieler
 app.post('/api/spieler', (req, res) => {
   console.log('POST /api/spieler aufgerufen');
-  const spielerList = req.body;
+  const spielerList = req.body; // gesamte Spieler-Liste übernehmen
   const filePath = path.join(__dirname, '../public/spieler.json');
 
   fs.writeFile(filePath, JSON.stringify(spielerList, null, 2), (writeErr) => {
