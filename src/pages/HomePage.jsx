@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Table, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import QuizErstellen from './QuizErstellen';
-import EditQuizModal from './EditQuizModal';
 
 const HomePage = () => {
   const [quizFiles, setQuizFiles] = useState([]);
@@ -12,7 +11,6 @@ const HomePage = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [quizToEdit, setQuizToEdit] = useState(null);
 
-  
   useEffect(() => {
     const loadQuizFiles = async () => {
       try {
@@ -56,11 +54,16 @@ const HomePage = () => {
     loadQuizFiles();
   }, []);
 
+  const handleDeleteClick = (quizName) => {
+    setQuizToDelete(quizName);
+    setShowDeleteModal(true);
+  };
+
   const handleEditClick = (quizName) => {
     setQuizToEdit(quizName);
-    setShowEditModal(true);   
+    setShowEditModal(true);
   };
-  
+
   const confirmDeleteQuiz = async () => {
     try {
       const response = await fetch(`http://localhost:5000/api/deleteQuiz/${quizToDelete}`, { method: 'DELETE' });
@@ -194,13 +197,25 @@ const HomePage = () => {
         </Modal.Footer>
       </Modal>
 
-      <EditQuizModal
-        show={showEditModal}
-        onHide={() => setShowEditModal(false)}
-        quizToEdit={quizToEdit}
-        quizFiles={quizFiles}
-        setQuizFiles={setQuizFiles}
-      />
+      <Modal 
+        className='bearbeitenModal'
+        show={showEditModal} 
+        onHide={() => setShowEditModal(false)}>
+        <Modal.Header className='editModalHeader' closeButton>
+          <Modal.Title>Quiz: "{quizToEdit}" bearbeiten</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className='editModalBody'>
+          
+          </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowEditModal(false)}>
+            Abbrechen
+          </Button>
+          <Button variant="danger" onClick={confirmEditQuiz}>
+            Bearbeiten
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };
