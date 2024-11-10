@@ -108,6 +108,11 @@
   border: none;
 }
 
+.quiz-row:hover {
+  background-color: rgb(255, 255, 255) !important;
+  --bs-table-hover-bg: none;
+}
+
 
 /* Button-Stile */
 .button-1 {
