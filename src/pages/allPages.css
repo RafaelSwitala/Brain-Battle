@@ -577,12 +577,38 @@ li button {
 
 /* Anleitungen */
 .anleitungTabGruppe {
-  background-color: green;
+  background-color: var(--darkgrey);
+  padding: 5px;
+  width: 1850px;
+  height: 70px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.anleitungTabGruppe > li {
+  background-color: var(--darkgrey);
+  height: 60px;
+  display: inline-block;
+  width: 910px;
+  border: 2px solid var(--cream);
+  margin-right: auto !important;
+}
+
+.anleitungTabGruppe > li > button {
+  background-color: var(--gold);
+  height: 40px;
+  width: 100%;
+  border-radius: 10px !important;
 }
 
 .anleitungTab {
-  background-color: rgb(212, 195, 69) !important;
-  color: white !important;
+  background-color: var(--darkgrey);
+  color: var(--cream);
+  padding: 20px;
+  border: 2px solid black;
+  height: 750px;
+  margin-top: 20px;
+  border-radius: 20px;
 } 
 
 /* Icons */
