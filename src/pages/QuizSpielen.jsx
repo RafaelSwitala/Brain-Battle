@@ -274,16 +274,14 @@ const QuizSpielen = () => {
 
                <div className='individuellePunkte'>
                 <Form.Group controlId="individuellePunkteSpieler">
-                  <Form.Label>Spieler auswählen:</Form.Label>
-                  <Form.Select value={spielerReihenfolge[currentSpielerIndex]} onChange={(e) => {}}>
+                  <Form.Label className='hiddenElement'>Spieler auswählen:</Form.Label>
+                  <Form.Select className='hiddenElement' value={spielerReihenfolge[currentSpielerIndex]} onChange={(e) => {}}>
                     {spielerReihenfolge.map((spielerName, index) => (
-                      <option key={index} value={spielerName}>
+                      <option className='hiddenElement' key={index} value={spielerName}>
                         {spielerName}
                       </option>
                     ))}
                   </Form.Select>
-
-
                 </Form.Group>
 
                 <Form.Group controlId="punkteInput">

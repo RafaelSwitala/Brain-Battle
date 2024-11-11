@@ -1,0 +1,99 @@
+{
+  "name": "TimerTest",
+  "settings": {
+    "timer": 15,
+    "incorrectAnswerBehavior": "minus",
+    "openOptionsBehavior": "half"
+  },
+  "categories": [
+    "1",
+    "2",
+    "3"
+  ],
+  "questions": [
+    {
+      "category": "1",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "1",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "1",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "1",
+      "points": 400,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "2",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "2",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "2",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "2",
+      "points": 400,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "3",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "3",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "3",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "3",
+      "points": 400,
+      "question": "",
+      "answer": "",
+      "options": []
+    }
+  ]
+}
