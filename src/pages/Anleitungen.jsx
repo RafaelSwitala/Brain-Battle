@@ -78,8 +78,15 @@ const Anleitungen = () => {
         title="Versions Update">
           <h4>Versions Update</h4>
           <h5>Befolge diese Schritte um eine neue Version der Anwendung herunter zu laden:</h5>
-          <p className='pInhalt'></p>
-          <p className='pInhalt'></p>
+          <p className='pInhalt'>Sollte es eine neue Version von der Anwendung geben, mit neuen Funktionen oder Fehlerbehebungen etc. dann gehe wie folgt vor:</p>
+          <p className='pInhalt'>Navigiere zum public Ordner und öffne die spieler.json Datei. Kopiere dir den kompletten Inhalt dieser Datei und füge ihn hier ein: public, dann backup, dann spieler.json</p>
+          <p className='pInhalt'>Navigiere zum public Ordner, dann erstellteQuize. Kopiere alle Quizdateien und füge sie hier ein: public, dann backup, dann erstellteQuize</p>
+          <p className='pInhalt'>Kopiere die den kompletten Backup-Ordner an einen Ort wo du es wieder finden kannst. Z.b. Desktop</p>
+          <p className='pInhalt'>Gehe zurück zu Visual Studio Code und öffne ein Terminal: STRG + Ö</p>
+          <p className='pInhalt'>Gebe folgenden Befehl ein: git pull --all</p>
+          <p className='pInhalt'>Nach einer kurzen Installation, gebe diesen Befehl ein: npm install</p>
+          <p className='pInhalt'>Kopiere den Inhalt deines Backup Ordners in den Ordner public. Du wirst gefragt ob du die Dateien Überschreiben möchtest. Antworte mit JA!</p>
+          <p className='pInhalt'>Du kannst jetzt deine Anwendung wie gewohnt starten. Viel Spaß mit der neuen Version!</p>
           <p className='pInhalt'></p>
       </Tab>
     </Tabs>
