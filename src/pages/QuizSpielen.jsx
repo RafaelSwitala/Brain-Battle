@@ -340,7 +340,7 @@ const QuizSpielen = () => {
           </div>
 
           <div className='quizSpielenQuiz'>
-            <div className='mainPage-container'>
+            <div className='mainPage-container quiz-container'>
               <div className="grid-container" style={{ gridTemplateColumns: `repeat(${categories.length}, 1fr)` }}>
                 {categories.map((category, index) => (
                   <div key={index} className="grid-cell category-header">{category}</div>

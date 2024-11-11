@@ -398,11 +398,17 @@
 }
 
 .quizSpielenQuiz {
-  width: 80%;
+  width: 83% !important;
+  height: 840px !important;
 }
 
 .mainPage-container {
   padding: 20px;
+}
+
+.quiz-container {
+  width: 110% !important;
+  margin-left: -130px !important;
 }
 
 .controls {
@@ -416,13 +422,13 @@
 
 .grid-cell {
   background-color: var(--pattyGreen);
-  color: white;
-  border: 1px solid #ccc;
-  padding: 20px;
+  color: var(--white);
+  padding: 8px;
   text-align: center;
-  font-size: 32px;
+  font-size: 30px;
   border: 2px solid var(--darkgrey);
   border-radius: 7px;
+  height: 60px;
 }
 
 .grid-cell:hover {
