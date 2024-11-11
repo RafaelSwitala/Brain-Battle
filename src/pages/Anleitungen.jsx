@@ -17,78 +17,77 @@ const Anleitungen = () => {
         title="Spielerverwaltung">
           <h4>Spielerverwaltung</h4>
           <br />
-          <h5>1. Neue Spieler Erstellen</h5>
-          <p className='pInhalt'>Navigiere zur Spielerverwaltung.</p>
-          <p className='pInhalt'>Vergebe einen Namen und drücke auf den Button: Spieler Hinzufügen</p>
-          <p className='pInhalt'>Du wirst jetzt die Verbindung zur Anwendung verlieren. Der Spieler wurde aber erfolgreich erstellt!</p>
-          <p className='pInhalt'>Gehe wieder zurück auf die HomePage und aktualisiere die Seite. Der eben erstellte Spieler wird dir in der Spieleransicht angezeigt.</p>
-          <br /> <br />
-          <h5>2. Vorhandene Spieler Bearbeiten</h5>
-          <p className='pInhalt'>Navigiere zur Spielerverwaltung</p>
-          <p className='pInhalt'>Durch das klicken auf den Bearbeiten-Button öffnet sich ein neues Eingabefeld in dem du die Möglichkeit hast, den vorhandenen Spieler zu umschreiben.</p>
-          <p className='pInhalt'>Klickst du auf Abbrechen, so schließt das Fenster wieder ohne einer Änderung. Klickst du auf Aktualisieren, änderst du den Namen des Spielers.</p>
-          <p className='pInhalt'>Du wirst jetzt die Verbindung zur Anwendung verlieren. Der Spieler wurde aber erfolgreich aktualisiert!</p>
-          <p className='pInhalt'>Gehe wieder zurück auf die HomePage und aktualisiere die Seite. Der eben bearbeitete Spieler wird dir in der Spieleransicht angezeigt.</p>
-          <br /> <br />
-          <h5>3. Vorhandene Spieler Löschen</h5>
-          <p className='pInhalt'>Navigiere zur Spielerverwaltung</p>
-          <p className='pInhalt'>Durch das klicken auf den Löschen-Button öffnet sich ein Fenster in dem du die Möglichkeit hast, einen vorhandenen Spieler zu löschen.</p>
-          <p className='pInhalt'>Klickst du auf Abbrechen, so schließt das Fenster wieder ohne einer Änderung. Klickst du auf Ok, dann wird der Spieler entfernt.</p>
-          <p className='pInhalt'>Du wirst jetzt die Verbindung zur Anwendung verlieren. Der Spieler wurde aber erfolgreich entfernt!</p>
-          <p className='pInhalt'>Gehe wieder zurück auf die HomePage und aktualisiere die Seite. Der eben gelöschte Spieler wird dir nicht mehr in der Spieleransicht angezeigt.</p>
           
+          <h5>1. Einen neuen Spieler erstellen</h5>
+          <p className='pInhalt'>Öffne die Spielerverwaltung und gib einen Namen für den neuen Spieler ein.</p>
+          <p className='pInhalt'>Klicke auf „Spieler hinzufügen“. Dadurch verlierst du kurz die Verbindung zur Anwendung, aber der Spieler wurde erfolgreich erstellt!</p>
+          <p className='pInhalt'>Gehe zurück zur Homepage und aktualisiere die Seite. Der neu erstellte Spieler wird nun in der Übersicht angezeigt.</p>
+          <br /><br />
+          
+          <h5>2. Vorhandene Spieler bearbeiten</h5>
+          <p className='pInhalt'>Gehe in die Spielerverwaltung.</p>
+          <p className='pInhalt'>Klicke auf den Bearbeiten-Button des gewünschten Spielers. Ein Eingabefeld wird geöffnet, in dem du den Namen ändern kannst.</p>
+          <p className='pInhalt'>Falls du den Vorgang abbrechen möchtest, klicke auf „Abbrechen“. Mit „Aktualisieren“ wird der Spielername geändert.</p>
+          <p className='pInhalt'>Nach der Aktualisierung verlierst du kurz die Verbindung zur Anwendung. Gehe dann zurück zur Homepage und aktualisiere die Seite, um die Änderungen zu sehen.</p>
+          <br /><br />
+          
+          <h5>3. Vorhandene Spieler löschen</h5>
+          <p className='pInhalt'>Öffne die Spielerverwaltung.</p>
+          <p className='pInhalt'>Klicke auf den Löschen-Button des gewünschten Spielers. Ein Fenster erscheint zur Bestätigung des Löschvorgangs.</p>
+          <p className='pInhalt'>Falls du den Vorgang abbrechen möchtest, klicke auf „Abbrechen“. Mit „OK“ wird der Spieler entfernt.</p>
+          <p className='pInhalt'>Nach dem Löschen verlierst du kurz die Verbindung zur Anwendung. Gehe dann zurück zur Homepage und aktualisiere die Seite. Der gelöschte Spieler wird nicht mehr angezeigt.</p>
       </Tab>
+
       <Tab 
         className='anleitungTab'
         eventKey="quizManipulation" 
         title="Quiz Erstellen">
-          <h4>Quiz Manipulationen</h4>
+          <h4>Quiz Verwaltung</h4>
           <br />
-          <h5>1. Neues Quiz Erstellen</h5>
-          <p className='pInhalt'>Im Dashboard der Homepage befindet sich ein Button zum erstellen eines Quizes.</p>
-          <p className='pInhalt'>Gebe den Namen des Quizes ein. Achte darauf, dass sich im Quiznamen keine Sonderzeichen, keine Punkte und keine Leerzeichen befinden dürfen. Ein Quiznamen muss mindestens 3 Zeichen enthalten.</p>
-          <p className='pInhalt'>Wähle die Anzahl der Kategorien, die Anzahl der Schwierigkeitslevel und die Punkteschritte aus und klicke dann auf Fragenfelder generieren.</p>
-          <p className='pInhalt'>Gan oben werden dir leere Eingabefelder angezeigt. Ein Eingabefeld entspricht einer Kategorie. Jedes dieser Felder muss ausgefüllt werden.</p>
-          <p className='pInhalt'>Darunter befinden sich die generierten Frage und Antwort Eingabefelder. Gebe zu jeder Kategorie und zu jedem Schwierigkeitslevel eine Frage ein.</p>
-          <p className='pInhalt'>Du kannst optional die richtige Antwort in das Feld darunter eintragen und Antwortoptionen hinzufügen.</p>
-          <p className='pInhalt'>Hast du alles eingetragen kannst du weiter zu Seite 3 gehen. Hier werden 3 Spieleinstellungen definiert:</p>
-          <p className='pInhalt'>- Timer: Du kannst dir aussuchen, wie lange ein Spieler Zeit hat zum Beantworten einer Frage.</p>
-          <p className='pInhalt'>- Verhalten bei falscher Antwort: Entscheide dich, ob der Spieler die Frage ohne Punkte beendet, ob es Minuspunkte bekommt oder ob die Frage noch einmal beantwortet werden darf.</p>
-          <p className='pInhalt'>- Verhalten beim öffnen der Antwortmöglichkeiten: Entscheide dich, ob der Spieler immernoch die volle Punktzahl oder nur noch die halbe Punktzahl für das richtige Beantworten der Frage bekommt, nachdem er sich dazu entscheiden hat, die Antwortsmöglichkeiten einzublenden.</p>
-          <p className='pInhalt'>Durch den Klick auf Quiz erstellen, wird dir das Quiz in der Quiz Übersicht angezeigt.</p>
-          <br /> <br />
-          <h5>2. Vorhandenes Quiz Bearbeiten</h5>
-          <p className='pInhalt'>Das Bearbeiten eines Quizes ist leider nur über einen Umwege möglich:</p>
-          <p className='pInhalt'>Du erstellst ein neues Quiz und vergibst den selben Namen des Quizes nocheinmal. Anschließend musst du nochmal von vorne alle Fragen, Antworten, Antwortoptionen und Einstellungen eingeben.</p>
-          <p className='pInhalt'>Beim Klicken auf Quiz Erstellen am Ende, wird das alte Quiz durch das neue Quiz überschrieben.</p>
-          <p className='pInhalt'>Deswegen gibt es eine Alternative:</p>
-          <p className='pInhalt'>Du befindest dich in Visual Studio Code!</p>
-          <p className='pInhalt'>Navigiere zum Ordner public, dann erstellteQuize und öffne die .json-Datei mit dem entsprechenden Namen.</p>
-          <p className='pInhalt'>Solltest du eine bestimmte Frage anpassen wollen, gehe zu der Frage hin und bearbeite sie. Solltest du den Timer anpassen wollen, ändere die Zeit.</p>
-          <p className='pInhalt'>Wenn du mit der Bearbeitung fertig bist, kannst du die .json-Datei speichern und schließen. In der Anwendung werden die Daten sofort aktualisiert!</p>
-         <br /> <br />
-          <h5>3. Vorhandenes Quiz Löschen</h5>
-          <p className='pInhalt'>In der Quiz Übersicht auf deiner Homepage befindet sich eine Tabelle.</p>
-          <p className='pInhalt'>In der letzten Spalte befindet sich ein Mülleimer Icon. Klicke darauf und bestätige deine Entscheidung</p>
-          <p className='pInhalt'>Achtung: Auf diese Weise löscht du das Quiz entgültig!</p>
+          
+          <h5>1. Ein neues Quiz erstellen</h5>
+          <p className='pInhalt'>Klicke im Dashboard auf „Quiz erstellen“.</p>
+          <p className='pInhalt'>Gib einen Namen ein – ohne Sonderzeichen, Punkte oder Leerzeichen. Der Name muss mindestens drei Zeichen enthalten.</p>
+          <p className='pInhalt'>Wähle Anzahl der Kategorien, Schwierigkeitsstufen und Punkteschritte aus, dann klicke auf „Fragenfelder generieren“.</p>
+          <p className='pInhalt'>Oben erscheinen leere Eingabefelder, je eines pro Kategorie. Fülle jedes dieser Felder aus.</p>
+          <p className='pInhalt'>Darunter findest du die generierten Frage- und Antwortfelder. Gib pro Kategorie und Schwierigkeitsgrad eine Frage ein.</p>
+          <p className='pInhalt'>Optional kannst du die richtige Antwort und Antwortoptionen hinzufügen.</p>
+          <p className='pInhalt'>Klicke auf „Weiter zu Seite 3“ und definiere die Spieleinstellungen:</p>
+          <p className='pInhalt'>- Timer: Lege fest, wie lange ein Spieler Zeit hat, eine Frage zu beantworten.</p>
+          <p className='pInhalt'>- Verhalten bei falscher Antwort: Bestimme, ob der Spieler Punkte verliert, eine zweite Chance bekommt oder die Frage ohne Punkte beendet wird.</p>
+          <p className='pInhalt'>- Verhalten bei eingeblendeten Antwortoptionen: Entscheide, ob für eine richtige Antwort noch die volle oder nur die halbe Punktzahl vergeben wird.</p>
+          <p className='pInhalt'>Durch „Quiz erstellen“ wird das Quiz in der Übersicht angezeigt.</p>
+          <br /><br />
+          
+          <h5>2. Ein vorhandenes Quiz bearbeiten</h5>
+          <p className='pInhalt'>Eine direkte Bearbeitung ist nicht möglich. Du kannst jedoch ein neues Quiz mit dem gleichen Namen erstellen und die Inhalte erneut eingeben.</p>
+          <p className='pInhalt'>Alternativ kannst du das Quiz in Visual Studio Code bearbeiten:</p>
+          <p className='pInhalt'>Öffne im Ordner „public/erstellteQuize“ die passende .json-Datei und ändere die gewünschten Inhalte (z.B. Timer oder Fragen).</p>
+          <p className='pInhalt'>Speichere die Datei – die Änderungen werden sofort in der Anwendung sichtbar.</p>
+          <br /><br />
+          
+          <h5>3. Ein vorhandenes Quiz löschen</h5>
+          <p className='pInhalt'>In der Quiz-Übersicht findest du in der letzten Spalte der Tabelle ein Mülleimer-Icon.</p>
+          <p className='pInhalt'>Klicke darauf und bestätige den Löschvorgang. Achtung: Diese Aktion entfernt das Quiz dauerhaft!</p>
       </Tab>
+
       <Tab 
         className='anleitungTab'
         eventKey="versionsUpdate" 
-        title="Versions Update">
-          <h4>Versions Update</h4>
-          <h5>Befolge diese Schritte um eine neue Version der Anwendung herunter zu laden:</h5>
-          <p className='pInhalt'>Sollte es eine neue Version von der Anwendung geben, mit neuen Funktionen oder Fehlerbehebungen etc. dann gehe wie folgt vor:</p>
-          <p className='pInhalt'>Navigiere zum public Ordner und öffne die spieler.json Datei. Kopiere dir den kompletten Inhalt dieser Datei und füge ihn hier ein: public, dann backup, dann spieler.json</p>
-          <p className='pInhalt'>Navigiere zum public Ordner, dann erstellteQuize. Kopiere alle Quizdateien und füge sie hier ein: public, dann backup, dann erstellteQuize</p>
-          <p className='pInhalt'>Kopiere die den kompletten Backup-Ordner an einen Ort wo du es wieder finden kannst. Z.b. Desktop</p>
-          <p className='pInhalt'>Gehe zurück zu Visual Studio Code und öffne ein Terminal: STRG + Ö</p>
-          <p className='pInhalt'>Gebe folgenden Befehl ein: git pull --all</p>
-          <p className='pInhalt'>Nach einer kurzen Installation, gebe diesen Befehl ein: npm install</p>
-          <p className='pInhalt'>Kopiere den Inhalt deines Backup Ordners in den Ordner public. Du wirst gefragt ob du die Dateien Überschreiben möchtest. Antworte mit JA!</p>
-          <p className='pInhalt'>Du kannst jetzt deine Anwendung wie gewohnt starten. Viel Spaß mit der neuen Version!</p>
-          <p className='pInhalt'></p>
+        title="Versions-Update">
+          <h4>Versions-Update</h4>
+          <h5>Schritte zur Installation einer neuen Version:</h5>
+          <p className='pInhalt'>Falls eine neue Version verfügbar ist, folge diesen Schritten:</p>
+          <p className='pInhalt'>Gehe in den Ordner „public“ und öffne die Datei „spieler.json“. Kopiere den Inhalt und füge ihn im Ordner „backup/spieler.json“ ein.</p>
+          <p className='pInhalt'>Kopiere die Dateien im Ordner „erstellteQuize“ und füge sie im Ordner „backup/erstellteQuize“ ein.</p>
+          <p className='pInhalt'>Speichere den „backup“-Ordner an einem Ort, den du leicht findest (z.B. Desktop).</p>
+          <p className='pInhalt'>Öffne in Visual Studio Code das Terminal mit „STRG + Ö“ und gib „git pull --all“ ein.</p>
+          <p className='pInhalt'>Nach dem Download führe „npm install“ aus, um alle Abhängigkeiten zu aktualisieren.</p>
+          <p className='pInhalt'>Gebe im Terminal folgenden Befehl ein: git checkout release/versionsNummer</p>
+          <p className='pInhalt'>Kopiere den Inhalt des „backup“-Ordners zurück in den „public“-Ordner und bestätige das Überschreiben der Dateien.</p>
+          <p className='pInhalt'>Nun kannst du die Anwendung wie gewohnt starten und die neue Version verwenden!</p>
       </Tab>
+
     </Tabs>
     </div>
   );
