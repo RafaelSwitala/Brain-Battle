@@ -596,9 +596,14 @@ li button {
 
 .anleitungTabGruppe > li > button {
   background-color: var(--gold);
+  color: black;
   height: 40px;
   width: 100%;
   border-radius: 10px !important;
+}
+
+.anleitungTabGruppe > li > button:hover {
+  color: black !important;
 }
 
 .anleitungTab {

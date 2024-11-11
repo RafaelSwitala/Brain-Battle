@@ -20,7 +20,7 @@ const Anleitungen = () => {
           
           <h5>1. Einen neuen Spieler erstellen</h5>
           <p className='pInhalt'>Öffne die Spielerverwaltung und gib einen Namen für den neuen Spieler ein.</p>
-          <p className='pInhalt'>Klicke auf „Spieler hinzufügen“. Dadurch verlierst du kurz die Verbindung zur Anwendung, aber der Spieler wurde erfolgreich erstellt!</p>
+          <p className='pInhalt'>Klicke auf „Spieler hinzufügen“. Dadurch verlierst du die Verbindung zur Anwendung, aber der Spieler wurde erfolgreich erstellt!</p>
           <p className='pInhalt'>Gehe zurück zur Homepage und aktualisiere die Seite. Der neu erstellte Spieler wird nun in der Übersicht angezeigt.</p>
           <br /><br />
           
@@ -28,14 +28,14 @@ const Anleitungen = () => {
           <p className='pInhalt'>Gehe in die Spielerverwaltung.</p>
           <p className='pInhalt'>Klicke auf den Bearbeiten-Button des gewünschten Spielers. Ein Eingabefeld wird geöffnet, in dem du den Namen ändern kannst.</p>
           <p className='pInhalt'>Falls du den Vorgang abbrechen möchtest, klicke auf „Abbrechen“. Mit „Aktualisieren“ wird der Spielername geändert.</p>
-          <p className='pInhalt'>Nach der Aktualisierung verlierst du kurz die Verbindung zur Anwendung. Gehe dann zurück zur Homepage und aktualisiere die Seite, um die Änderungen zu sehen.</p>
+          <p className='pInhalt'>Nach der Aktualisierung verlierst du die Verbindung zur Anwendung. Gehe dann zurück zur Homepage und aktualisiere die Seite, um die Änderungen zu sehen.</p>
           <br /><br />
           
           <h5>3. Vorhandene Spieler löschen</h5>
           <p className='pInhalt'>Öffne die Spielerverwaltung.</p>
           <p className='pInhalt'>Klicke auf den Löschen-Button des gewünschten Spielers. Ein Fenster erscheint zur Bestätigung des Löschvorgangs.</p>
           <p className='pInhalt'>Falls du den Vorgang abbrechen möchtest, klicke auf „Abbrechen“. Mit „OK“ wird der Spieler entfernt.</p>
-          <p className='pInhalt'>Nach dem Löschen verlierst du kurz die Verbindung zur Anwendung. Gehe dann zurück zur Homepage und aktualisiere die Seite. Der gelöschte Spieler wird nicht mehr angezeigt.</p>
+          <p className='pInhalt'>Nach dem Löschen verlierst du die Verbindung zur Anwendung. Gehe dann zurück zur Homepage und aktualisiere die Seite. Der gelöschte Spieler wird nicht mehr angezeigt.</p>
       </Tab>
 
       <Tab 
@@ -76,6 +76,7 @@ const Anleitungen = () => {
         eventKey="versionsUpdate" 
         title="Versions-Update">
           <h4>Versions-Update</h4>
+          <br />
           <h5>Schritte zur Installation einer neuen Version:</h5>
           <p className='pInhalt'>Falls eine neue Version verfügbar ist, folge diesen Schritten:</p>
           <p className='pInhalt'>Gehe in den Ordner „public“ und öffne die Datei „spieler.json“. Kopiere den Inhalt und füge ihn im Ordner „backup/spieler.json“ ein.</p>
