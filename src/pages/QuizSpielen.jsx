@@ -36,6 +36,7 @@ const QuizSpielen = () => {
     const loadQuiz = async () => {
       try {
         const response = await fetch(`/erstellteQuize/${quizName}.json`);
+        if (!response.ok) throw new Error("Fehler beim Laden des Quizdaten.");
         const data = await response.json();
         setQuizData(data);
         setIncorrectAnswerBehavior(data.settings.incorrectAnswerBehavior);
@@ -44,6 +45,7 @@ const QuizSpielen = () => {
         console.error("Fehler beim Laden des Quiz:", error);
       }
     };
+    
 
     loadQuiz();
   }, [quizName]);
@@ -51,11 +53,13 @@ const QuizSpielen = () => {
   const handleCellClick = (question) => {
     if (!answeredQuestions.has(question)) {
       setSelectedQuestion(question);
-      setTimer(question.timer || 0);
+      const questionTimer = quizData.settings.timer || 0;
+      setTimer(questionTimer);
       setIsTimerRunning(false);
       setIsContentVisible(false);
     }
   };
+  
 
   const shuffleOptions = (options) => {
     return options.sort(() => Math.random() - 0.5);
@@ -133,8 +137,9 @@ const QuizSpielen = () => {
           });
           break;
         default:
-          console.error("Unbekanntes Verhalten bei falscher Antwort");
+          console.warn("Unbekanntes Verhalten bei falscher Antwort:", incorrectAnswerBehavior);
       }
+      
     }
   
     setAnsweredQuestions(prevAnswered => new Set(prevAnswered).add(selectedQuestion));
@@ -147,8 +152,11 @@ const QuizSpielen = () => {
   
 
   const handleTimerStart = () => {
-    setIsTimerRunning(true);
+    if (timer > 0) {
+      setIsTimerRunning(true);
+    }
   };
+  
 
   useEffect(() => {
     let interval;
@@ -156,12 +164,14 @@ const QuizSpielen = () => {
       interval = setInterval(() => {
         setTimer(prevTimer => Math.max(prevTimer - 1, 0));
       }, 1000);
-    } else if (timer === 0) {
+    } else if (timer === 0 && isTimerRunning) {
       handleAnswerClick(false);
+      setIsTimerRunning(false);
     }
-
+  
     return () => clearInterval(interval);
   }, [isTimerRunning, timer]);
+  
 
   const saveResults = async () => {
     const results = {
@@ -319,7 +329,7 @@ const QuizSpielen = () => {
                 <Button
                   variant="primary"
                   onClick={() => {
-                    if (currentSpieler && !isNaN(punkteAnpassen)) {
+                    if (currentSpieler && Number.isFinite(punkteAnpassen)) {
                       setSpielerPunkte((prevPunkte) => ({
                         ...prevPunkte,
                         [currentSpieler]: Math.max(
@@ -329,6 +339,7 @@ const QuizSpielen = () => {
                       }));
                     }
                   }}
+                  
                 >
                   Punkte aktualisieren
                 </Button>
@@ -374,13 +385,13 @@ const QuizSpielen = () => {
                 </Modal.Header>
                 <Modal.Body className='modalBody'>
                   <div className="questionText">{selectedQuestion.question}</div>
-                  <h5>Zeit verbleibend: {timer} Sekunden</h5>
 
                   {!isTimerRunning && (
                     <Button className='timerButton' onClick={handleTimerStart}>
                       Start Timer
                     </Button>
                   )}
+                  <h5>Zeit verbleibend: {timer} Sekunden</h5>
 
                   <Button
                     className='beantwortenButton richtigButton'

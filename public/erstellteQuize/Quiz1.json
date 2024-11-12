@@ -2,7 +2,7 @@
   "name": "Quiz1",
   "settings": {
     "timer": 15,
-    "incorrectAnswerBehavior": "buzzer",
+    "incorrectAnswerBehavior": "minus",
     "openOptionsBehavior": "half"
   },
   "categories": [
