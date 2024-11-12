@@ -17,8 +17,8 @@ Installation der Anwendung
 - Gebe folgenden Befehl ein: npm install
 - Nach der Installation, gebe folgenden Befehl ein: git flow init
 - Drücke so lange auf Enter, bis du keine weiteren Fragen mehr gestellt bekommst
-- Gebe nun folgenden Befehl ein: git checkout release/versionsNummer
+- Gebe nun folgenden Befehl ein: git checkout release/1.0.0
 
 Starten der Anwendung:
 - Gebe im Verzeichnis /Tab-it-right-Bone-it-out folgenden Befehl ein: npm start  
-- Gebe im Verzeichnis /Tab-it-right-Bone-it-out/server folgenden Befehl ein: node server.js 
+- Gebe im Verzeichnis /Tab-it-right-Bone-it-out/server folgenden Befehl ein: node server.js

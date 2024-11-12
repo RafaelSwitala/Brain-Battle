@@ -115,7 +115,7 @@ const Anleitungen = () => {
           <p className='pInhalt'>Speichere den „backup“-Ordner an einem Ort, den du leicht findest (z.B. Desktop).</p>
           <p className='pInhalt'>Öffne in Visual Studio Code das Terminal mit „STRG + Ö“ und gib „git pull --all“ ein.</p>
           <p className='pInhalt'>Nach dem Download führe „npm install“ aus, um alle Abhängigkeiten zu aktualisieren.</p>
-          <p className='pInhalt'>Gebe im Terminal folgenden Befehl ein: git checkout release/versionsNummer</p>
+          <p className='pInhalt'>Gebe im Terminal folgenden Befehl ein: git checkout release/1.x.y</p>
           <p className='pInhalt'>Kopiere den Inhalt des „backup“-Ordners zurück in den „public“-Ordner und bestätige das Überschreiben der Dateien.</p>
           <p className='pInhalt'>Nun kannst du die Anwendung wie gewohnt starten und die neue Version verwenden!</p>
       </Tab>
