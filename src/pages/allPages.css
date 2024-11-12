@@ -154,26 +154,26 @@
   border: 2px solid var(--white) !important;
 }
 
-.timerButton {
-  display: block !important;
-  background-color: yellow !important;
-  color: black !important;
-}
-
 .beantwortenButton {
   display: inline-block !important;
   margin-top: 50px;
   margin-bottom: 50px;
   width: 200px !important;
   height: 80px !important;
-  border: 2px solid green !important;
+  border: 2px solid var(--darkgrey) !important;
   font-size: 30px !important;
   font-weight: 600 !important;
+}
+
+.beantwortenButton:hover {
+  background-color: var(--cream) !important;
+  color: var(--darkgrey) !important;
 }
 
 .richtigButton {
   background-color: green !important;
   margin-right: 26px;
+  margin-left: 350px;
 }
 
 .falschButton {
@@ -190,7 +190,24 @@
 }
 
 .modalQuestion {
-  background-color: green !important;
+  margin-left: auto;
+  font-size: 40px !important;
+  font-weight: 800 !important;
+}
+
+.questionText {
+  color: var(--cream);
+  background-color: var(--darkBlue);
+  border-radius: 20px;
+  padding: 20px;
+  height: 320px;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.quizModal {
+  margin-left: -330px !important;
+  margin-top: 50px;
 }
 
 .modalBody {
@@ -223,6 +240,49 @@
   margin-bottom: 20px !important;
   padding-bottom: 6px !important;
   border: 3px solid black !important;
+}
+
+.antwortoptionenAnzeigenButton,
+.timerButton {
+  display: block !important;
+  color: var(--cream) !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  height: 40px !important;
+  width: 1125px !important;
+  background-color: var(--darkBlue) !important;
+  border: none !important;
+}
+
+.antwortoptionenAnzeigenButton:hover {
+  background-color: var(--darkBlueHover) !important;
+  color: white !important;
+}
+
+.timerButton {
+  background-color: var(--cream) !important;
+  color: var(--darkgrey) !important;
+  border: 2px solid var(--darkgrey) !important;
+}
+
+.timerButton:hover {
+  background-color: var(--gold) !important;
+}
+
+.antwortOptionen {
+  width: 800px;
+  height: 50px;
+  color: var(--darkBlue) !important;
+  font-weight: 500 !important;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid var(--darkBlue) !important;
+}
+
+.antwortOptionen:hover {
+  color: var(--darkBlue) !important;
+  background-color: var(--gold) !important;
+  border: 2px solid var(--darkBlue) !important;
 }
 
 .quiz-settings {
@@ -442,14 +502,14 @@
 }
 
 .category-header {
-  background-color: var(--red);
-  color: black;
-  font-weight: 800;
+  background-color: var(--darkBlue);
+  color: var(--cream);
+  font-weight: 600;
   font-size: 24px;
 }
 
 .category-header:hover {
-  background-color: var(--red);
+  background-color: var(--darkBlue);
 }
 
 .wer-spielt-mit {
@@ -458,10 +518,6 @@
   height: 500px;
 }
 
-
-
-
-
 .tabelle-container {
   background-color: var(--darkgrey);
   border: 2px solid var(--darkgrey);
@@ -469,7 +525,6 @@
   color: white;
   padding: 15px;
   margin-right: 20px;
-  /* display: block !important; */
 }
 
 .spieler-tabelle {
@@ -477,7 +532,6 @@
   font-size: 24px;
   margin-bottom: 30px;
   height: 100px;
-  border: 1px solid yellow;
   overflow: auto !important;
 }
 

@@ -373,7 +373,7 @@ const QuizSpielen = () => {
                   </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className='modalBody'>
-                  {selectedQuestion.question} <br />
+                  <div className="questionText">{selectedQuestion.question}</div>
                   <h5>Zeit verbleibend: {timer} Sekunden</h5>
 
                   {!isTimerRunning && (
@@ -396,7 +396,7 @@ const QuizSpielen = () => {
                     Falsch
                   </Button>
 
-                  <Button onClick={toggleContentVisibility} variant="primary">
+                  <Button onClick={toggleContentVisibility} variant="primary" className='antwortoptionenAnzeigenButton'>
                     {isContentVisible ? "Schließen" : "Antwortmöglichkeiten anzeigen"}
                   </Button>
 
@@ -407,7 +407,7 @@ const QuizSpielen = () => {
                           <Button
                             key={index}
                             variant="outline-primary"
-                            className="d-block mb-2"
+                            className="d-block mb-2 antwortOptionen"
                             onClick={() => handleAnswerClick(option === selectedQuestion.answer)}
                           >
                             {option}
