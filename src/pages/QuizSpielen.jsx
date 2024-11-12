@@ -36,6 +36,7 @@ const QuizSpielen = () => {
     const loadQuiz = async () => {
       try {
         const response = await fetch(`/erstellteQuize/${quizName}.json`);
+        if (!response.ok) throw new Error("Fehler beim Laden des Quizdaten.");
         const data = await response.json();
         setQuizData(data);
         setIncorrectAnswerBehavior(data.settings.incorrectAnswerBehavior);
@@ -44,6 +45,7 @@ const QuizSpielen = () => {
         console.error("Fehler beim Laden des Quiz:", error);
       }
     };
+    
 
     loadQuiz();
   }, [quizName]);
@@ -51,25 +53,31 @@ const QuizSpielen = () => {
   const handleCellClick = (question) => {
     if (!answeredQuestions.has(question)) {
       setSelectedQuestion(question);
-      setTimer(question.timer || 0);
+      const questionTimer = quizData.settings.timer || 0;
+      setTimer(questionTimer);
       setIsTimerRunning(false);
       setIsContentVisible(false);
     }
   };
+  
 
   const shuffleOptions = (options) => {
     return options.sort(() => Math.random() - 0.5);
   };
 
   const handleCheckboxChange = (spielerName) => {
-    setSelectedSpieler(prevSelected => {
+    setSelectedSpieler((prevSelected) => {
       if (prevSelected.includes(spielerName)) {
-        return prevSelected.filter(name => name !== spielerName);
-      } else {
+        return prevSelected.filter((name) => name !== spielerName);
+      } else if (prevSelected.length < 8) {
         return [...prevSelected, spielerName];
+      } else {
+        alert("Maximal 8 Spieler können ausgewählt werden.");
+        return prevSelected;
       }
     });
   };
+  
 
   const handleConfirmSpieler = () => {
     if (selectedSpieler.length > 0) {
@@ -129,8 +137,9 @@ const QuizSpielen = () => {
           });
           break;
         default:
-          console.error("Unbekanntes Verhalten bei falscher Antwort");
+          console.warn("Unbekanntes Verhalten bei falscher Antwort:", incorrectAnswerBehavior);
       }
+      
     }
   
     setAnsweredQuestions(prevAnswered => new Set(prevAnswered).add(selectedQuestion));
@@ -143,8 +152,11 @@ const QuizSpielen = () => {
   
 
   const handleTimerStart = () => {
-    setIsTimerRunning(true);
+    if (timer > 0) {
+      setIsTimerRunning(true);
+    }
   };
+  
 
   useEffect(() => {
     let interval;
@@ -152,12 +164,14 @@ const QuizSpielen = () => {
       interval = setInterval(() => {
         setTimer(prevTimer => Math.max(prevTimer - 1, 0));
       }, 1000);
-    } else if (timer === 0) {
+    } else if (timer === 0 && isTimerRunning) {
       handleAnswerClick(false);
+      setIsTimerRunning(false);
     }
-
+  
     return () => clearInterval(interval);
   }, [isTimerRunning, timer]);
+  
 
   const saveResults = async () => {
     const results = {
@@ -274,16 +288,14 @@ const QuizSpielen = () => {
 
                <div className='individuellePunkte'>
                 <Form.Group controlId="individuellePunkteSpieler">
-                  <Form.Label>Spieler auswählen:</Form.Label>
-                  <Form.Select value={spielerReihenfolge[currentSpielerIndex]} onChange={(e) => {}}>
+                  <Form.Label className='hiddenElement'>Spieler auswählen:</Form.Label>
+                  <Form.Select className='hiddenElement' value={spielerReihenfolge[currentSpielerIndex]} onChange={(e) => {}}>
                     {spielerReihenfolge.map((spielerName, index) => (
-                      <option key={index} value={spielerName}>
+                      <option className='hiddenElement' key={index} value={spielerName}>
                         {spielerName}
                       </option>
                     ))}
                   </Form.Select>
-
-
                 </Form.Group>
 
                 <Form.Group controlId="punkteInput">
@@ -317,7 +329,7 @@ const QuizSpielen = () => {
                 <Button
                   variant="primary"
                   onClick={() => {
-                    if (currentSpieler && !isNaN(punkteAnpassen)) {
+                    if (currentSpieler && Number.isFinite(punkteAnpassen)) {
                       setSpielerPunkte((prevPunkte) => ({
                         ...prevPunkte,
                         [currentSpieler]: Math.max(
@@ -327,6 +339,7 @@ const QuizSpielen = () => {
                       }));
                     }
                   }}
+                  
                 >
                   Punkte aktualisieren
                 </Button>
@@ -340,7 +353,7 @@ const QuizSpielen = () => {
           </div>
 
           <div className='quizSpielenQuiz'>
-            <div className='mainPage-container'>
+            <div className='mainPage-container quiz-container'>
               <div className="grid-container" style={{ gridTemplateColumns: `repeat(${categories.length}, 1fr)` }}>
                 {categories.map((category, index) => (
                   <div key={index} className="grid-cell category-header">{category}</div>
@@ -371,14 +384,14 @@ const QuizSpielen = () => {
                   </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className='modalBody'>
-                  {selectedQuestion.question} <br />
-                  <h5>Zeit verbleibend: {timer} Sekunden</h5>
+                  <div className="questionText">{selectedQuestion.question}</div>
 
                   {!isTimerRunning && (
                     <Button className='timerButton' onClick={handleTimerStart}>
                       Start Timer
                     </Button>
                   )}
+                  <h5>Zeit verbleibend: {timer} Sekunden</h5>
 
                   <Button
                     className='beantwortenButton richtigButton'
@@ -394,7 +407,7 @@ const QuizSpielen = () => {
                     Falsch
                   </Button>
 
-                  <Button onClick={toggleContentVisibility} variant="primary">
+                  <Button onClick={toggleContentVisibility} variant="primary" className='antwortoptionenAnzeigenButton'>
                     {isContentVisible ? "Schließen" : "Antwortmöglichkeiten anzeigen"}
                   </Button>
 
@@ -405,7 +418,7 @@ const QuizSpielen = () => {
                           <Button
                             key={index}
                             variant="outline-primary"
-                            className="d-block mb-2"
+                            className="d-block mb-2 antwortOptionen"
                             onClick={() => handleAnswerClick(option === selectedQuestion.answer)}
                           >
                             {option}

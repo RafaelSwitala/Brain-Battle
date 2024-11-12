@@ -1,9 +1,24 @@
 # Tab-it-right-Bone-it-out
 Quiz erstellen
 
-Starten der Anwendung:
-node server.js im Verzeichnis:
-C:\Users\RafaelSwitala\Desktop\Rafael Switala\Hobbys und Projekte\Persönliche Weiterbildung\Programmieren\Angelo\Tab-it-right-Bone-it-out\server
+Installiere folgende Tools um die Anwendung zu nutzen:
+- Visual Studio Code
+- Git (Versionskontrollsystem)
+- Node.js
+- npm
 
-npm start im Verzeichnis:
-C:\Users\RafaelSwitala\Desktop\Rafael Switala\Hobbys und Projekte\Persönliche Weiterbildung\Programmieren\Angelo\Tab-it-right-Bone-it-out
+Installation der Anwendung
+- Navigiere zum Zielordner: Hier soll sich deine Anwendung befinden
+- Öffne Visual Studio Code und öffne den Ordner wo sich die Anwendung befinden soll
+- Öffne das Terminal von Visual Studio Code: STRG + Ö
+- Gebe folgenden Befehl ein: git clone  https://github.com/RafaelSwitala/Tab-it-right-Bone-it-out.git
+- Öffne den eben heruntergeladenen Ordner in Visual Studio Code: Tab-it-right-Bone-it-out
+- Öffne erneut das Terminal von Visual Studio Code: STRG + Ö
+- Gebe folgenden Befehl ein: npm install
+- Nach der Installation, gebe folgenden Befehl ein: git flow init
+- Drücke so lange auf Enter, bis du keine weiteren Fragen mehr gestellt bekommst
+- Gebe nun folgenden Befehl ein: git checkout release/versionsNummer
+
+Starten der Anwendung:
+- Gebe im Verzeichnis /Tab-it-right-Bone-it-out folgenden Befehl ein: npm start  
+- Gebe im Verzeichnis /Tab-it-right-Bone-it-out/server folgenden Befehl ein: node server.js 

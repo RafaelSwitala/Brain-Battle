@@ -73,6 +73,37 @@ const Anleitungen = () => {
 
       <Tab 
         className='anleitungTab'
+        eventKey="quizRegeln" 
+        title="Quiz Regeln">
+          <h4>Regeln um ein Quiz zu spielen</h4>
+          <br />
+          
+          <h5>Grundregeln</h5>
+          <p className='pInhalt'>Es können mindestens 1 Spieler und maximal 8 Spieler am Quiz teilnehmen.</p>
+          <p className='pInhalt'>Ein Quiz kann mindestens 2 und maximal 8 Kategorien haben.</p>
+          <p className='pInhalt'>Es gibt mindestens 3 und maximal 10 Schwierigkeitslevel.</p>
+          <p className='pInhalt'></p>
+          <p className='pInhalt'></p>
+          <p className='pInhalt'></p>
+          <br /><br />
+          <h5>Übersicht für Quizmaster: Quiz Spielen</h5>
+          <p className='pInhalt'>Individuelle Punkte können nur dem aktuellen Spieler vergeben oder abgezogen werden.</p>
+          <p className='pInhalt'></p>
+          <p className='pInhalt'></p>
+          <br /><br />
+          <h5>Übersicht für Quizmaster: Quiz Übersicht</h5>
+          <p className='pInhalt'>Verhalten bei einer falschen Antwort: minus: Die zu erreichende Punktzahl wird dem Spieler abgezogen.</p>
+          <p className='pInhalt'>Verhalten bei einer falschen Antwort: retry: Die Frage wird wiederholt. Vielleicht dürfen ja die anderen Spieler antworten.</p>
+          <p className='pInhalt'>Verhalten bei einer falschen Antwort: none: Das Quiz geht weiter. Der Spieler der falsch geantwortet hat, verliert und gewinnt keine Pnkte.</p>
+          <p className='pInhalt'>Verhalten bei einer falschen Antwort: skip: Das Quiz geht weiter. Der Spieler der falsch geantwortet hat, verliert und gewinnt keine Pnkte.</p>
+          <p className='pInhalt'>Verhalten bei geöffneten Antwortmöglichkeiten: full: Durch das Öffnen der Antwortmöglichkeiten, ist es immer noch möglich, die volle Punktzahl zu erhalten.</p>
+          <p className='pInhalt'>Verhalten bei geöffneten Antwortmöglichkeiten: half: Durch das Öffnen der Antwortmöglichkeiten, ist es nur noch möglich, die halbe Punktzahl zu erhalten.</p>
+          <br /><br />
+          
+      </Tab>
+
+      <Tab 
+        className='anleitungTab'
         eventKey="versionsUpdate" 
         title="Versions-Update">
           <h4>Versions-Update</h4>

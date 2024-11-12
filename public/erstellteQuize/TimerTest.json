@@ -1,117 +1,96 @@
 {
-  "name": "BeispielFULL",
+  "name": "TimerTest",
   "settings": {
     "timer": 15,
-    "incorrectAnswerBehavior": "none",
-    "openOptionsBehavior": "none"
+    "incorrectAnswerBehavior": "minus",
+    "openOptionsBehavior": "half"
   },
   "categories": [
-    "",
-    "",
-    ""
+    "1",
+    "2",
+    "3"
   ],
   "questions": [
     {
-      "category": "",
+      "category": "1",
       "points": 100,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "",
+      "category": "1",
       "points": 200,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "",
+      "category": "1",
       "points": 300,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "",
+      "category": "1",
       "points": 400,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "",
-      "points": 500,
-      "question": "",
-      "answer": "",
-      "options": []
-    },
-    {
-      "category": "",
+      "category": "2",
       "points": 100,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "",
+      "category": "2",
       "points": 200,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "",
+      "category": "2",
       "points": 300,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "",
+      "category": "2",
       "points": 400,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "",
-      "points": 500,
-      "question": "",
-      "answer": "",
-      "options": []
-    },
-    {
-      "category": "",
+      "category": "3",
       "points": 100,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "",
+      "category": "3",
       "points": 200,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "",
+      "category": "3",
       "points": 300,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "",
+      "category": "3",
       "points": 400,
-      "question": "",
-      "answer": "",
-      "options": []
-    },
-    {
-      "category": "",
-      "points": 500,
       "question": "",
       "answer": "",
       "options": []
