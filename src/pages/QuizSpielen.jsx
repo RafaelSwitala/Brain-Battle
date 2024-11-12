@@ -62,14 +62,18 @@ const QuizSpielen = () => {
   };
 
   const handleCheckboxChange = (spielerName) => {
-    setSelectedSpieler(prevSelected => {
+    setSelectedSpieler((prevSelected) => {
       if (prevSelected.includes(spielerName)) {
-        return prevSelected.filter(name => name !== spielerName);
-      } else {
+        return prevSelected.filter((name) => name !== spielerName);
+      } else if (prevSelected.length < 8) {
         return [...prevSelected, spielerName];
+      } else {
+        alert("Maximal 8 Spieler können ausgewählt werden.");
+        return prevSelected;
       }
     });
   };
+  
 
   const handleConfirmSpieler = () => {
     if (selectedSpieler.length > 0) {

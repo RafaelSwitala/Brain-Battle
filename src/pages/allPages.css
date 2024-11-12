@@ -489,8 +489,6 @@
   border-bottom: 3px solid white;
 }
 
-
-
 .spieler-tabelle > thead {
   border-bottom: 3px solid white;
 }
@@ -502,7 +500,6 @@
 .individuellePunkte {
   height: 190px;
   width: 250px;
-  margin-bottom: 50px;
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
@@ -604,7 +601,7 @@ li button {
   background-color: var(--darkgrey);
   height: 60px;
   display: inline-block;
-  width: 610px;
+  width: 460px;
   border: 2px solid var(--cream);
   margin-right: auto !important;
 }
