@@ -177,37 +177,20 @@ const QuizErstellen = ({ show, onHide }) => {
 
   return (
     <Modal
-      className='quizModal'
+      className='quizModal quizErstellenModal'
       show={show}
       onHide={onHide}
       size="xl"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-    <Modal.Header className='modalHeader' closeButton>
-      <Modal.Title id="contained-modal-title-vcenter">
-        Neues Quiz Erstellen
-      </Modal.Title>
-    </Modal.Header>
+      <Modal.Header className='modalHeader' closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Neues Quiz Erstellen
+        </Modal.Title>
+      </Modal.Header>
 
       <Modal.Body className='modalBody'>
-        <Modal show={showOverwriteDialog} onHide={() => setShowOverwriteDialog(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Quizname existiert bereits</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>Ein Quiz mit diesem Namen existiert bereits. Möchten Sie den Namen ändern oder das bestehende Quiz überschreiben?</p>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleRenameQuiz}>
-              Namen ändern
-            </Button>
-            <Button variant="primary" onClick={handleOverwriteConfirm}>
-              Überschreiben
-            </Button>
-          </Modal.Footer>
-        </Modal>
-
         {currentPage === 1 && (
       <>
           <Form>
@@ -267,9 +250,6 @@ const QuizErstellen = ({ show, onHide }) => {
           </Form.Select>
         </div>
         <br />
-        <Button className="button-1" onClick={generateQuestions}>
-          Fragenfelder generieren
-        </Button>
       </>
     )}
 
@@ -344,25 +324,11 @@ const QuizErstellen = ({ show, onHide }) => {
             </div>
           ))}
         </div>
-
-        <Button className="button-secondary" onClick={() => setCurrentPage(1)}>
-          Zurück zu Seite 1
-        </Button>
-        <Button 
-          className="button-secondary weiterButton" 
-          onClick={() => setCurrentPage(3)}
-          disabled={!areAllCategoriesFilled()}
-        >
-          Weiter zu Seite 3
-        </Button>
-
-
       </>
     )}
 
     {currentPage === 3 && (
       <>
-        {/* Seite 3: Weitere Einstellungen */}
         <Form.Group controlId="timer">
           <Form.Label>Timer-Dauer:</Form.Label>
           <Form.Select value={timer} onChange={(e) => setTimer(Number(e.target.value))}>
@@ -389,16 +355,42 @@ const QuizErstellen = ({ show, onHide }) => {
             <option value="half">Die Punktzahl halbiert sich</option>
           </Form.Select>
         </Form.Group>
+      </>
+    )}
+  </Modal.Body>
+  <Modal.Footer className='modalFooter'>
+  {currentPage === 1 && (
+      <>
+        <Button className="button-1" onClick={generateQuestions}>
+          Fragenfelder generieren
+        </Button>
+      </>
+    )}
 
+    {currentPage === 2 && (
+      <>
+        <Button className="button-secondary" onClick={() => setCurrentPage(1)}>
+          Zurück zu Seite 1
+        </Button>
+        <Button 
+          className="button-secondary weiterButton" 
+          onClick={() => setCurrentPage(3)}
+          disabled={!areAllCategoriesFilled()}
+        >
+          Weiter zu Seite 3
+        </Button>
+      </>
+    )}
+
+    {currentPage === 3 && (
+      <>
         <Button className="button-secondary" onClick={() => setCurrentPage(2)}>
           Zurück zu Seite 2
         </Button>
         <Button className="button-secondary weiterButton" onClick={handleCreateJson}>Quiz erstellen</Button>
       </>
     )}
-
-
-  </Modal.Body>
+  </Modal.Footer>
 </Modal>
 
   );

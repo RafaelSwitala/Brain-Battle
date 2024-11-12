@@ -1,0 +1,20 @@
+{
+  "name": "fsfsf",
+  "settings": {
+    "timer": 30,
+    "incorrectAnswerBehavior": "retry",
+    "openOptionsBehavior": "half"
+  },
+  "categories": [
+    "sfgfs"
+  ],
+  "questions": [
+    {
+      "category": "sfgfs",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    }
+  ]
+}

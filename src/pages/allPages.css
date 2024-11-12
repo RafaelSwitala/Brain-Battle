@@ -127,7 +127,7 @@
     font-weight: bold !important;
     text-decoration: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
-    margin-top: 20px !important; 
+    margin-top: -15px !important; 
 }
 
 .button-1:hover {
@@ -210,6 +210,11 @@
   margin-top: 50px;
 }
 
+.quizErstellenModal {
+  margin-left: 50px !important;
+  margin-top: -50px;
+}
+
 .modalBody {
   background-color: var(--cream) !important;
   border-right: 15px solid var(--darkgrey);
@@ -225,7 +230,7 @@
   color: var(--cream);
   border: none !important;
   border-radius: 0 !important;
-  height: 7%;
+  height: 9%;
 }
 
 .modalText {
