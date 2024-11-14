@@ -1,0 +1,128 @@
+{
+  "name": "WIKAWIKA",
+  "settings": {
+    "timer": 15,
+    "incorrectAnswerBehavior": "none",
+    "openOptionsBehavior": "none"
+  },
+  "categories": [
+    "dyfhhydf",
+    "dcghxdgh",
+    "fg",
+    "fgffjd"
+  ],
+  "questions": [
+    {
+      "category": "dyfhhydf",
+      "points": 1,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dyfhhydf",
+      "points": 2,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dyfhhydf",
+      "points": 3,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dyfhhydf",
+      "points": 4,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dcghxdgh",
+      "points": 1,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dcghxdgh",
+      "points": 2,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dcghxdgh",
+      "points": 3,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dcghxdgh",
+      "points": 4,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fg",
+      "points": 1,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fg",
+      "points": 2,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fg",
+      "points": 3,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fg",
+      "points": 4,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fgffjd",
+      "points": 1,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fgffjd",
+      "points": 2,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fgffjd",
+      "points": 3,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fgffjd",
+      "points": 4,
+      "question": "",
+      "answer": "",
+      "options": []
+    }
+  ]
+}
