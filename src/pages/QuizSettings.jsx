@@ -1,10 +1,11 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import './allPages.css';
 
 const QuizSettings = ({
   quizName,
-  setQuizName,
+  handleQuizNameChange,
   isQuiznameValid,
   categoryCount,
   setCategoryCount,
@@ -23,7 +24,7 @@ const QuizSettings = ({
             type="text"
             placeholder="Gib den Namen des Quizzes ein"
             value={quizName}
-            onChange={(e) => setQuizName(e.target.value)}
+            onChange={handleQuizNameChange}
             className={isQuiznameValid(quizName) ? '' : 'is-invalid'}
           />
         </Form.Group>

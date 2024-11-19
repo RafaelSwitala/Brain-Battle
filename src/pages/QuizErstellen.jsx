@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import './allPages.css';
 
 import QuizSettings from './QuizSettings';
@@ -125,6 +124,13 @@ const QuizErstellen = ({ show, onHide }) => {
     setShowOverwriteDialog(false);
   };
 
+  const handleQuizNameChange = (e) => {
+    const input = e.target.value;
+    const formattedInput = input.replace(/\s+/g, '-');
+    setQuizName(formattedInput);
+  };
+  
+
   return (
     <Modal
       className="quizModal quizErstellenModal"
@@ -144,6 +150,7 @@ const QuizErstellen = ({ show, onHide }) => {
           <QuizSettings
             quizName={quizName}
             setQuizName={setQuizName}
+            handleQuizNameChange={handleQuizNameChange}
             isQuiznameValid={isQuiznameValid}
             categoryCount={categoryCount}
             setCategoryCount={setCategoryCount}
@@ -153,6 +160,7 @@ const QuizErstellen = ({ show, onHide }) => {
             setPointStep={setPointStep}
             generateQuestions={generateQuestions}
           />
+
         )}
         {currentPage === 2 && (
           <div>
@@ -164,7 +172,7 @@ const QuizErstellen = ({ show, onHide }) => {
             <QuestionEditor
               questions={questions}
               setQuestions={setQuestions}
-              categoryIndex={categories.findIndex((c) => c.trim() !== '')} // Beispielhafter Index
+              categoryIndex={categories.findIndex((c) => c.trim() !== '')}
               rowsPerCategory={rowCount}
             />
           </div>
