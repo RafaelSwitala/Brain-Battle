@@ -18,37 +18,51 @@ const SpielerVerwaltung = () => {
   };
 
   const addSpieler = async () => {
-    if (spielerName) {
-      if (!spielerList.includes(spielerName)) {
-        const neueSpielerList = [...spielerList, spielerName];
-        try {
-          await axios.post('http://localhost:5000/api/spieler', neueSpielerList);
-          setSpielerList(neueSpielerList);
-          setSpielerName('');
-        } catch (error) {
-          console.error('Fehler beim Hinzufügen des Spielers:', error);
-        }
-      } else {
-        alert('Spieler ist bereits in der Liste.');
-      }
-    } else {
+    if (!spielerName) {
       alert('Bitte geben Sie einen Spielernamen ein.');
+      return;
+    }
+    if (spielerName.length > 18) {
+      alert('Der Spielername darf maximal 18 Zeichen enthalten.');
+      return;
+    }
+    if (spielerList.includes(spielerName)) {
+      alert('Spieler ist bereits in der Liste.');
+      return;
+    }
+
+    const neueSpielerList = [...spielerList, spielerName];
+    try {
+      await axios.post('http://localhost:5000/api/spieler', neueSpielerList);
+      setSpielerList(neueSpielerList);
+      setSpielerName('');
+    } catch (error) {
+      console.error('Fehler beim Hinzufügen des Spielers:', error);
     }
   };
 
   const updateSpieler = async () => {
-    if (bearbeitenIndex !== null) {
-      const neueSpielerList = [...spielerList];
-      neueSpielerList[bearbeitenIndex] = bearbeiteterSpieler;
+    if (bearbeitenIndex === null) return;
 
-      try {
-        await axios.post('http://localhost:5000/api/spieler', neueSpielerList);
-        setSpielerList(neueSpielerList);
-        setBearbeiteterSpieler('');
-        setBearbeitenIndex(null);
-      } catch (error) {
-        console.error('Fehler beim Aktualisieren der Spieler:', error);
-      }
+    if (!bearbeiteterSpieler) {
+      alert('Bitte geben Sie einen Spielernamen ein.');
+      return;
+    }
+    if (bearbeiteterSpieler.length > 18) {
+      alert('Der Spielername darf maximal 18 Zeichen enthalten.');
+      return;
+    }
+
+    const neueSpielerList = [...spielerList];
+    neueSpielerList[bearbeitenIndex] = bearbeiteterSpieler;
+
+    try {
+      await axios.post('http://localhost:5000/api/spieler', neueSpielerList);
+      setSpielerList(neueSpielerList);
+      setBearbeiteterSpieler('');
+      setBearbeitenIndex(null);
+    } catch (error) {
+      console.error('Fehler beim Aktualisieren der Spieler:', error);
     }
   };
 
@@ -77,7 +91,7 @@ const SpielerVerwaltung = () => {
           type="text"
           value={spielerName}
           onChange={(e) => setSpielerName(e.target.value)}
-          placeholder="Spielernamen eingeben"
+          placeholder="Spielernamen eingeben (max. 18 Zeichen)"
         />
         <button onClick={addSpieler}>Spieler hinzufügen</button>
         <h4>Spielerliste</h4>
@@ -99,7 +113,7 @@ const SpielerVerwaltung = () => {
               type="text"
               value={bearbeiteterSpieler}
               onChange={(e) => setBearbeiteterSpieler(e.target.value)}
-              placeholder="Neuer Spielername"
+              placeholder="Neuer Spielername (max. 18 Zeichen)"
             />
             <button onClick={updateSpieler}>Aktualisieren</button>
             <button onClick={() => setBearbeitenIndex(null)}>Abbrechen</button>

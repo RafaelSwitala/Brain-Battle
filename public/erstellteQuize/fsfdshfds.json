@@ -1,0 +1,272 @@
+{
+  "name": "fsfdshfds",
+  "settings": {
+    "timer": 60,
+    "incorrectAnswerBehavior": "end",
+    "openOptionsBehavior": "custom"
+  },
+  "categories": [
+    "sfd",
+    "sfd",
+    "sdf",
+    "fsd",
+    "sdf",
+    "sfd"
+  ],
+  "questions": [
+    {
+      "category": "sfd",
+      "points": 10,
+      "question": "fds",
+      "answer": "sdf",
+      "options": []
+    },
+    {
+      "category": "sfd",
+      "points": 20,
+      "question": "dsf",
+      "answer": "dsf",
+      "options": []
+    },
+    {
+      "category": "sfd",
+      "points": 30,
+      "question": "fsd",
+      "answer": "fds",
+      "options": [
+        ""
+      ]
+    },
+    {
+      "category": "sfd",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sfd",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sfd",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sfd",
+      "points": 10,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sfd",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sfd",
+      "points": 30,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sfd",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sfd",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sfd",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdf",
+      "points": 10,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdf",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdf",
+      "points": 30,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdf",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdf",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdf",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fsd",
+      "points": 10,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fsd",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fsd",
+      "points": 30,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fsd",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fsd",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fsd",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdf",
+      "points": 10,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdf",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdf",
+      "points": 30,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdf",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdf",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdf",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sfd",
+      "points": 10,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sfd",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sfd",
+      "points": 30,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sfd",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sfd",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sfd",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    }
+  ]
+}
