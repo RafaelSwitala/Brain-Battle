@@ -28,19 +28,18 @@ const FinalSettings = ({
           onChange={(e) => setIncorrectAnswerBehavior(e.target.value)}
         >
           <option value="none">Kein Punktabzug</option>
-          <option value="lose">Punkte abziehen</option>
+          <option value="minus">Punkte abziehen</option>
           <option value="end">Quiz beenden</option>
         </Form.Select>
       </Form.Group>
       <Form.Group controlId="openOptionsBehavior">
-        <Form.Label>Offene Optionen:</Form.Label>
+        <Form.Label>Verhalten beim öffnen der Antwortmöglichkeiten:</Form.Label>
         <Form.Select
           value={openOptionsBehavior}
           onChange={(e) => setOpenOptionsBehavior(e.target.value)}
         >
-          <option value="none">Keine Option</option>
-          <option value="random">Zufällige Frage</option>
-          <option value="custom">Benutzerdefiniert</option>
+          <option value="full">Volle Punktzahl möglich</option>
+          <option value="half">Halbe Punktzahl</option>
         </Form.Select>
       </Form.Group>
     </>
