@@ -9,7 +9,7 @@ const NavBar = () => {
       <Link to="/">
         <div className="navbar-logo"></div>
       </Link>
-      <h2 className='navbarTitle'>Tab It Right, Bone It Out</h2>
+      <h2 className='navbarTitle'>Brain Battle</h2>
     </nav>
   );
 };
