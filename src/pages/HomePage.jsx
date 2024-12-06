@@ -141,7 +141,8 @@ const HomePage = () => {
                         {quiz.scoreSteps}
                       </Link>
                     </td>
-                    <td className='loeschenIcon' onClick={() => handleDeleteClick(quiz.name)}></td>
+                    <td className='bearbeitenIcon'></td>
+                    {/* <td className='loeschenIcon' onClick={() => handleDeleteClick(quiz.name)}></td> */}
                   </tr>
                 ))
               ) : (
