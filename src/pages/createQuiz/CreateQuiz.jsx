@@ -8,7 +8,7 @@ import CategoryInput from './CategoryInput';
 import QuestionEditor from './QuestionEditor';
 import FinalSettings from './FinalSettings';
 
-const QuizErstellen = ({ show, onHide }) => {
+const CreateQuiz = ({ show, onHide }) => {
   const [quizName, setQuizName] = useState('');
   const [questions, setQuestions] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -218,4 +218,4 @@ const QuizErstellen = ({ show, onHide }) => {
   );
 };
 
-export default QuizErstellen;
+export default CreateQuiz;
