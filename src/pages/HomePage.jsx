@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Table, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import CreateQuiz from './createQuiz/CreateQuiz';
+import EditQuiz from './editQuiz/EditQuiz';
 
 const HomePage = () => {
   const [quizFiles, setQuizFiles] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [quizToDelete, setQuizToDelete] = useState(null);
+  const [editModalShow, setEditModalShow] = useState(false); 
+  const [quizToEdit, setQuizToEdit] = useState(null); 
 
   useEffect(() => {
     const loadQuizFiles = async () => {
@@ -52,10 +55,10 @@ const HomePage = () => {
     loadQuizFiles();
   }, []);
 
-  const handleDeleteClick = (quizName) => {
-    setQuizToDelete(quizName);
-    setShowDeleteModal(true);
-  };
+  // const handleDeleteClick = (quizName) => {
+  //   setQuizToDelete(quizName);
+  //   setShowDeleteModal(true);
+  // };
 
   const confirmDeleteQuiz = async () => {
     try {
@@ -70,6 +73,16 @@ const HomePage = () => {
     } catch (error) {
       console.error("Error deleting quiz:", error);
     }
+  };
+
+  const openEditModal = (quiz) => {
+    setQuizToEdit(quiz);
+    setEditModalShow(true);
+  };
+
+  const closeEditModal = () => {
+    setQuizToEdit(null);
+    setEditModalShow(false);
   };
 
   return (
@@ -141,7 +154,7 @@ const HomePage = () => {
                         {quiz.scoreSteps}
                       </Link>
                     </td>
-                    <td className='bearbeitenIcon'></td>
+                    <td className='bearbeitenIcon' onClick={() => openEditModal(quiz)}></td>
                     {/* <td className='loeschenIcon' onClick={() => handleDeleteClick(quiz.name)}></td> */}
                   </tr>
                 ))
@@ -172,6 +185,19 @@ const HomePage = () => {
             Löschen
           </Button>
         </Modal.Footer>
+      </Modal>
+
+      <Modal 
+        show={editModalShow} 
+        onHide={closeEditModal}
+        size="lg"
+        centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Quiz bearbeiten</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <EditQuiz quizData={quizToEdit} onClose={closeEditModal} />
+        </Modal.Body>
       </Modal>
 
     </Container>

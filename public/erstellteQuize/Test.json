@@ -1,0 +1,120 @@
+{
+  "name": "Test",
+  "settings": {
+    "timer": 30,
+    "incorrectAnswerBehavior": "minus",
+    "openOptionsBehavior": "none"
+  },
+  "categories": [
+    "dd",
+    "ddd",
+    "ddddd"
+  ],
+  "questions": [
+    {
+      "category": "dd",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dd",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dd",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dd",
+      "points": 400,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dd",
+      "points": 500,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ddd",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ddd",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ddd",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ddd",
+      "points": 400,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ddd",
+      "points": 500,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ddddd",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ddddd",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ddddd",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ddddd",
+      "points": 400,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ddddd",
+      "points": 500,
+      "question": "",
+      "answer": "",
+      "options": []
+    }
+  ]
+}
