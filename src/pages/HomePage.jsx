@@ -8,8 +8,6 @@ const HomePage = () => {
   const [modalShow, setModalShow] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [quizToDelete, setQuizToDelete] = useState(null);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [quizToEdit, setQuizToEdit] = useState(null);
 
   useEffect(() => {
     const loadQuizFiles = async () => {
@@ -59,11 +57,6 @@ const HomePage = () => {
     setShowDeleteModal(true);
   };
 
-  const handleEditClick = (quizName) => {
-    setQuizToEdit(quizName);
-    setShowEditModal(true);
-  };
-
   const confirmDeleteQuiz = async () => {
     try {
       const response = await fetch(`http://localhost:5000/api/deleteQuiz/${quizToDelete}`, { method: 'DELETE' });
@@ -76,21 +69,6 @@ const HomePage = () => {
       }
     } catch (error) {
       console.error("Error deleting quiz:", error);
-    }
-  };
-
-  const confirmEditQuiz = async () => {
-    try {
-      const response = await fetch(`http://localhost:5000/api/editQuiz/${quizToEdit}`, { method: 'POST' });
-      if (response.ok) {
-        setQuizFiles(prevFiles => prevFiles.filter(quiz => quiz.name !== quizToEdit));
-        setShowEditModal(false);
-        setQuizToEdit(null);
-      } else {
-        console.error('Error editing quiz:', response.statusText);
-      }
-    } catch (error) {
-      console.error("Error editing quiz:", error);
     }
   };
 
@@ -195,25 +173,6 @@ const HomePage = () => {
         </Modal.Footer>
       </Modal>
 
-      <Modal 
-        className='bearbeitenModal'
-        show={showEditModal} 
-        onHide={() => setShowEditModal(false)}>
-        <Modal.Header className='editModalHeader' closeButton>
-          <Modal.Title>Quiz: "{quizToEdit}" bearbeiten</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className='editModalBody'>
-          
-          </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowEditModal(false)}>
-            Abbrechen
-          </Button>
-          <Button variant="danger" onClick={confirmEditQuiz}>
-            Bearbeiten
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </Container>
   );
 };
