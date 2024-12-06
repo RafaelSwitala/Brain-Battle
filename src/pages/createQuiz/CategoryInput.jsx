@@ -1,6 +1,6 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
-import './allPages.css';
+import '../allPages.css';
 
 const CategoryInput = ({ categories, setCategories }) => {
   const handleCategoryChange = (index, value) => {

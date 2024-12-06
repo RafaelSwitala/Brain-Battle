@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import './allPages.css';
+import '../allPages.css';
 
 import QuizSettings from './QuizSettings';
 import CategoryInput from './CategoryInput';

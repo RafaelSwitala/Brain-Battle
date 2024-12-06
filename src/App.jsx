@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
-import QuizErstellen from './pages/QuizErstellen';
+import CreateQuiz from './pages/createQuiz/CreateQuiz';
 import QuizSpielen from './pages/QuizSpielen';
 import SpielerVerwaltung from './pages/SpielerVerwaltung';
 import Anleitungen from './pages/Anleitungen';
@@ -22,7 +22,7 @@ const App = () => {
         <div className='mainPage-container'>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/QuizErstellen" element={<QuizErstellen />} />
+            <Route path="/CreateQuiz" element={<CreateQuiz />} />
             <Route path="/QuizSpielen/:quizName" element={<QuizSpielen />} />
             <Route path="/Spielerverwaltung" element={<SpielerVerwaltung />} />
             <Route path="/Anleitungen" element={<Anleitungen />} />

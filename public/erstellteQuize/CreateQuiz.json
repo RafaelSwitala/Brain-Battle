@@ -1,0 +1,262 @@
+{
+  "name": "CreateQuiz",
+  "settings": {
+    "timer": 15,
+    "incorrectAnswerBehavior": "none",
+    "openOptionsBehavior": "none"
+  },
+  "categories": [
+    "f",
+    "ff",
+    "fff",
+    "fff",
+    "ffff"
+  ],
+  "questions": [
+    {
+      "category": "f",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "f",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "f",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "f",
+      "points": 80,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "f",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "f",
+      "points": 120,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "f",
+      "points": 140,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ff",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ff",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ff",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ff",
+      "points": 80,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ff",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ff",
+      "points": 120,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ff",
+      "points": 140,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fff",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fff",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fff",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fff",
+      "points": 80,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fff",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fff",
+      "points": 120,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fff",
+      "points": 140,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fff",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fff",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fff",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fff",
+      "points": 80,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fff",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fff",
+      "points": 120,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fff",
+      "points": 140,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ffff",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ffff",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ffff",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ffff",
+      "points": 80,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ffff",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ffff",
+      "points": 120,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ffff",
+      "points": 140,
+      "question": "",
+      "answer": "",
+      "options": []
+    }
+  ]
+}

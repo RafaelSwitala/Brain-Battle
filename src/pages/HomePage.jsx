@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Table, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import QuizErstellen from './QuizErstellen';
+import QuizErstellen from './createQuiz/CreateQuiz';
 
 const HomePage = () => {
   const [quizFiles, setQuizFiles] = useState([]);

@@ -1,0 +1,184 @@
+{
+  "name": "Alle-Verschoben",
+  "settings": {
+    "timer": 30,
+    "incorrectAnswerBehavior": "minus",
+    "openOptionsBehavior": "half"
+  },
+  "categories": [
+    "1",
+    "22",
+    "333",
+    "444"
+  ],
+  "questions": [
+    {
+      "category": "1",
+      "points": 10,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "1",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "1",
+      "points": 30,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "1",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "1",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "1",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "22",
+      "points": 10,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "22",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "22",
+      "points": 30,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "22",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "22",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "22",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "333",
+      "points": 10,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "333",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "333",
+      "points": 30,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "333",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "333",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "333",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "444",
+      "points": 10,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "444",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "444",
+      "points": 30,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "444",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "444",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "444",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    }
+  ]
+}

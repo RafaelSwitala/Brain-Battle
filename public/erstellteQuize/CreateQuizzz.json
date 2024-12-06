@@ -1,0 +1,212 @@
+{
+  "name": "CreateQuizzz",
+  "settings": {
+    "timer": 30,
+    "incorrectAnswerBehavior": "minus",
+    "openOptionsBehavior": "half"
+  },
+  "categories": [
+    "fsg",
+    "sdfgh",
+    "sdfh",
+    "dfsh"
+  ],
+  "questions": [
+    {
+      "category": "fsg",
+      "points": 10,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fsg",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fsg",
+      "points": 30,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fsg",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fsg",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fsg",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fsg",
+      "points": 70,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdfgh",
+      "points": 10,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdfgh",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdfgh",
+      "points": 30,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdfgh",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdfgh",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdfgh",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdfgh",
+      "points": 70,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdfh",
+      "points": 10,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdfh",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdfh",
+      "points": 30,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdfh",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdfh",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdfh",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "sdfh",
+      "points": 70,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dfsh",
+      "points": 10,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dfsh",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dfsh",
+      "points": 30,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dfsh",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dfsh",
+      "points": 50,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dfsh",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "dfsh",
+      "points": 70,
+      "question": "",
+      "answer": "",
+      "options": []
+    }
+  ]
+}
