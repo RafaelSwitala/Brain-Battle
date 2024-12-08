@@ -199,6 +199,9 @@ app.delete('/api/deleteQuizResult/:quizResultName', (req, res) => {
 
 
 
+
+
+
 // Server starten
 app.listen(PORT, () => {
   console.log(`Server läuft auf http://localhost:${PORT}`);

@@ -1,75 +1,141 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import '../allPages.css';
 
 const EditQuiz = ({ quizData }) => {
-  if (!quizData) {
+  const [quiz, setQuiz] = useState(null);
+
+  useEffect(() => {
+    console.log('Empfangenes quizData:', quizData);
+    if (quizData) {
+      // Datenstruktur anpassen, um settings hinzuzufügen
+      setQuiz({
+        ...quizData,
+        settings: {
+          timer: quizData.timerLength || 0,
+          incorrectAnswerBehavior: quizData.wrongAnswerBehavior || 'minus',
+          openOptionsBehavior: quizData.openAnswerBehavior || 'none',
+        },
+        categories: quizData.categories || [],
+      });
+    }
+  }, [quizData]);
+
+  if (!quiz || !quiz.settings) {
     return <div>Lade Daten...</div>;
   }
 
+  const handleChange = (field, value) => {
+    setQuiz((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const handleSettingsChange = (field, value) => {
+    setQuiz((prev) => ({
+      ...prev,
+      settings: {
+        ...prev.settings,
+        [field]: value,
+      },
+    }));
+  };
+
+  const handleAddCategory = () => {
+    const newCategory = prompt('Neue Kategorie eingeben:');
+    if (newCategory) {
+      setQuiz((prev) => ({
+        ...prev,
+        categories: [...prev.categories, newCategory],
+      }));
+    }
+  };
+
+  const handleSave = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/save-json', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fileName: `${quiz.name}.json`,
+          jsonData: quiz,
+        }),
+      });
+
+      if (response.ok) {
+        alert('Quiz erfolgreich gespeichert!');
+      } else {
+        const error = await response.json();
+        console.error('Fehler beim Speichern:', error);
+        alert('Fehler beim Speichern des Quiz.');
+      }
+    } catch (error) {
+      console.error('Netzwerkfehler:', error);
+      alert('Es gab einen Netzwerkfehler.');
+    }
+  };
+
   return (
     <div>
-      <h3>{`Bearbeite Quiz: ${quizData.name}`}</h3>
+      <h3>{`Bearbeite Quiz: ${quiz.name}`}</h3>
       <p>Was möchtest du bearbeiten?</p>
 
-      <Accordion eventKey="0">
+      <Accordion defaultActiveKey="0">
         <Accordion.Item eventKey="0">
           <Accordion.Header>Quiz Namen</Accordion.Header>
           <Accordion.Body>
-            <p>Aktueller Name: {quizData.name}</p>
-            <input 
-              type="text" 
-              defaultValue={quizData.name} 
-              placeholder="Neuen Quiznamen eingeben" 
+            <p>Aktueller Name: {quiz.name}</p>
+            <input
+              type="text"
+              value={quiz.name}
+              onChange={(e) => handleChange('name', e.target.value)}
+              placeholder="Neuen Quiznamen eingeben"
             />
           </Accordion.Body>
         </Accordion.Item>
 
         <Accordion.Item eventKey="1">
-          <Accordion.Header>Kategorien</Accordion.Header>
+          <Accordion.Header>Timer</Accordion.Header>
           <Accordion.Body>
-            <p>Anzahl der Kategorien: {quizData.categoryCount}</p>
-            <button>Kategorien bearbeiten</button>
+            <p>Aktuelle Dauer: {quiz.settings.timer} Sekunden</p>
+            <input
+              type="number"
+              value={quiz.settings.timer}
+              onChange={(e) => handleSettingsChange('timer', Number(e.target.value))}
+              placeholder="Neue Timer-Dauer (in Sekunden)"
+            />
           </Accordion.Body>
         </Accordion.Item>
 
         <Accordion.Item eventKey="2">
-          <Accordion.Header>Anzahl der Schwierigkeitslevel</Accordion.Header>
+          <Accordion.Header>Verhalten bei falscher Antwort</Accordion.Header>
           <Accordion.Body>
-            <p>Aktuelle Level: {quizData.scoreSteps}</p>
-            <input 
-              type="text" 
-              defaultValue={quizData.scoreSteps} 
-              placeholder="Neue Level eingeben" 
-            />
+            <p>Aktuelles Verhalten: {quiz.settings.incorrectAnswerBehavior}</p>
+            <select
+              value={quiz.settings.incorrectAnswerBehavior}
+              onChange={(e) =>
+                handleSettingsChange('incorrectAnswerBehavior', e.target.value)
+              }
+            >
+              <option value="minus">Minus Punkte</option>
+              <option value="skip">Überspringen</option>
+              <option value="endQuiz">Quiz beenden</option>
+            </select>
           </Accordion.Body>
         </Accordion.Item>
 
         <Accordion.Item eventKey="3">
-          <Accordion.Header>Punkteschritte</Accordion.Header>
+          <Accordion.Header>Verhalten beim Öffnen der Optionen</Accordion.Header>
           <Accordion.Body>
-            <p>Aktuelle Punkteschritte: {quizData.scoreSteps}</p>
-            <input 
-              type="text" 
-              defaultValue={quizData.scoreSteps} 
-              placeholder="Neue Punkteschritte eingeben" 
-            />
-          </Accordion.Body>
-        </Accordion.Item>
-
-        <Accordion.Item eventKey="4">
-          <Accordion.Header>Fragen und Antworten</Accordion.Header>
-          <Accordion.Body>
-            <p>Hier kannst du Fragen und Antworten bearbeiten.</p>
-            <button>Fragen bearbeiten</button>
-          </Accordion.Body>
-        </Accordion.Item>
-
-        <Accordion.Item eventKey="5">
-          <Accordion.Header>Verhalten beim Öffnen der Antwortoptionen</Accordion.Header>
-          <Accordion.Body>
-            <p>Aktuelles Verhalten: {quizData.openAnswerBehavior}</p>
-            <select defaultValue={quizData.openAnswerBehavior}>
+            <p>Aktuelles Verhalten: {quiz.settings.openOptionsBehavior}</p>
+            <select
+              value={quiz.settings.openOptionsBehavior}
+              onChange={(e) =>
+                handleSettingsChange('openOptionsBehavior', e.target.value)
+              }
+            >
+              <option value="none">Keine Aktion</option>
               <option value="standard">Standard</option>
               <option value="random">Zufällig</option>
               <option value="alwaysOpen">Immer offen</option>
@@ -77,32 +143,45 @@ const EditQuiz = ({ quizData }) => {
           </Accordion.Body>
         </Accordion.Item>
 
-        <Accordion.Item eventKey="6">
-          <Accordion.Header>Verhalten bei falscher Antwort</Accordion.Header>
+        <Accordion.Item eventKey="4">
+          <Accordion.Header>Kategorien</Accordion.Header>
           <Accordion.Body>
-            <p>Aktuelles Verhalten: {quizData.wrongAnswerBehavior}</p>
-            <select defaultValue={quizData.wrongAnswerBehavior}>
-              <option value="retry">Wiederholen</option>
-              <option value="skip">Überspringen</option>
-              <option value="endQuiz">Quiz beenden</option>
-            </select>
+            <ul>
+              {quiz.categories.map((category, index) => (
+                <li key={index}>{category}</li>
+              ))}
+            </ul>
+            <button onClick={handleAddCategory}>Kategorie hinzufügen</button>
           </Accordion.Body>
         </Accordion.Item>
 
-        <Accordion.Item eventKey="7">
-          <Accordion.Header>Dauer des Timers</Accordion.Header>
+        <Accordion.Item eventKey="5">
+          <Accordion.Header>Fragen und Antworten</Accordion.Header>
           <Accordion.Body>
-            <p>Aktuelle Dauer: {quizData.timerLength} Sekunden</p>
-            <input 
-              type="number" 
-              defaultValue={quizData.timerLength} 
-              placeholder="Neue Timer-Dauer (in Sekunden)" 
+            <p>Hier kannst du die Fragen und Antworten bearbeiten.</p>
+            <button onClick={() => alert('Funktion für das Bearbeiten der Fragen hinzufügen.')}>
+              Fragen bearbeiten
+            </button>
+          </Accordion.Body>
+        </Accordion.Item>
+
+        <Accordion.Item eventKey="6">
+          <Accordion.Header>Punkteschritte</Accordion.Header>
+          <Accordion.Body>
+            <p>Aktuelle Punkteschritte: {quiz.scoreSteps}</p>
+            <input
+              type="text"
+              value={quiz.scoreSteps}
+              onChange={(e) => handleChange('scoreSteps', e.target.value)}
+              placeholder="Neue Punkteschritte eingeben"
             />
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
 
-      <button className="save-button">Speichern</button>
+      <button className="save-button" onClick={handleSave}>
+        Speichern
+      </button>
     </div>
   );
 };
