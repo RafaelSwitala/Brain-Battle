@@ -8,18 +8,20 @@ const EditQuiz = ({ quizData }) => {
   useEffect(() => {
     console.log('Empfangenes quizData:', quizData);
     if (quizData) {
-      // Datenstruktur anpassen, um settings hinzuzufügen
       setQuiz({
         ...quizData,
         settings: {
-          timer: quizData.timerLength || 0,
-          incorrectAnswerBehavior: quizData.wrongAnswerBehavior || 'minus',
-          openOptionsBehavior: quizData.openAnswerBehavior || 'none',
+          timer: quizData.settings?.timer || 0,
+          incorrectAnswerBehavior: quizData.settings?.incorrectAnswerBehavior || 'minus',
+          openOptionsBehavior: quizData.settings?.openOptionsBehavior || 'none',
         },
-        categories: quizData.categories || [],
+        categories: Array.isArray(quizData.categories) ? quizData.categories : [],
+        questions: Array.isArray(quizData.questions) ? quizData.questions : [],
       });
     }
   }, [quizData]);
+  
+  
 
   if (!quiz || !quiz.settings) {
     return <div>Lade Daten...</div>;
@@ -81,7 +83,7 @@ const EditQuiz = ({ quizData }) => {
       <h3>{`Bearbeite Quiz: ${quiz.name}`}</h3>
       <p>Was möchtest du bearbeiten?</p>
 
-      <Accordion defaultActiveKey="0">
+      <Accordion>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Quiz Namen</Accordion.Header>
           <Accordion.Body>
@@ -144,28 +146,6 @@ const EditQuiz = ({ quizData }) => {
         </Accordion.Item>
 
         <Accordion.Item eventKey="4">
-          <Accordion.Header>Kategorien</Accordion.Header>
-          <Accordion.Body>
-            <ul>
-              {quiz.categories.map((category, index) => (
-                <li key={index}>{category}</li>
-              ))}
-            </ul>
-            <button onClick={handleAddCategory}>Kategorie hinzufügen</button>
-          </Accordion.Body>
-        </Accordion.Item>
-
-        <Accordion.Item eventKey="5">
-          <Accordion.Header>Fragen und Antworten</Accordion.Header>
-          <Accordion.Body>
-            <p>Hier kannst du die Fragen und Antworten bearbeiten.</p>
-            <button onClick={() => alert('Funktion für das Bearbeiten der Fragen hinzufügen.')}>
-              Fragen bearbeiten
-            </button>
-          </Accordion.Body>
-        </Accordion.Item>
-
-        <Accordion.Item eventKey="6">
           <Accordion.Header>Punkteschritte</Accordion.Header>
           <Accordion.Body>
             <p>Aktuelle Punkteschritte: {quiz.scoreSteps}</p>
