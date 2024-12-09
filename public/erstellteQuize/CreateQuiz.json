@@ -1,224 +1,259 @@
 {
-  "name": "sagd-sgfayg-d",
+  "name": "CreateQuiz",
   "settings": {
     "timer": 15,
     "incorrectAnswerBehavior": "none",
     "openOptionsBehavior": "none"
   },
   "categories": [
-    "ddd",
-    "dddd",
-    "ddddddd",
-    "ddddddd",
-    "ddddddddddd"
+    "f",
+    "ff",
+    "fff",
+    "fff",
+    "ffff"
   ],
   "questions": [
     {
-      "category": "ddd",
+      "category": "f",
+      "points": 20,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "f",
+      "points": 40,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "f",
+      "points": 60,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "f",
+      "points": 80,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "f",
       "points": 100,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddd",
-      "points": 200,
+      "category": "f",
+      "points": 120,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddd",
-      "points": 300,
+      "category": "f",
+      "points": 140,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddd",
-      "points": 400,
+      "category": "ff",
+      "points": 20,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddd",
-      "points": 500,
+      "category": "ff",
+      "points": 40,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddd",
-      "points": 600,
+      "category": "ff",
+      "points": 60,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "dddd",
+      "category": "ff",
+      "points": 80,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ff",
       "points": 100,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "dddd",
-      "points": 200,
+      "category": "ff",
+      "points": 120,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "dddd",
-      "points": 300,
+      "category": "ff",
+      "points": 140,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "dddd",
-      "points": 400,
+      "category": "fff",
+      "points": 20,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "dddd",
-      "points": 500,
+      "category": "fff",
+      "points": 40,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "dddd",
-      "points": 600,
+      "category": "fff",
+      "points": 60,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddddd",
+      "category": "fff",
+      "points": 80,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fff",
       "points": 100,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddddd",
-      "points": 200,
+      "category": "fff",
+      "points": 120,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddddd",
-      "points": 300,
+      "category": "fff",
+      "points": 140,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddddd",
-      "points": 400,
+      "category": "fff",
+      "points": 20,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddddd",
-      "points": 500,
+      "category": "fff",
+      "points": 40,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddddd",
-      "points": 600,
+      "category": "fff",
+      "points": 60,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddddd",
+      "category": "fff",
+      "points": 80,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "fff",
       "points": 100,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddddd",
-      "points": 200,
+      "category": "fff",
+      "points": 120,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddddd",
-      "points": 300,
+      "category": "fff",
+      "points": 140,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddddd",
-      "points": 400,
+      "category": "ffff",
+      "points": 20,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddddd",
-      "points": 500,
+      "category": "ffff",
+      "points": 40,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddddd",
-      "points": 600,
+      "category": "ffff",
+      "points": 60,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddddddddd",
+      "category": "ffff",
+      "points": 80,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ffff",
       "points": 100,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddddddddd",
-      "points": 200,
+      "category": "ffff",
+      "points": 120,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddddddddd",
-      "points": 300,
-      "question": "",
-      "answer": "",
-      "options": []
-    },
-    {
-      "category": "ddddddddddd",
-      "points": 400,
-      "question": "",
-      "answer": "",
-      "options": []
-    },
-    {
-      "category": "ddddddddddd",
-      "points": 500,
-      "question": "",
-      "answer": "",
-      "options": []
-    },
-    {
-      "category": "ddddddddddd",
-      "points": 600,
+      "category": "ffff",
+      "points": 140,
       "question": "",
       "answer": "",
       "options": []

@@ -45,8 +45,6 @@ const QuizSpielen = () => {
         console.error("Fehler beim Laden des Quiz:", error);
       }
     };
-    
-
     loadQuiz();
   }, [quizName]);
   
@@ -78,7 +76,6 @@ const QuizSpielen = () => {
     });
   };
   
-
   const handleConfirmSpieler = () => {
     if (selectedSpieler.length > 0) {
       const shuffledSpieler = selectedSpieler.sort(() => Math.random() - 0.5);
@@ -139,7 +136,6 @@ const QuizSpielen = () => {
         default:
           console.warn("Unbekanntes Verhalten bei falscher Antwort:", incorrectAnswerBehavior);
       }
-      
     }
   
     setAnsweredQuestions(prevAnswered => new Set(prevAnswered).add(selectedQuestion));
@@ -149,7 +145,6 @@ const QuizSpielen = () => {
     setAreOptionsOpened(false);
     setIsContentVisible(false);
   };
-  
 
   const handleTimerStart = () => {
     if (timer > 0) {
@@ -157,7 +152,6 @@ const QuizSpielen = () => {
     }
   };
   
-
   useEffect(() => {
     let interval;
     if (isTimerRunning && timer > 0) {
@@ -168,11 +162,9 @@ const QuizSpielen = () => {
       handleAnswerClick(false);
       setIsTimerRunning(false);
     }
-  
     return () => clearInterval(interval);
   }, [isTimerRunning, timer]);
   
-
   const saveResults = async () => {
     const results = {
       quizName: quizName,
@@ -216,7 +208,6 @@ const QuizSpielen = () => {
     setAreOptionsOpened(prev => !prev);
     console.log(isContentVisible ? "Inhalt geschlossen" : "Inhalt geöffnet");
   };
-
 
   return (
     <div className='quizSpielenContainer'>
@@ -285,7 +276,6 @@ const QuizSpielen = () => {
               {currentSpieler}
             </h4>
 
-
                <div className='individuellePunkte'>
                 <Form.Group controlId="individuellePunkteSpieler">
                   <Form.Label className='hiddenElement'>Spieler auswählen:</Form.Label>
@@ -339,17 +329,14 @@ const QuizSpielen = () => {
                       }));
                     }
                   }}
-                  
                 >
                   Punkte aktualisieren
                 </Button>
               </div>
 
-
                 <Button variant="danger" onClick={saveResults}>
                  Quiz beenden
                 </Button>
-
           </div>
 
           <div className='quizSpielenQuiz'>
@@ -433,7 +420,6 @@ const QuizSpielen = () => {
                 </Modal.Footer>
               </Modal>
             )}
-
           </div>
         </>
       )}

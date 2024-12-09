@@ -1,0 +1,56 @@
+{
+  "name": "Verschoben",
+  "settings": {
+    "timer": 15,
+    "incorrectAnswerBehavior": "none",
+    "openOptionsBehavior": "none"
+  },
+  "categories": [
+    "ff",
+    "ff"
+  ],
+  "questions": [
+    {
+      "category": "ff",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ff",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ff",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ff",
+      "points": 100,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ff",
+      "points": 200,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "ff",
+      "points": 300,
+      "question": "",
+      "answer": "",
+      "options": []
+    }
+  ]
+}

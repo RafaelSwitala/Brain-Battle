@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button, Table, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import QuizErstellen from './QuizErstellen';
+import CreateQuiz from './createQuiz/CreateQuiz';
+import EditQuiz from './editQuiz/EditQuiz';
 
 const HomePage = () => {
   const [quizFiles, setQuizFiles] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [quizToDelete, setQuizToDelete] = useState(null);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [quizToEdit, setQuizToEdit] = useState(null);
+  const [editModalShow, setEditModalShow] = useState(false); 
+  const [quizToEdit, setQuizToEdit] = useState(null); 
 
   useEffect(() => {
     const loadQuizFiles = async () => {
@@ -54,15 +55,10 @@ const HomePage = () => {
     loadQuizFiles();
   }, []);
 
-  const handleDeleteClick = (quizName) => {
-    setQuizToDelete(quizName);
-    setShowDeleteModal(true);
-  };
-
-  const handleEditClick = (quizName) => {
-    setQuizToEdit(quizName);
-    setShowEditModal(true);
-  };
+  // const handleDeleteClick = (quizName) => {
+  //   setQuizToDelete(quizName);
+  //   setShowDeleteModal(true);
+  // };
 
   const confirmDeleteQuiz = async () => {
     try {
@@ -79,19 +75,14 @@ const HomePage = () => {
     }
   };
 
-  const confirmEditQuiz = async () => {
-    try {
-      const response = await fetch(`http://localhost:5000/api/editQuiz/${quizToEdit}`, { method: 'POST' });
-      if (response.ok) {
-        setQuizFiles(prevFiles => prevFiles.filter(quiz => quiz.name !== quizToEdit));
-        setShowEditModal(false);
-        setQuizToEdit(null);
-      } else {
-        console.error('Error editing quiz:', response.statusText);
-      }
-    } catch (error) {
-      console.error("Error editing quiz:", error);
-    }
+  const openEditModal = (quiz) => {
+    setQuizToEdit(quiz);
+    setEditModalShow(true);
+  };
+
+  const closeEditModal = () => {
+    setQuizToEdit(null);
+    setEditModalShow(false);
   };
 
   return (
@@ -108,7 +99,7 @@ const HomePage = () => {
               Neues Quiz erstellen
             </Button>
 
-            <QuizErstellen
+            <CreateQuiz
               show={modalShow}
               onHide={() => setModalShow(false)}
             />
@@ -163,7 +154,8 @@ const HomePage = () => {
                         {quiz.scoreSteps}
                       </Link>
                     </td>
-                    <td className='loeschenIcon' onClick={() => handleDeleteClick(quiz.name)}></td>
+                    <td className='bearbeitenIcon' onClick={() => openEditModal(quiz)}></td>
+                    {/* <td className='loeschenIcon' onClick={() => handleDeleteClick(quiz.name)}></td> */}
                   </tr>
                 ))
               ) : (
@@ -196,24 +188,18 @@ const HomePage = () => {
       </Modal>
 
       <Modal 
-        className='bearbeitenModal'
-        show={showEditModal} 
-        onHide={() => setShowEditModal(false)}>
-        <Modal.Header className='editModalHeader' closeButton>
-          <Modal.Title>Quiz: "{quizToEdit}" bearbeiten</Modal.Title>
+        show={editModalShow} 
+        onHide={closeEditModal}
+        size="lg"
+        centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Quiz bearbeiten</Modal.Title>
         </Modal.Header>
-        <Modal.Body className='editModalBody'>
-          
-          </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowEditModal(false)}>
-            Abbrechen
-          </Button>
-          <Button variant="danger" onClick={confirmEditQuiz}>
-            Bearbeiten
-          </Button>
-        </Modal.Footer>
+        <Modal.Body>
+          <EditQuiz quizData={quizToEdit} onClose={closeEditModal} />
+        </Modal.Body>
       </Modal>
+
     </Container>
   );
 };

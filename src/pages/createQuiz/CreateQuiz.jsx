@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import './allPages.css';
+import '../allPages.css';
 
 import QuizSettings from './QuizSettings';
 import CategoryInput from './CategoryInput';
 import QuestionEditor from './QuestionEditor';
 import FinalSettings from './FinalSettings';
 
-const QuizErstellen = ({ show, onHide }) => {
+const CreateQuiz = ({ show, onHide }) => {
   const [quizName, setQuizName] = useState('');
   const [questions, setQuestions] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -19,10 +19,7 @@ const QuizErstellen = ({ show, onHide }) => {
   const [timer, setTimer] = useState(15);
   const [incorrectAnswerBehavior, setIncorrectAnswerBehavior] = useState('none');
   const [openOptionsBehavior, setOpenOptionsBehavior] = useState('none');
-  const [creationStatus, setCreationStatus] = useState('');
-  const [showOverwriteDialog, setShowOverwriteDialog] = useState(false);
 
-  // Validierungsfunktionen
   const isQuiznameValid = (name) => /^[a-zA-Z0-9_-]+$/.test(name) && name.length >= 3;
 
   const areAllCategoriesFilled = () => categories.every((category) => category.trim() !== '');
@@ -114,23 +111,12 @@ const QuizErstellen = ({ show, onHide }) => {
     }
   };
 
-  const handleOverwriteConfirm = () => {
-    setShowOverwriteDialog(false);
-    saveQuizData();
-  };
-
-  const handleRenameQuiz = () => {
-    setQuizName('');
-    setShowOverwriteDialog(false);
-  };
-
   const handleQuizNameChange = (e) => {
     const input = e.target.value;
     const formattedInput = input.replace(/\s+/g, '-');
     setQuizName(formattedInput);
   };
   
-
   return (
     <Modal
       className="quizModal quizErstellenModal"
@@ -232,4 +218,4 @@ const QuizErstellen = ({ show, onHide }) => {
   );
 };
 
-export default QuizErstellen;
+export default CreateQuiz;

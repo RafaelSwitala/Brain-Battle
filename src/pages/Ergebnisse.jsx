@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './allPages.css';
 import Accordion from 'react-bootstrap/Accordion';
-import { Modal, Button } from 'react-bootstrap';  // Importiere Modal und Button
+import { Modal, Button } from 'react-bootstrap';
 
 const Ergebnisse = () => {
   const [quizResults, setQuizResults] = useState([]);
@@ -83,7 +83,6 @@ const Ergebnisse = () => {
           ))}
         </Accordion>
         
-        {/* Delete Modal */}
         <Modal 
           className='loeschenModal'
           show={showDeleteModal} 
