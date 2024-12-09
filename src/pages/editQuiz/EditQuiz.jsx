@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import Accordion from 'react-bootstrap/Accordion';
-import '../allPages.css';
+import React, { useState, useEffect } from "react";
+import Accordion from "react-bootstrap/Accordion";
+import "../allPages.css";
 
 const EditQuiz = ({ quizData }) => {
   const [quiz, setQuiz] = useState(null);
 
   useEffect(() => {
-    console.log('Empfangenes quizData:', quizData);
+    console.log("Empfangenes quizData:", quizData);
     if (quizData) {
       setQuiz({
         ...quizData,
         settings: {
-          timer: quizData.settings?.timer || 0,
-          incorrectAnswerBehavior: quizData.settings?.incorrectAnswerBehavior || 'minus',
-          openOptionsBehavior: quizData.settings?.openOptionsBehavior || 'none',
+          timer: quizData.timerLength ?? 0,
+          incorrectAnswerBehavior: quizData.wrongAnswerBehavior ?? "minus",
+          openOptionsBehavior: quizData.openAnswerBehavior ?? "none",
         },
         categories: Array.isArray(quizData.categories) ? quizData.categories : [],
         questions: Array.isArray(quizData.questions) ? quizData.questions : [],
       });
     }
   }, [quizData]);
-  
   
 
   if (!quiz || !quiz.settings) {
@@ -45,7 +44,7 @@ const EditQuiz = ({ quizData }) => {
   };
 
   const handleAddCategory = () => {
-    const newCategory = prompt('Neue Kategorie eingeben:');
+    const newCategory = prompt("Neue Kategorie eingeben:");
     if (newCategory) {
       setQuiz((prev) => ({
         ...prev,
@@ -56,9 +55,9 @@ const EditQuiz = ({ quizData }) => {
 
   const handleSave = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/save-json', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://localhost:5000/api/save-json", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           fileName: `${quiz.name}.json`,
           jsonData: quiz,
@@ -66,15 +65,15 @@ const EditQuiz = ({ quizData }) => {
       });
 
       if (response.ok) {
-        alert('Quiz erfolgreich gespeichert!');
+        alert("Quiz erfolgreich gespeichert!");
       } else {
         const error = await response.json();
-        console.error('Fehler beim Speichern:', error);
-        alert('Fehler beim Speichern des Quiz.');
+        console.error("Fehler beim Speichern:", error);
+        alert("Fehler beim Speichern des Quiz.");
       }
     } catch (error) {
-      console.error('Netzwerkfehler:', error);
-      alert('Es gab einen Netzwerkfehler.');
+      console.error("Netzwerkfehler:", error);
+      alert("Es gab einen Netzwerkfehler.");
     }
   };
 
@@ -91,7 +90,7 @@ const EditQuiz = ({ quizData }) => {
             <input
               type="text"
               value={quiz.name}
-              onChange={(e) => handleChange('name', e.target.value)}
+              onChange={(e) => handleChange("name", e.target.value)}
               placeholder="Neuen Quiznamen eingeben"
             />
           </Accordion.Body>
@@ -103,12 +102,15 @@ const EditQuiz = ({ quizData }) => {
             <p>Aktuelle Dauer: {quiz.settings.timer} Sekunden</p>
             <input
               type="number"
-              value={quiz.settings.timer}
-              onChange={(e) => handleSettingsChange('timer', Number(e.target.value))}
+              value={quiz.settings.timer || 0}
+              onChange={(e) =>
+                handleSettingsChange("timer", parseInt(e.target.value, 10) || 0)
+              }
               placeholder="Neue Timer-Dauer (in Sekunden)"
             />
           </Accordion.Body>
         </Accordion.Item>
+
 
         <Accordion.Item eventKey="2">
           <Accordion.Header>Verhalten bei falscher Antwort</Accordion.Header>
@@ -117,7 +119,10 @@ const EditQuiz = ({ quizData }) => {
             <select
               value={quiz.settings.incorrectAnswerBehavior}
               onChange={(e) =>
-                handleSettingsChange('incorrectAnswerBehavior', e.target.value)
+                handleSettingsChange(
+                  "incorrectAnswerBehavior",
+                  e.target.value
+                )
               }
             >
               <option value="minus">Minus Punkte</option>
@@ -134,13 +139,14 @@ const EditQuiz = ({ quizData }) => {
             <select
               value={quiz.settings.openOptionsBehavior}
               onChange={(e) =>
-                handleSettingsChange('openOptionsBehavior', e.target.value)
+                handleSettingsChange("openOptionsBehavior", e.target.value)
               }
             >
               <option value="none">Keine Aktion</option>
               <option value="standard">Standard</option>
               <option value="random">Zufällig</option>
               <option value="alwaysOpen">Immer offen</option>
+              <option value="half">Halb</option>
             </select>
           </Accordion.Body>
         </Accordion.Item>
@@ -152,7 +158,7 @@ const EditQuiz = ({ quizData }) => {
             <input
               type="text"
               value={quiz.scoreSteps}
-              onChange={(e) => handleChange('scoreSteps', e.target.value)}
+              onChange={(e) => handleChange("scoreSteps", e.target.value)}
               placeholder="Neue Punkteschritte eingeben"
             />
           </Accordion.Body>
