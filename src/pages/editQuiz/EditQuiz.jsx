@@ -20,8 +20,6 @@ const EditQuiz = ({ quizData }) => {
     }
   }, [quizData]);
   
-  
-
   if (!quiz || !quiz.settings) {
     return <div>Lade Daten...</div>;
   }
@@ -125,8 +123,8 @@ const EditQuiz = ({ quizData }) => {
               }
             >
               <option value="minus">Minus Punkte</option>
-              <option value="skip">Überspringen</option>
-              <option value="endQuiz">Quiz beenden</option>
+              <option value="skip">Kein Punktabzug</option>
+              <option value="retry">Erneut Versuchen</option>
             </select>
           </Accordion.Body>
         </Accordion.Item>
@@ -141,27 +139,12 @@ const EditQuiz = ({ quizData }) => {
                 handleSettingsChange("openOptionsBehavior", e.target.value)
               }
             >
-              <option value="none">Keine Aktion</option>
-              <option value="standard">Standard</option>
-              <option value="random">Zufällig</option>
-              <option value="alwaysOpen">Immer offen</option>
-              <option value="half">Halb</option>
+              <option value="full">Volle Punktzahl</option>
+              <option value="half">Halbe Punktzahl</option>
             </select>
           </Accordion.Body>
         </Accordion.Item>
 
-        <Accordion.Item eventKey="4">
-          <Accordion.Header>Punkteschritte</Accordion.Header>
-          <Accordion.Body>
-            <p>Aktuelle Punkteschritte: {quiz.scoreSteps}</p>
-            <input
-              type="text"
-              value={quiz.scoreSteps}
-              onChange={(e) => handleChange("scoreSteps", e.target.value)}
-              placeholder="Neue Punkteschritte eingeben"
-            />
-          </Accordion.Body>
-        </Accordion.Item>
       </Accordion>
 
       <button className="save-button" onClick={handleSave}>
