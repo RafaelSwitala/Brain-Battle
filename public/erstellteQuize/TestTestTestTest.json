@@ -1,0 +1,10 @@
+{
+  "name": "TestTestTestTest",
+  "settings": {
+    "timer": 15,
+    "incorrectAnswerBehavior": "none",
+    "openOptionsBehavior": "none"
+  },
+  "categories": [],
+  "questions": []
+}

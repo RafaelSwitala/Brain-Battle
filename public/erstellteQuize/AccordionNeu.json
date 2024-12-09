@@ -1,117 +1,125 @@
 {
-  "name": "Test",
+  "name": "AccordionNeu",
   "settings": {
-    "timer": 30,
+    "timer": 45,
     "incorrectAnswerBehavior": "minus",
-    "openOptionsBehavior": "none"
+    "openOptionsBehavior": "half"
   },
   "categories": [
-    "dd",
-    "ddd",
-    "ddddd"
+    "Erdkunde",
+    "Hauptstädte",
+    "Fußball",
+    "Sport"
   ],
   "questions": [
     {
-      "category": "dd",
-      "points": 100,
+      "category": "Erdkunde",
+      "points": 500,
+      "question": "Ist das Frage 1?",
+      "answer": "Ja",
+      "options": []
+    },
+    {
+      "category": "Erdkunde",
+      "points": 1000,
+      "question": "Ist das Frage 3?",
+      "answer": "Nein",
+      "options": []
+    },
+    {
+      "category": "Erdkunde",
+      "points": 1500,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "dd",
-      "points": 200,
+      "category": "Erdkunde",
+      "points": 2000,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "dd",
-      "points": 300,
-      "question": "",
-      "answer": "",
-      "options": []
-    },
-    {
-      "category": "dd",
-      "points": 400,
-      "question": "",
-      "answer": "",
-      "options": []
-    },
-    {
-      "category": "dd",
+      "category": "Hauptstädte",
       "points": 500,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddd",
-      "points": 100,
+      "category": "Hauptstädte",
+      "points": 1000,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddd",
-      "points": 200,
+      "category": "Hauptstädte",
+      "points": 1500,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddd",
-      "points": 300,
+      "category": "Hauptstädte",
+      "points": 2000,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddd",
-      "points": 400,
-      "question": "",
-      "answer": "",
-      "options": []
-    },
-    {
-      "category": "ddd",
+      "category": "Fußball",
       "points": 500,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddd",
-      "points": 100,
+      "category": "Fußball",
+      "points": 1000,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddd",
-      "points": 200,
+      "category": "Fußball",
+      "points": 1500,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddd",
-      "points": 300,
+      "category": "Fußball",
+      "points": 2000,
       "question": "",
       "answer": "",
       "options": []
     },
     {
-      "category": "ddddd",
-      "points": 400,
-      "question": "",
-      "answer": "",
-      "options": []
-    },
-    {
-      "category": "ddddd",
+      "category": "Sport",
       "points": 500,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Sport",
+      "points": 1000,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Sport",
+      "points": 1500,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Sport",
+      "points": 2000,
       "question": "",
       "answer": "",
       "options": []

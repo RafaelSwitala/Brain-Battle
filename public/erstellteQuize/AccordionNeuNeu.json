@@ -1,0 +1,128 @@
+{
+  "name": "AccordionNeuNeu",
+  "settings": {
+    "timer": 45,
+    "incorrectAnswerBehavior": "minus",
+    "openOptionsBehavior": "half"
+  },
+  "categories": [
+    "Erdkunde",
+    "Hauptstädte",
+    "Fußball",
+    "Sport"
+  ],
+  "questions": [
+    {
+      "category": "Erdkunde",
+      "points": 500,
+      "question": "Ist das Frage 1?",
+      "answer": "Ja",
+      "options": []
+    },
+    {
+      "category": "Erdkunde",
+      "points": 1000,
+      "question": "Ist das Frage 3?",
+      "answer": "Nein",
+      "options": []
+    },
+    {
+      "category": "Erdkunde",
+      "points": 1500,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Erdkunde",
+      "points": 2000,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Hauptstädte",
+      "points": 500,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Hauptstädte",
+      "points": 1000,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Hauptstädte",
+      "points": 1500,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Hauptstädte",
+      "points": 2000,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Fußball",
+      "points": 500,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Fußball",
+      "points": 1000,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Fußball",
+      "points": 1500,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Fußball",
+      "points": 2000,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Sport",
+      "points": 500,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Sport",
+      "points": 1000,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Sport",
+      "points": 1500,
+      "question": "",
+      "answer": "",
+      "options": []
+    },
+    {
+      "category": "Sport",
+      "points": 2000,
+      "question": "",
+      "answer": "",
+      "options": []
+    }
+  ]
+}

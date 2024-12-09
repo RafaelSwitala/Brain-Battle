@@ -4,20 +4,22 @@ import "../allPages.css";
 
 const EditQuiz = ({ quizData }) => {
   const [quiz, setQuiz] = useState(null);
+  const [originalName, setOriginalName] = useState("");
 
   useEffect(() => {
-    console.log("Empfangenes quizData:", quizData);
     if (quizData) {
       setQuiz({
         ...quizData,
         settings: {
-          timer: quizData.timerLength ?? 0,
-          incorrectAnswerBehavior: quizData.wrongAnswerBehavior ?? "minus",
-          openOptionsBehavior: quizData.openAnswerBehavior ?? "none",
-        }
+          timer: quizData.settings?.timer ?? 0,
+          incorrectAnswerBehavior: quizData.settings?.incorrectAnswerBehavior ?? "minus",
+          openOptionsBehavior: quizData.settings?.openOptionsBehavior ?? "none",
+        },
       });
+      setOriginalName(quizData.name || "");
     }
   }, [quizData]);
+  
   
 
   if (!quiz || !quiz.settings) {
@@ -42,18 +44,30 @@ const EditQuiz = ({ quizData }) => {
   };
 
   const handleSave = async () => {
+    const updatedData = { ...quiz };
+    const fileName = `${originalName}.json`;
+    const newFileName = quiz.name !== originalName ? `${quiz.name}.json` : null;
+  
+    console.log("Sende Daten an Server:", {
+      fileName,
+      newFileName,
+      updatedData,
+    });
+  
     try {
       const response = await fetch("http://localhost:5000/api/save-json", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fileName: `${quiz.name}.json`,
-          jsonData: quiz,
+          fileName,
+          newFileName,
+          updatedData,
         }),
       });
-
+  
       if (response.ok) {
         alert("Quiz erfolgreich gespeichert!");
+        if (newFileName) setOriginalName(quiz.name);
       } else {
         const error = await response.json();
         console.error("Fehler beim Speichern:", error);
@@ -64,6 +78,7 @@ const EditQuiz = ({ quizData }) => {
       alert("Es gab einen Netzwerkfehler.");
     }
   };
+  
 
   return (
     <div>
@@ -99,7 +114,6 @@ const EditQuiz = ({ quizData }) => {
           </Accordion.Body>
         </Accordion.Item>
 
-
         <Accordion.Item eventKey="2">
           <Accordion.Header>Verhalten bei falscher Antwort</Accordion.Header>
           <Accordion.Body>
@@ -107,10 +121,7 @@ const EditQuiz = ({ quizData }) => {
             <select
               value={quiz.settings.incorrectAnswerBehavior}
               onChange={(e) =>
-                handleSettingsChange(
-                  "incorrectAnswerBehavior",
-                  e.target.value
-                )
+                handleSettingsChange("incorrectAnswerBehavior", e.target.value)
               }
             >
               <option value="minus">Minus Punkte</option>
