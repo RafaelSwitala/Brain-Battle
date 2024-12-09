@@ -14,9 +14,7 @@ const EditQuiz = ({ quizData }) => {
           timer: quizData.timerLength ?? 0,
           incorrectAnswerBehavior: quizData.wrongAnswerBehavior ?? "minus",
           openOptionsBehavior: quizData.openAnswerBehavior ?? "none",
-        },
-        categories: Array.isArray(quizData.categories) ? quizData.categories : [],
-        questions: Array.isArray(quizData.questions) ? quizData.questions : [],
+        }
       });
     }
   }, [quizData]);
@@ -41,16 +39,6 @@ const EditQuiz = ({ quizData }) => {
         [field]: value,
       },
     }));
-  };
-
-  const handleAddCategory = () => {
-    const newCategory = prompt("Neue Kategorie eingeben:");
-    if (newCategory) {
-      setQuiz((prev) => ({
-        ...prev,
-        categories: [...prev.categories, newCategory],
-      }));
-    }
   };
 
   const handleSave = async () => {
