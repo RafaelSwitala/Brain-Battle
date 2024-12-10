@@ -78,6 +78,32 @@ const EditQuiz = ({ quizData }) => {
       alert("Es gab einen Netzwerkfehler.");
     }
   };
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      `Bist du sicher, dass du das Quiz "${quiz.name}" löschen möchtest?`
+    );
+  
+    if (!confirmDelete) return;
+  
+    try {
+      const response = await fetch(`http://localhost:5000/api/deleteQuiz/${quiz.name}`, {
+        method: "DELETE",
+      });
+  
+      if (response.ok) {
+        alert("Quiz erfolgreich gelöscht!");
+        window.location.reload();
+      } else {
+        const error = await response.json();
+        console.error("Fehler beim Löschen:", error);
+        alert("Fehler beim Löschen des Quiz.");
+      }
+    } catch (error) {
+      console.error("Netzwerkfehler:", error);
+      alert("Es gab einen Netzwerkfehler.");
+    }
+  };
   
 
   return (
@@ -152,6 +178,9 @@ const EditQuiz = ({ quizData }) => {
 
       <button className="save-button" onClick={handleSave}>
         Speichern
+      </button>
+      <button className="delete-button" onClick={handleDelete} style={{ marginLeft: "10px", backgroundColor: "red", color: "white" }}>
+        Löschen
       </button>
     </div>
   );
