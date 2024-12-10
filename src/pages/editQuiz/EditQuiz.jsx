@@ -11,7 +11,7 @@ const EditQuiz = ({ quizData }) => {
       setQuiz({
         ...quizData,
         settings: {
-          timer: quizData.settings?.timer ?? 0,
+          timer: quizData.timerLength ?? 0,
           incorrectAnswerBehavior: quizData.settings?.incorrectAnswerBehavior ?? "minus",
           openOptionsBehavior: quizData.settings?.openOptionsBehavior ?? "none",
         },
@@ -42,15 +42,12 @@ const EditQuiz = ({ quizData }) => {
   };
 
   const handleSave = async () => {
-    const updatedData = { ...quiz };
+    const updatedData = {
+      name: quiz.name,
+      settings: quiz.settings,
+    };
     const fileName = `${originalName}.json`;
     const newFileName = quiz.name !== originalName ? `${quiz.name}.json` : null;
-  
-    console.log("Sende Daten an Server:", {
-      fileName,
-      newFileName,
-      updatedData,
-    });
   
     try {
       const response = await fetch("http://localhost:5000/api/save-json", {
@@ -64,12 +61,17 @@ const EditQuiz = ({ quizData }) => {
       });
   
       if (response.ok) {
-        alert("Quiz erfolgreich gespeichert!");
+        alert("Einstellungen erfolgreich gespeichert!");
+  
+        const newDataResponse = await fetch(`http://localhost:5000/public/erstellteQuize/${quiz.name}.json`);
+        const newData = await newDataResponse.json();
+        setQuiz(newData);
+  
         if (newFileName) setOriginalName(quiz.name);
       } else {
         const error = await response.json();
         console.error("Fehler beim Speichern:", error);
-        alert("Fehler beim Speichern des Quiz.");
+        alert("Fehler beim Speichern der Einstellungen.");
       }
     } catch (error) {
       console.error("Netzwerkfehler:", error);
@@ -139,6 +141,7 @@ const EditQuiz = ({ quizData }) => {
                 handleSettingsChange("openOptionsBehavior", e.target.value)
               }
             >
+              <option value="none">Keine Aktion</option>
               <option value="full">Volle Punktzahl</option>
               <option value="half">Halbe Punktzahl</option>
             </select>

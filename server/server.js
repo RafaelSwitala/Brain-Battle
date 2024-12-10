@@ -97,9 +97,9 @@ app.post('/api/save-json', (req, res) => {
     name: updatedData.name || existingData.name,
     settings: {
       ...existingData.settings,
-      timer: updatedData.timer !== undefined ? updatedData.timer : existingData.settings.timer,
-      incorrectAnswerBehavior: updatedData.incorrectAnswerBehavior || existingData.settings.incorrectAnswerBehavior,
-      openOptionsBehavior: updatedData.openOptionsBehavior || existingData.settings.openOptionsBehavior
+      timer: updatedData.settings?.timer !== undefined ? updatedData.settings.timer : existingData.settings.timer,
+      incorrectAnswerBehavior: updatedData.settings?.incorrectAnswerBehavior || existingData.settings.incorrectAnswerBehavior,
+      openOptionsBehavior: updatedData.settings?.openOptionsBehavior || existingData.settings.openOptionsBehavior
     },
     categories: updatedData.categories || existingData.categories, 
     questions: updatedData.questions || existingData.questions
@@ -110,6 +110,7 @@ app.post('/api/save-json', (req, res) => {
 
   res.status(200).json({ message: 'Quiz erfolgreich gespeichert!' });
 });
+
 
 
 

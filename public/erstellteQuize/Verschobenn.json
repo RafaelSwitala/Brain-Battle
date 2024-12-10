@@ -1,9 +1,9 @@
 {
-  "name": "Verschoben",
+  "name": "Verschobenn",
   "settings": {
-    "timer": 60,
-    "incorrectAnswerBehavior": "retry",
-    "openOptionsBehavior": "half"
+    "timer": 22,
+    "incorrectAnswerBehavior": "skip",
+    "openOptionsBehavior": "full"
   },
   "categories": [
     "ff",
