@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Accordion from "react-bootstrap/Accordion";
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 import "../allPages.css";
 
 const EditQuiz = ({ quizData }) => {
@@ -111,7 +113,16 @@ const EditQuiz = ({ quizData }) => {
       <h3>{`Bearbeite Quiz: ${quiz.name}`}</h3>
       <p>Was möchtest du bearbeiten?</p>
 
-      <Accordion>
+    <Tabs
+      defaultActiveKey="profile"
+      id="uncontrolled-tab-example"
+      className="editQuizTabGruppe"
+    >
+      <Tab 
+        className='editQuizTab'
+        eventKey="settings" 
+        title=" Allgemeine Einstellungen Bearbeiten">
+          <Accordion>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Quiz Namen</Accordion.Header>
           <Accordion.Body>
@@ -175,6 +186,15 @@ const EditQuiz = ({ quizData }) => {
         </Accordion.Item>
 
       </Accordion>
+      </Tab>
+      <Tab 
+        className='editQuizTab'
+        eventKey="questions" 
+        title="Fragen und Antworten Bearbeiten">
+      </Tab>
+
+    </Tabs>
+
 
       <button className="save-button" onClick={handleSave}>
         Speichern
