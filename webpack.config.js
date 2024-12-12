@@ -1,15 +1,15 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.jsx', // Dein Einstiegspunkt
+  entry: './src/index.jsx',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'public'), // Der Ausgabeort für das gebündelte JavaScript
+    path: path.resolve(__dirname, 'public'),
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/, // Regel für JavaScript/JSX-Dateien
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -19,7 +19,7 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/, // Regel für CSS-Dateien
+        test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
     ],
@@ -28,8 +28,12 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   devServer: {
-    static: path.join(__dirname, 'public'), // Ersetze contentBase durch static
+    static: path.join(__dirname, 'public'),
     compress: true,
     port: 9000,
+    client: {
+      logging: 'warn',
+    },
+    hot: false,
   },
 };
