@@ -89,7 +89,8 @@ const QuizSpielen = () => {
   return (
     <div className='quizSpielenContainer'>
       {!confirmedSpieler ? (
-        <ChoosePlayer spieler={spieler} selectedSpieler={selectedSpieler} handleCheckboxChange={setSelectedSpieler} handleConfirmSpieler={handleConfirmSpieler} />
+        <ChoosePlayer spieler={spieler} selectedSpieler={selectedSpieler} setSelectedSpieler={setSelectedSpieler} handleConfirmSpieler={handleConfirmSpieler} />
+
       ) : (
         <>
           <Score spielerReihenfolge={spielerReihenfolge} spielerPunkte={spielerPunkte} currentSpieler={spielerReihenfolge[currentSpielerIndex]} saveResults={saveResults} />
