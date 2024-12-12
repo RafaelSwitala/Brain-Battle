@@ -4,7 +4,7 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import CreateQuiz from './pages/createQuiz/CreateQuiz';
-import QuizSpielen from './pages/QuizSpielen';
+import QuizSpielen from './pages/playQuiz/QuizSpielen';
 import SpielerVerwaltung from './pages/SpielerVerwaltung';
 import Anleitungen from './pages/Anleitungen';
 import Ergebnisse from './pages/Ergebnisse';
