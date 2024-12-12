@@ -93,23 +93,49 @@ app.post('/api/save-json', (req, res) => {
   const existingData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
   const updatedQuizData = {
-    ...existingData, 
+    ...existingData,
     name: updatedData.name || existingData.name,
     settings: {
       ...existingData.settings,
-      timer: updatedData.timer !== undefined ? updatedData.timer : existingData.settings.timer,
-      incorrectAnswerBehavior: updatedData.incorrectAnswerBehavior || existingData.settings.incorrectAnswerBehavior,
-      openOptionsBehavior: updatedData.openOptionsBehavior || existingData.settings.openOptionsBehavior
+      timer: updatedData.settings?.timer !== undefined ? updatedData.settings.timer : existingData.settings.timer,
+      incorrectAnswerBehavior: updatedData.settings?.incorrectAnswerBehavior || existingData.settings.incorrectAnswerBehavior,
+      openOptionsBehavior: updatedData.settings?.openOptionsBehavior || existingData.settings.openOptionsBehavior
     },
-    categories: updatedData.categories || existingData.categories, 
-    questions: updatedData.questions || existingData.questions
+    categories: updatedData.categories || existingData.categories,  // Überprüfen, ob Kategorien vorhanden sind
+    questions: updatedData.questions || existingData.questions     // Überprüfen, ob Fragen vorhanden sind
   };
+  
+  
 
   const savePath = newFileName ? path.join(__dirname, '../public/erstellteQuize', newFileName) : filePath;
   fs.writeFileSync(savePath, JSON.stringify(updatedQuizData, null, 2));
 
   res.status(200).json({ message: 'Quiz erfolgreich gespeichert!' });
 });
+
+// Route zum Abrufen eines Quiz anhand seines Namens
+app.get('/api/quiz/:name', (req, res) => {
+  const quizName = req.params.name;
+  const filePath = path.join(__dirname, '../public/erstellteQuize', `${quizName}.json`);
+
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Fehler beim Laden des Quiz:', err);
+      return res.status(500).json({ error: 'Fehler beim Laden des Quiz.' });
+    }
+
+    try {
+      const quizData = JSON.parse(data);
+      console.log("Geladene Quizdaten:", quizData); // Hier prüfst du, ob die Kategorien und Fragen korrekt geladen werden
+      res.json(quizData);  // Quiz-Daten an den Client zurückgeben
+    } catch (parseError) {
+      console.error('Fehler beim Parsen der Quizdaten:', parseError);
+      return res.status(500).json({ error: 'Fehler beim Parsen des Quiz.' });
+    }
+  });
+});
+
+
 
 
 

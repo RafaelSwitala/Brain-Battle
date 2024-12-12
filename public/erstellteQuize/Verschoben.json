@@ -1,8 +1,8 @@
 {
   "name": "Verschoben",
   "settings": {
-    "timer": 15,
-    "incorrectAnswerBehavior": "none",
+    "timer": 61,
+    "incorrectAnswerBehavior": "minus",
     "openOptionsBehavior": "none"
   },
   "categories": [
