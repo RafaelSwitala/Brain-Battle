@@ -12,10 +12,12 @@ const EditQuiz = ({ quizData }) => {
 
   useEffect(() => {
     if (!quizData) return;
-
+  
     const categories = quizData.categories || [];
     const questions = quizData.questions || [];
-
+  
+    console.log("QuizData in useEffect:", quizData);
+  
     setQuiz({
       ...quizData,
       settings: {
@@ -26,14 +28,21 @@ const EditQuiz = ({ quizData }) => {
       categories,
       questions,
     });
-
+  
     setOriginalName(quizData.name || "");
   }, [quizData]);
+  
 
   if (!quiz || !quiz.settings) return <div>Lade Daten...</div>;
 
-  const handleChange = (field, value) => {
-    setQuiz((prev) => ({ ...prev, [field]: value }));
+  const handleChange = (field, value, index = null) => {
+    if (field === "categories" && index !== null) {
+      const updatedCategories = [...quiz.categories];
+      updatedCategories[index] = value;
+      setQuiz((prev) => ({ ...prev, categories: updatedCategories }));
+    } else {
+      setQuiz((prev) => ({ ...prev, [field]: value }));
+    }
   };
 
   const handleSettingsChange = (field, value) => {
@@ -47,7 +56,10 @@ const EditQuiz = ({ quizData }) => {
     const updatedData = {
       name: quiz.name,
       settings: quiz.settings,
+      categories: quiz.categories,  // Achte darauf, dass Kategorien eingeschlossen werden
+      questions: quiz.questions    // Und auch die Fragen
     };
+    
     const fileName = `${originalName}.json`;
     const newFileName = quiz.name !== originalName ? `${quiz.name}.json` : null;
 
@@ -68,6 +80,7 @@ const EditQuiz = ({ quizData }) => {
           `http://localhost:5000/public/erstellteQuize/${quiz.name}.json`
         );
         const newData = await newDataResponse.json();
+        console.log(newData);
         setQuiz(newData);
         if (newFileName) setOriginalName(quiz.name);
       } else {

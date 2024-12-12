@@ -101,9 +101,10 @@ app.post('/api/save-json', (req, res) => {
       incorrectAnswerBehavior: updatedData.settings?.incorrectAnswerBehavior || existingData.settings.incorrectAnswerBehavior,
       openOptionsBehavior: updatedData.settings?.openOptionsBehavior || existingData.settings.openOptionsBehavior
     },
-    categories: updatedData.categories || existingData.categories,
-    questions: updatedData.questions || existingData.questions
+    categories: updatedData.categories || existingData.categories,  // Überprüfen, ob Kategorien vorhanden sind
+    questions: updatedData.questions || existingData.questions     // Überprüfen, ob Fragen vorhanden sind
   };
+  
   
 
   const savePath = newFileName ? path.join(__dirname, '../public/erstellteQuize', newFileName) : filePath;
@@ -122,17 +123,18 @@ app.get('/api/quiz/:name', (req, res) => {
       console.error('Fehler beim Laden des Quiz:', err);
       return res.status(500).json({ error: 'Fehler beim Laden des Quiz.' });
     }
-  
+
     try {
       const quizData = JSON.parse(data);
-      console.log("Geladene Quizdaten:", quizData);
-      res.json(quizData);
+      console.log("Geladene Quizdaten:", quizData); // Hier prüfst du, ob die Kategorien und Fragen korrekt geladen werden
+      res.json(quizData);  // Quiz-Daten an den Client zurückgeben
     } catch (parseError) {
       console.error('Fehler beim Parsen der Quizdaten:', parseError);
       return res.status(500).json({ error: 'Fehler beim Parsen des Quiz.' });
     }
   });
 });
+
 
 
 
