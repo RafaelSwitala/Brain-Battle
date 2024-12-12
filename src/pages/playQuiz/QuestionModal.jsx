@@ -1,9 +1,17 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
+const shuffleOptions = (options) => {
+  for (let i = options.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [options[i], options[j]] = [options[j], options[i]];
+  }
+  return options;
+};
+
 const QuestionModal = ({ selectedQuestion, timer, isTimerRunning, handleTimerStart, isContentVisible, toggleContentVisibility, handleAnswerClick }) => {
   return (
-    <Modal className='quizModal' show={true} onHide={() => { setSelectedQuestion(null); toggleContentVisibility(); }}>
+    <Modal className='quizModal' show={true} onHide={() => { toggleContentVisibility(); }}>
       <Modal.Header className='modalHeader' closeButton>
         <Modal.Title className='modalQuestion'>
           <small>{selectedQuestion.category} - {selectedQuestion.points} Punkte</small>
