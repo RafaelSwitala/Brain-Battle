@@ -93,7 +93,7 @@ app.post('/api/save-json', (req, res) => {
   const existingData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
   const updatedQuizData = {
-    ...existingData, 
+    ...existingData,
     name: updatedData.name || existingData.name,
     settings: {
       ...existingData.settings,
@@ -101,14 +101,37 @@ app.post('/api/save-json', (req, res) => {
       incorrectAnswerBehavior: updatedData.settings?.incorrectAnswerBehavior || existingData.settings.incorrectAnswerBehavior,
       openOptionsBehavior: updatedData.settings?.openOptionsBehavior || existingData.settings.openOptionsBehavior
     },
-    categories: updatedData.categories || existingData.categories, 
+    categories: updatedData.categories || existingData.categories,
     questions: updatedData.questions || existingData.questions
   };
+  
 
   const savePath = newFileName ? path.join(__dirname, '../public/erstellteQuize', newFileName) : filePath;
   fs.writeFileSync(savePath, JSON.stringify(updatedQuizData, null, 2));
 
   res.status(200).json({ message: 'Quiz erfolgreich gespeichert!' });
+});
+
+// Route zum Abrufen eines Quiz anhand seines Namens
+app.get('/api/quiz/:name', (req, res) => {
+  const quizName = req.params.name;
+  const filePath = path.join(__dirname, '../public/erstellteQuize', `${quizName}.json`);
+
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Fehler beim Laden des Quiz:', err);
+      return res.status(500).json({ error: 'Fehler beim Laden des Quiz.' });
+    }
+  
+    try {
+      const quizData = JSON.parse(data);
+      console.log("Geladene Quizdaten:", quizData);
+      res.json(quizData);
+    } catch (parseError) {
+      console.error('Fehler beim Parsen der Quizdaten:', parseError);
+      return res.status(500).json({ error: 'Fehler beim Parsen des Quiz.' });
+    }
+  });
 });
 
 
