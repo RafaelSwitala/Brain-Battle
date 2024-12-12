@@ -88,16 +88,48 @@ const QuizSpielen = () => {
 
   return (
     <div className='quizSpielenContainer'>
-      {!confirmedSpieler ? (
-        <ChoosePlayer spieler={spieler} selectedSpieler={selectedSpieler} setSelectedSpieler={setSelectedSpieler} handleConfirmSpieler={handleConfirmSpieler} />
+      <div className='quizSpielenSpieler'>
+        {!confirmedSpieler ? (
+          <ChoosePlayer
+            spieler={spieler}
+            selectedSpieler={selectedSpieler}
+            setSelectedSpieler={setSelectedSpieler}
+            handleConfirmSpieler={handleConfirmSpieler}
+          />
+        ) : (
+          <Score
+            spielerReihenfolge={spielerReihenfolge}
+            spielerPunkte={spielerPunkte}
+            currentSpieler={spielerReihenfolge[currentSpielerIndex]}
+            saveResults={saveResults}
+          />
+        )}
+      </div>
 
-      ) : (
-        <>
-          <Score spielerReihenfolge={spielerReihenfolge} spielerPunkte={spielerPunkte} currentSpieler={spielerReihenfolge[currentSpielerIndex]} saveResults={saveResults} />
-          <QuizGrid categories={categories} sortedPoints={sortedPoints} handleCellClick={handleCellClick} answeredQuestions={answeredQuestions} categorizedQuestions={categorizedQuestions} />
-          {selectedQuestion && <QuestionModal selectedQuestion={selectedQuestion} timer={timer} isTimerRunning={isTimerRunning} handleTimerStart={() => setIsTimerRunning(true)} isContentVisible={isContentVisible} toggleContentVisibility={() => setIsContentVisible(!isContentVisible)} handleAnswerClick={(correct) => { }} />}
-        </>
-      )}
+      <div className='quizSpielenQuiz'>
+        {confirmedSpieler && (
+          <>
+            <QuizGrid
+              categories={categories}
+              sortedPoints={sortedPoints}
+              handleCellClick={handleCellClick}
+              answeredQuestions={answeredQuestions}
+              categorizedQuestions={categorizedQuestions}
+            />
+            {selectedQuestion && (
+              <QuestionModal
+                selectedQuestion={selectedQuestion}
+                timer={timer}
+                isTimerRunning={isTimerRunning}
+                handleTimerStart={() => setIsTimerRunning(true)}
+                isContentVisible={isContentVisible}
+                toggleContentVisibility={() => setIsContentVisible(!isContentVisible)}
+                handleAnswerClick={(correct) => { }}
+              />
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };

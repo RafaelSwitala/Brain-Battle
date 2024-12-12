@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 
 const Score = ({ spielerReihenfolge, spielerPunkte, currentSpieler, saveResults }) => {
   return (
