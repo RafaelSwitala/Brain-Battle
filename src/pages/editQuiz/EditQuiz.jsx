@@ -16,8 +16,6 @@ const EditQuiz = ({ quizData }) => {
     const categories = quizData.categories || [];
     const questions = quizData.questions || [];
   
-    console.log("QuizData in useEffect:", quizData);
-  
     setQuiz({
       ...quizData,
       settings: {
