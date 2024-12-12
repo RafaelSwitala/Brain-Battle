@@ -88,7 +88,7 @@ const QuizSpielen = () => {
 
   return (
     <div className='quizSpielenContainer'>
-      <div className='quizSpielenSpieler'>
+      <div className='quizSpielenQuiz'>
         {!confirmedSpieler ? (
           <ChoosePlayer
             spieler={spieler}

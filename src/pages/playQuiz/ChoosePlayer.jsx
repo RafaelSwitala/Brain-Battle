@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 
 const ChoosePlayer = ({ spieler, selectedSpieler, setSelectedSpieler, handleConfirmSpieler }) => {
     return (
-      <div className='quizSpielenSpieler'>
+      <div>
         <h3>Spieler auswählen</h3>
         <div className='wer-spielt-mit'>
           <div className="spieler-auswahl">
